@@ -1,0 +1,337 @@
+                                                                                  
+┌──(kali㉿kali)-[~]
+└─$ nmap 10.10.154.80
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-06-05 14:21 EDT
+Nmap scan report for 10.10.154.80
+Host is up (0.099s latency).
+Not shown: 998 filtered ports
+PORT     STATE SERVICE
+80/tcp   open  http
+3389/tcp open  ms-wbt-server
+
+Nmap done: 1 IP address (1 host up) scanned in 8.33 seconds
+
+
+                                                                                  
+┌──(kali㉿kali)-[~]
+└─$ nmap -sV -A -sC 10.10.154.80
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-06-05 14:21 EDT
+Nmap scan report for 10.10.154.80
+Host is up (0.099s latency).
+Not shown: 998 filtered ports
+PORT     STATE SERVICE       VERSION
+80/tcp   open  http          Microsoft IIS httpd 10.0
+| http-methods: 
+|_  Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/10.0
+|_http-title: IIS Windows Server
+3389/tcp open  ms-wbt-server Microsoft Terminal Services
+| rdp-ntlm-info: 
+|   Target_Name: RETROWEB
+|   NetBIOS_Domain_Name: RETROWEB
+|   NetBIOS_Computer_Name: RETROWEB
+|   DNS_Domain_Name: RetroWeb
+|   DNS_Computer_Name: RetroWeb
+|   Product_Version: 10.0.14393
+|_  System_Time: 2021-06-05T18:21:58+00:00
+| ssl-cert: Subject: commonName=RetroWeb
+| Not valid before: 2021-06-04T18:13:51
+|_Not valid after:  2021-12-04T18:13:51
+|_ssl-date: 2021-06-05T18:22:00+00:00; 0s from scanner time.
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 20.94 seconds
+
+
+
+
+
+
+   
+┌──(kali㉿kali)-[~/dirsearch]
+└─$ python3 dirsearch.py -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://10.10.154.80
+/home/kali/dirsearch/thirdparty/requests/__init__.py:91: RequestsDependencyWarning: urllib3 (1.26.4) or chardet (4.0.0) doesn't match a supported version!
+  warnings.warn("urllib3 ({}) or chardet ({}) doesn't match a supported "
+
+  _|. _ _  _  _  _ _|_    v0.4.1
+ (_||| _) (/_(_|| (_| )
+
+Extensions: php, aspx, jsp, html, js | HTTP method: GET | Threads: 30 | Wordlist size: 220520
+
+Error Log: /home/kali/dirsearch/logs/errors-21-06-05_14-28-03.log
+
+Target: http://10.10.154.80/
+
+Output File: /home/kali/dirsearch/reports/10.10.154.80/_21-06-05_14-28-04.txt
+
+[14:28:04] Starting: 
+[14:28:44] 301 -  149B  - /retro  ->  http://10.10.154.80/retro/
+[14:32:17] 301 -  149B  - /Retro  ->  http://10.10.154.80/Retro/
+CTRL+C detected: Pausing threads, please wait...
+[e]xit / [c]ontinue: 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                  
+┌──(kali㉿kali)-[~]
+└─$ wpscan --url http://10.10.154.80/retro                                     4 ⨯
+_______________________________________________________________
+         __          _______   _____
+         \ \        / /  __ \ / ____|
+          \ \  /\  / /| |__) | (___   ___  __ _ _ __ ®
+           \ \/  \/ / |  ___/ \___ \ / __|/ _` | '_ \
+            \  /\  /  | |     ____) | (__| (_| | | | |
+             \/  \/   |_|    |_____/ \___|\__,_|_| |_|
+
+         WordPress Security Scanner by the WPScan Team
+                         Version 3.8.17
+       Sponsored by Automattic - https://automattic.com/
+       @_WPScan_, @ethicalhack3r, @erwan_lr, @firefart
+_______________________________________________________________
+
+[+] URL: http://10.10.154.80/retro/ [10.10.154.80]
+[+] Started: Sat Jun  5 14:48:02 2021
+
+Interesting Finding(s):
+
+[+] Headers
+ | Interesting Entries:
+ |  - Server: Microsoft-IIS/10.0
+ |  - X-Powered-By: PHP/7.1.29
+ | Found By: Headers (Passive Detection)
+ | Confidence: 100%
+
+[+] XML-RPC seems to be enabled: http://10.10.154.80/retro/xmlrpc.php
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 100%
+ | References:
+ |  - http://codex.wordpress.org/XML-RPC_Pingback_API
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_ghost_scanner/
+ |  - https://www.rapid7.com/db/modules/auxiliary/dos/http/wordpress_xmlrpc_dos/
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_xmlrpc_login/
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_pingback_access/
+
+[+] WordPress readme found: http://10.10.154.80/retro/readme.html
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 100%
+
+[+] The external WP-Cron seems to be enabled: http://10.10.154.80/retro/wp-cron.php
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 60%
+ | References:
+ |  - https://www.iplocation.net/defend-wordpress-from-ddos
+ |  - https://github.com/wpscanteam/wpscan/issues/1299
+
+[+] WordPress version 5.2.1 identified (Insecure, released on 2019-05-21).
+ | Found By: Rss Generator (Passive Detection)
+ |  - http://10.10.154.80/retro/index.php/feed/, <generator>https://wordpress.org/?v=5.2.1</generator>
+ |  - http://10.10.154.80/retro/index.php/comments/feed/, <generator>https://wordpress.org/?v=5.2.1</generator>
+
+[+] WordPress theme in use: 90s-retro
+ | Location: http://10.10.154.80/retro/wp-content/themes/90s-retro/
+ | Latest Version: 1.4.10 (up to date)
+ | Last Updated: 2019-04-15T00:00:00.000Z
+ | Readme: http://10.10.154.80/retro/wp-content/themes/90s-retro/readme.txt
+ | Style URL: http://10.10.154.80/retro/wp-content/themes/90s-retro/style.css?ver=5.2.1
+ | Style Name: 90s Retro
+ | Style URI: https://organicthemes.com/retro-theme/
+ | Description: Have you ever wished your WordPress blog looked like an old Geocities site from the 90s!? Probably n...
+ | Author: Organic Themes
+ | Author URI: https://organicthemes.com
+ |
+ | Found By: Css Style In Homepage (Passive Detection)
+ |
+ | Version: 1.4.10 (80% confidence)
+ | Found By: Style (Passive Detection)
+ |  - http://10.10.154.80/retro/wp-content/themes/90s-retro/style.css?ver=5.2.1, Match: 'Version: 1.4.10'
+
+[+] Enumerating All Plugins (via Passive Methods)
+
+[i] No plugins Found.
+
+[+] Enumerating Config Backups (via Passive and Aggressive Methods)
+ Checking Config Backups - Time: 00:00:06 <==========================================================================================> (137 / 137) 100.00% Time: 00:00:06
+
+[i] No Config Backups Found.
+
+[!] No WPScan API Token given, as a result vulnerability data has not been output.
+[!] You can get a free API token with 25 daily requests by registering at https://wpscan.com/register
+
+[+] Finished: Sat Jun  5 14:48:45 2021
+[+] Requests Done: 170
+[+] Cached Requests: 5
+[+] Data Sent: 43.693 KB
+[+] Data Received: 221.091 KB
+[+] Memory used: 206.039 MB
+[+] Elapsed time: 00:00:42
+
+
+                                                                                                                                                                         
+┌──(kali㉿kali)-[~/dirsearch]
+└─$ wpscan --url http://10.10.154.80/retro -U wade:parzival                                                                                                          1 ⨯
+_______________________________________________________________
+         __          _______   _____
+         \ \        / /  __ \ / ____|
+          \ \  /\  / /| |__) | (___   ___  __ _ _ __ ®
+           \ \/  \/ / |  ___/ \___ \ / __|/ _` | '_ \
+            \  /\  /  | |     ____) | (__| (_| | | | |
+             \/  \/   |_|    |_____/ \___|\__,_|_| |_|
+
+         WordPress Security Scanner by the WPScan Team
+                         Version 3.8.17
+       Sponsored by Automattic - https://automattic.com/
+       @_WPScan_, @ethicalhack3r, @erwan_lr, @firefart
+_______________________________________________________________
+
+[+] URL: http://10.10.154.80/retro/ [10.10.154.80]
+[+] Started: Sat Jun  5 15:26:43 2021
+
+Interesting Finding(s):
+
+[+] Headers
+ | Interesting Entries:
+ |  - Server: Microsoft-IIS/10.0
+ |  - X-Powered-By: PHP/7.1.29
+ | Found By: Headers (Passive Detection)
+ | Confidence: 100%
+
+[+] XML-RPC seems to be enabled: http://10.10.154.80/retro/xmlrpc.php
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 100%
+ | References:
+ |  - http://codex.wordpress.org/XML-RPC_Pingback_API
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_ghost_scanner/
+ |  - https://www.rapid7.com/db/modules/auxiliary/dos/http/wordpress_xmlrpc_dos/
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_xmlrpc_login/
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_pingback_access/
+
+[+] WordPress readme found: http://10.10.154.80/retro/readme.html
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 100%
+
+[+] The external WP-Cron seems to be enabled: http://10.10.154.80/retro/wp-cron.php
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 60%
+ | References:
+ |  - https://www.iplocation.net/defend-wordpress-from-ddos
+ |  - https://github.com/wpscanteam/wpscan/issues/1299
+
+[+] WordPress version 5.2.1 identified (Insecure, released on 2019-05-21).
+ | Found By: Rss Generator (Passive Detection)
+ |  - http://10.10.154.80/retro/index.php/feed/, <generator>https://wordpress.org/?v=5.2.1</generator>
+ |  - http://10.10.154.80/retro/index.php/comments/feed/, <generator>https://wordpress.org/?v=5.2.1</generator>
+
+[+] WordPress theme in use: 90s-retro
+ | Location: http://10.10.154.80/retro/wp-content/themes/90s-retro/
+ | Latest Version: 1.4.10 (up to date)
+ | Last Updated: 2019-04-15T00:00:00.000Z
+ | Readme: http://10.10.154.80/retro/wp-content/themes/90s-retro/readme.txt
+ | Style URL: http://10.10.154.80/retro/wp-content/themes/90s-retro/style.css?ver=5.2.1
+ | Style Name: 90s Retro
+ | Style URI: https://organicthemes.com/retro-theme/
+ | Description: Have you ever wished your WordPress blog looked like an old Geocities site from the 90s!? Probably n...
+ | Author: Organic Themes
+ | Author URI: https://organicthemes.com
+ |
+ | Found By: Css Style In Homepage (Passive Detection)
+ |
+ | Version: 1.4.10 (80% confidence)
+ | Found By: Style (Passive Detection)
+ |  - http://10.10.154.80/retro/wp-content/themes/90s-retro/style.css?ver=5.2.1, Match: 'Version: 1.4.10'
+
+[+] Enumerating All Plugins (via Passive Methods)
+
+[i] No plugins Found.
+
+[+] Enumerating Config Backups (via Passive and Aggressive Methods)
+ Checking Config Backups - Time: 00:00:06 <==========================================================================================> (137 / 137) 100.00% Time: 00:00:06
+
+[i] No Config Backups Found.
+
+[!] No WPScan API Token given, as a result vulnerability data has not been output.
+[!] You can get a free API token with 25 daily requests by registering at https://wpscan.com/register
+
+[+] Finished: Sat Jun  5 15:27:27 2021
+[+] Requests Done: 170
+[+] Cached Requests: 5
+[+] Data Sent: 44.474 KB
+[+] Data Received: 221.091 KB
+[+] Memory used: 206.164 MB
+[+] Elapsed time: 00:00:43
+    
+wade:perzival
+
+/retro/wp-content/themes/90s-retro/404.php
+    
+
+
+https://www.revshells.com/		nice site
+
+
+so looked at write up by muir
+
+https://muirlandoracle.co.uk/2020/01/06/retro-write-up/
+
+why did i listen to esqy!!!! 
+
+rpd!!!! port 3389 ,,, 
+
+sudo apt-add-repository ppa:remmina-ppa-team/remmina-next
+sudo apt update
+sudo apt install remmina remmina-plugin-rdp remmina-plugin-secret
+
+aparantely it will only work with remmina because of firewall 
+
+to quote muir:
+
+Down at the bottom of the history we can see that the user was trying to figure out how to patch CVE-2019-1388 — maybe this means that the machine is vulnerable to it?
+
+A quick Google search tells us that CVE-2019-1388 involves manipulating a system process into opening a webpage, which we can then use to get a file dialogue, which we can use to open command prompt as System. A bit convoluted, but it works.
+
+Specifically what we’re going to be doing is attempting to run a .exe file as Administrator, then, when it asks for a password, we’re going to have a look at the certificate of the file. With this particular file the certificate details contain a link to more information, which, when opened, spawns a System session of the web browser. Thus if we can open a file dialogue from this window we’ll be able to open any file as system including Command Prompt.
+
+Fortunately for us, someone has already downloaded the .exe file we need. They also deleted it, but good ol’ windows has kept it in the recycling bin. The file is hhupd.exe — drag it out onto the desktop and there will only be one thing we need to do before we can perform the exploit.
+
+Start up both Internet Explorer and Google Chrome (I’ll explain why after walking through the exploit), then we’re ready to go.
+
+To carry out the escalation, we first need to right-click on the .exe file and choose to run it as Administrator. When we do we get this window:
+
+
+Start up both Internet Explorer and Google Chrome (I’ll explain why after walking through the exploit), then we’re ready to go.
+
+To carry out the escalation, we first need to right-click on the .exe file and choose to run it as Administrator. When we do we get this window:
+
+Click on “Show more details,” then choose “Show information about the publisher’s certificate.” Another window should pop up — click on the “Issued by” link:
+
+At this point you should be asked to pick a browser — choose Internet Explorer.
+
+A lot of people had problems performing this exploit as (due to an intentionally activated bug in Windows Server 2016), there are initially no options presented to open the link, like so:
+
+The fix presented by Darkstar is what we did to begin with: initialising both Google Chrome and IE before performing the exploit.
+
+Anyway, exit out of the two windows and we should now have an Internet Explorer window up:
+
+Remember that we aren’t connected to the internet, so the error message is actually fine. From here you can escalate your privilege using either the save file dialogue or the open file dialogue. I’ve used both when testing stuff for this write-up, but for now we’re going to press Ctrl + S to get the save file dialogue open:
+
+From here we need to navigate to the System32 folder. Type the following into the File Name box then press Enter:
+
+C:\Windows\System32\*.*
+
+From here we can scroll down until we find cmd :		// or just type cmd
+
+
+Right click on cmd then click open (no need to use Run as administrator — just open it). We’ll now have a command prompt shell running as System32!
+
+didn't work, had to right click and run as admin , 

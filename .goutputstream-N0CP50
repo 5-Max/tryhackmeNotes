@@ -1,0 +1,131 @@
+Lian_Yu		dirsearch wfuzz // ftp // exiftool steghide // ssh // gtfo pkexec
+
+CCT2019		impossible will be there a while, 
+
+bountyhacker	ftp // hydra // ssh // gtfo tar
+
+cyborg		borg backup // ssh // gtfo bash
+
+startup		ftp (writable directory) // ssh (writable cronjob)
+
+brute it	hydra login // ssh2john // cat 
+ 
+wgel		
+
+
+
+
+Ubuntu-Apache
+
+
+Daily bugle	joombla  //  reverse.php  //  SSH  
+
+Gamezone 	sqlmap injecting searchbar  // reverse ssh port // escalation with msf (never worked) // url manipulation we get flag 
+
+Internal	Wordpress  // SSH 
+
+Kenobi		Samba  // smbclient  //  SSH  (access)  //   SUID (escalating)
+
+Skynet		smbclient // squirrelmail  //  hidden directory that leads to Cuppa CMS  //  upload shell to cuppa // escalate with cronjobs running
+
+Vulnversity	smbclient //   GTFO SUID 
+
+Mr. Robot	Wordpress hydra // SSH  // nmap escalate
+
+Basic Pen Test	smbclient // Hydra // SSH
+
+tomghost	tomcat jserv (ajp13)// msf // gpg and asc // gtfo sudo
+
+agentSudo	hydra // steghide / binwalk / ssh
+
+easyctf		hydra // ssh 
+
+rootme		dirsearch // upload php // gtfo  (python and bash)
+
+
+
+Windows
+
+
+Alfred		Jenkins (admin:admin) // Invoke-PowerShellTct (reverse shell) // incognito (add user/privilage escalation) //  			rmdesktop windows 7
+
+Blue		eternal blue  msf  ///  print spooler to escalate and hashdump (john) 
+
+Hackpark	hydra // BlogEngine.net edit post with reverse shell //  escalate with msf 
+
+Ice		MSF // Kiwi  
+
+Relevant	eternal blue  smb client
+
+Steel Mountain	HTTP File Server (HFS)  Rejetto Vuln  //  MSF
+
+		NO-MSF   //  python 
+
+		powerup.ps1  //  winPEAS 
+
+		AdvancedSystemCareService9
+
+
+retro		rpd with remmina //  CVE-2019-1388  (opening browser as admin and then opening prompt as admin)  
+
+
+
+
+
+
+
+Educational
+
+
+
+
+Capture the Flag 		encryption 
+
+
+Hashing
+
+Networks
+
+Overpass
+
+MSF
+
+Privesc
+
+Shellz
+
+XSS
+
+sqli
+
+lfi
+
+
+
+linux modules
+
+
+
+
+webapps
+
+authenticate
+
+avengers
+
+lfi
+
+ssrf
+
+XXE and XXS
+
+zth
+
+toolrus		dirsearch // hydra // msf (tomcat)
+
+ignite		phpbash // 
+
+dogcat 		lfi  log poisoning // 
+
+toolsrus	tomcat manager upload 
+

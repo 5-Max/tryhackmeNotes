@@ -1,0 +1,102 @@
+{
+  "main": {
+    "id": "c21ae6fc50707956",
+    "type": "split",
+    "children": [
+      {
+        "id": "1db0c9acbcbed620",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "rooms/Notes/Wonderland Series/Wonderland/22.md",
+            "mode": "source"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "5c33a5c1d356a7ce",
+    "type": "split",
+    "children": [
+      {
+        "id": "dba0f9ce068df2af",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d0a5b618e026dba7",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "e36431ccc1a4961a",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 304
+  },
+  "right": {
+    "id": "fc52654dabad2fb4",
+    "type": "split",
+    "children": [
+      {
+        "id": "d99b83649de3f115",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "bdfb466fc023a690",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "rooms/Notes/Wonderland Series/Wonderland/22.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "1db0c9acbcbed620",
+  "lastOpenFiles": [
+    "rooms/Notes/Wonderland Series/Wonderland/22.md",
+    "rooms/Notes/Wonderland Series/Wonderland/images.md",
+    "rooms/Notes/Wonderland Series/Wonderland/80.md",
+    "rooms/Notes/Wonderland Series/Wonderland/nmap.md",
+    "rooms/Notes/Wonderland Series/Wonderland/Untitled.md",
+    "rooms/Notes/Wonderland/Looking Glass/22.md",
+    "educational/privesc.md",
+    "educational/shellz.md",
+    "rooms/Notes/Wonderland/Looking Glass/Untitled.md",
+    "rooms/Notes/Wonderland/Looking Glass/dropbear.md"
+  ]
+}

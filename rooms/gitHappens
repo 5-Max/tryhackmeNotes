@@ -1,0 +1,203 @@
+┌──(kali㉿kali)-[~]
+└─$ rustscan -a 10.10.239.199                                           
+.----. .-. .-. .----..---.  .----. .---.   .--.  .-. .-.
+| {}  }| { } |{ {__ {_   _}{ {__  /  ___} / {} \ |  `| |
+| .-. \| {_} |.-._} } | |  .-._} }\     }/  /\  \| |\  |
+`-' `-'`-----'`----'  `-'  `----'  `---' `-'  `-'`-' `-'
+The Modern Day Port Scanner.
+________________________________________
+: https://discord.gg/GFrQsGy           :
+: https://github.com/RustScan/RustScan :
+ --------------------------------------
+Real hackers hack time ⌛
+
+[~] The config file is expected to be at "/home/kali/.rustscan.toml"
+[!] File limit is lower than default batch size. Consider upping with --ulimit. May cause harm to sensitive servers
+[!] Your file limit is very small, which negatively impacts RustScan's speed. Use the Docker image, or up the Ulimit with '--ulimit 5000'. 
+Open 10.10.239.199:80
+[~] Starting Script(s)
+[>] Script to be run Some("nmap -vvv -p {{port}} {{ip}}")
+
+[~] Starting Nmap 7.91 ( https://nmap.org ) at 2021-07-02 16:48 EDT
+Initiating Ping Scan at 16:48
+Scanning 10.10.239.199 [2 ports]
+Completed Ping Scan at 16:48, 0.14s elapsed (1 total hosts)
+Initiating Parallel DNS resolution of 1 host. at 16:48
+Completed Parallel DNS resolution of 1 host. at 16:48, 0.07s elapsed
+DNS resolution of 1 IPs took 0.07s. Mode: Async [#: 2, OK: 0, NX: 1, DR: 0, SF: 0, TR: 1, CN: 0]
+Initiating Connect Scan at 16:48
+Scanning 10.10.239.199 [1 port]
+Discovered open port 80/tcp on 10.10.239.199
+Completed Connect Scan at 16:48, 0.13s elapsed (1 total ports)
+Nmap scan report for 10.10.239.199
+Host is up, received syn-ack (0.14s latency).
+Scanned at 2021-07-02 16:48:50 EDT for 0s
+
+PORT   STATE SERVICE REASON
+80/tcp open  http    syn-ack
+
+Read data files from: /usr/bin/../share/nmap
+Nmap done: 1 IP address (1 host up) scanned in 0.73 seconds
+
+                                                                                                                                                                         
+┌──(kali㉿kali)-[~]
+└─$ dirsearch -r -u 10.10.239.199
+
+  _|. _ _  _  _  _ _|_    v0.4.1
+ (_||| _) (/_(_|| (_| )
+
+Extensions: php, aspx, jsp, html, js | HTTP method: GET | Threads: 30 | Wordlist size: 10877
+
+Output File: /home/kali/.dirsearch/reports/10.10.239.199/_21-07-02_16-49-14.txt
+
+Error Log: /home/kali/.dirsearch/logs/errors-21-07-02_16-49-14.log
+
+Target: http://10.10.239.199/
+
+[16:49:15] Starting: 
+[16:49:19] 301 -  194B  - /.git  ->  http://10.10.239.199/.git/
+[16:49:20] 200 -    1KB - /.git/     (Added to queue)
+[16:49:20] 200 -  110B  - /.git/config
+[16:49:20] 200 -   23B  - /.git/HEAD
+[16:49:20] 200 -  179B  - /.git/branches/     (Added to queue)
+[16:49:20] 200 -   73B  - /.git/description
+[16:49:20] 200 -    1KB - /.git/hooks/     (Added to queue)
+[16:49:20] 200 -  645B  - /.git/index
+[16:49:20] 200 -  283B  - /.git/info/     (Added to queue)
+[16:49:20] 200 -  390B  - /.git/logs/     (Added to queue)
+[16:49:20] 200 -  216B  - /.git/logs/HEAD
+[16:49:20] 200 -  240B  - /.git/info/exclude
+[16:49:20] 301 -  194B  - /.git/logs/refs  ->  http://10.10.239.199/.git/logs/refs/
+[16:49:20] 301 -  194B  - /.git/logs/refs/heads  ->  http://10.10.239.199/.git/logs/refs/heads/
+[16:49:20] 301 -  194B  - /.git/refs/remotes  ->  http://10.10.239.199/.git/refs/remotes/
+[16:49:20] 200 -  216B  - /.git/logs/refs/heads/master
+[16:49:20] 200 -    4KB - /.git/objects/     (Added to queue)
+[16:49:20] 200 -  102B  - /.git/packed-refs
+[16:49:20] 200 -  505B  - /.git/refs/     (Added to queue)
+[16:49:20] 301 -  194B  - /.git/refs/heads  ->  http://10.10.239.199/.git/refs/heads/
+[16:49:20] 200 -   41B  - /.git/refs/heads/master
+[16:49:20] 301 -  194B  - /.git/logs/refs/remotes  ->  http://10.10.239.199/.git/logs/refs/remotes/
+[16:49:20] 301 -  194B  - /.git/refs/tags  ->  http://10.10.239.199/.git/refs/tags/
+[16:49:20] 200 -  792B  - /.gitlab-ci.yml
+[16:49:29] 200 -   54B  - /README.md
+[16:49:51] 301 -  194B  - /css  ->  http://10.10.239.199/css/
+[16:49:51] 200 -    4KB - /dashboard.html
+[16:49:57] 200 -    7KB - /index.html
+[16:50:20] Starting: .git/
+[16:50:53] 200 -  110B  - /.git/config
+[16:51:00] 200 -  645B  - /.git/index
+[16:51:00] 301 -  194B  - /.git/info  ->  http://10.10.239.199/.git/info/
+[16:51:03] 301 -  194B  - /.git/logs  ->  http://10.10.239.199/.git/logs/
+[16:51:03] 200 -  390B  - /.git/logs/
+[16:51:06] 301 -  194B  - /.git/objects  ->  http://10.10.239.199/.git/objects/
+[16:51:21] Starting: .git/branches/
+[16:52:22] Starting: .git/hooks/
+[16:53:19] Starting: .git/info/
+[16:54:15] Starting: .git/logs/
+[16:55:14] Starting: .git/objects/
+[16:55:26] 301 -  194B  - /.git/objects/06  ->  http://10.10.239.199/.git/objects/06/
+[16:55:26] 301 -  194B  - /.git/objects/08  ->  http://10.10.239.199/.git/objects/08/
+[16:55:27] 301 -  194B  - /.git/objects/20  ->  http://10.10.239.199/.git/objects/20/
+[16:55:27] 301 -  194B  - /.git/objects/39  ->  http://10.10.239.199/.git/objects/39/
+[16:55:27] 301 -  194B  - /.git/objects/48  ->  http://10.10.239.199/.git/objects/48/
+[16:55:27] 301 -  194B  - /.git/objects/56  ->  http://10.10.239.199/.git/objects/56/
+[16:55:27] 301 -  194B  - /.git/objects/66  ->  http://10.10.239.199/.git/objects/66/
+[16:55:27] 301 -  194B  - /.git/objects/77  ->  http://10.10.239.199/.git/objects/77/
+[16:55:27] 301 -  194B  - /.git/objects/87  ->  http://10.10.239.199/.git/objects/87/
+[16:55:51] 301 -  194B  - /.git/objects/info  ->  http://10.10.239.199/.git/objects/info/
+[16:56:09] Starting: .git/refs/
+[16:57:04] 301 -  194B  - /.git/refs/tags  ->  http://10.10.239.199/.git/refs/tags/
+
+Task Completed
+ 
+ 
+we get a login on port 80 with massive confusing js at the end, 
+
+
+
+const _0x4368=['+(\x20+[^','471197','value','RegExp','functi','test','CbRnH','passwo','userna','TML','tml','a865c5','+[^\x20]}','a5f298','cookie','admin','3a71fd','getEle','login-','^([^\x20]','TEhxP','href','f64cb3','51a151','d84319','D\x20USER','digest','R\x20PASS','oard.h','error','\x20]+)+)','19a3c0','f80f67','/dashb','bea070','3ec9cb','padSta','from','4004c2','WORD!','map','NAME\x20O','encode','INVALI','a5106e','baf89f','6a7c7c','elemen','9a88db','log','join','innerH','SaltyB','apply','ned','442a9d','mentBy'];(function(_0x1ef2d8,_0x436806){const _0x2c2818=function(_0x302738){while(--_0x302738){_0x1ef2d8['push'](_0x1ef2d8['shift']());}},_0x6f8b4a=function(){const _0x2e9681={'data':{'key':'cookie','value':'timeout'},'setCookie':function(_0x329b53,_0x28dc3d,_0x22f4a3,_0x6012c1){_0x6012c1=_0x6012c1||{};let _0x3d8f23=_0x28dc3d+'='+_0x22f4a3,_0x18026e=0x0;for(let _0x4175c9=0x0,_0x25d1be=_0x329b53['length'];_0x4175c9<_0x25d1be;_0x4175c9++){const _0x109e81=_0x329b53[_0x4175c9];_0x3d8f23+=';\x20'+_0x109e81;const _0x1e9a27=_0x329b53[_0x109e81];_0x329b53['push'](_0x1e9a27),_0x25d1be=_0x329b53['length'],_0x1e9a27!==!![]&&(_0x3d8f23+='='+_0x1e9a27);}_0x6012c1['cookie']=_0x3d8f23;},'removeCookie':function(){return'dev';},'getCookie':function(_0x3e797a,_0x2a5b7d){_0x3e797a=_0x3e797a||function(_0x242cdf){return _0x242cdf;};const _0x996bc1=_0x3e797a(new RegExp('(?:^|;\x20)'+_0x2a5b7d['replace'](/([.$?*|{}()[]\/+^])/g,'$1')+'=([^;]*)')),_0x51d0ee=function(_0x439650,_0x52fa41){_0x439650(++_0x52fa41);};return _0x51d0ee(_0x2c2818,_0x436806),_0x996bc1?decodeURIComponent(_0x996bc1[0x1]):undefined;}},_0x17997b=function(){const _0x383e88=new RegExp('\x5cw+\x20*\x5c(\x5c)\x20*{\x5cw+\x20*[\x27|\x22].+[\x27|\x22];?\x20*}');return _0x383e88['test'](_0x2e9681['removeCookie']['toString']());};_0x2e9681['updateCookie']=_0x17997b;let _0x39ee22='';const _0xad377=_0x2e9681['updateCookie']();if(!_0xad377)_0x2e9681['setCookie'](['*'],'counter',0x1);else _0xad377?_0x39ee22=_0x2e9681['getCookie'](null,'counter'):_0x2e9681['removeCookie']();};_0x6f8b4a();}(_0x4368,0xe6));const _0x2c28=function(_0x1ef2d8,_0x436806){_0x1ef2d8=_0x1ef2d8-0x0;let _0x2c2818=_0x4368[_0x1ef2d8];return _0x2c2818;};const _0x22f4a3=function(){let _0x36b504=!![];return function(_0x1087c7,_0x108f32){if(_0x2c28('0x4')===_0x2c28('0x4')){const _0x52d1da=_0x36b504?function(){if(_0x2c28('0x12')!==_0x2c28('0x12')){function _0x382a78(){document[_0x2c28('0xf')+_0x2c28('0x36')+'Id'](_0x2c28('0x1b'))['innerH'+_0x2c28('0x7')]=_0x2c28('0x29')+_0x2c28('0x17')+'NAME\x20O'+_0x2c28('0x19')+_0x2c28('0x25');}}else{if(_0x108f32){const _0x725292=_0x108f32[_0x2c28('0x33')](_0x1087c7,arguments);return _0x108f32=null,_0x725292;}}}:function(){};return _0x36b504=![],_0x52d1da;}else{function _0x323170(){const _0x2ed5f9=_0x36b504?function(){if(_0x108f32){const _0x407994=_0x108f32[_0x2c28('0x33')](_0x1087c7,arguments);return _0x108f32=null,_0x407994;}}:function(){};return _0x36b504=![],_0x2ed5f9;}}};}(),_0x28dc3d=_0x22f4a3(this,function(){const _0x5b8de6=typeof window!=='undefi'+_0x2c28('0x34')?window:typeof process==='object'&&typeof require===_0x2c28('0x2')+'on'&&typeof global==='object'?global:this,_0x4d9f75=function(){const _0x1eee2f=new _0x5b8de6[(_0x2c28('0x1'))](_0x2c28('0x11')+_0x2c28('0x37')+_0x2c28('0x1c')+_0x2c28('0xa'));return!_0x1eee2f[_0x2c28('0x3')](_0x28dc3d);};return _0x4d9f75();});_0x28dc3d();async function login(){let _0x110afb=document[_0x2c28('0xf')+_0x2c28('0x36')+'Id'](_0x2c28('0x10')+'form');console[_0x2c28('0x2f')](_0x110afb[_0x2c28('0x2d')+'ts']);let _0x383cb8=_0x110afb[_0x2c28('0x2d')+'ts'][_0x2c28('0x6')+'me'][_0x2c28('0x0')],_0x5b6063=await digest(_0x110afb[_0x2c28('0x2d')+'ts'][_0x2c28('0x5')+'rd'][_0x2c28('0x0')]);_0x383cb8===_0x2c28('0xd')&&_0x5b6063===_0x2c28('0x24')+_0x2c28('0xe')+'6ba9b0'+_0x2c28('0x21')+'7eed08'+_0x2c28('0x38')+_0x2c28('0x16')+_0x2c28('0x9')+_0x2c28('0x35')+_0x2c28('0x2c')+_0x2c28('0x20')+'f3cb6a'+_0x2c28('0x2a')+_0x2c28('0x1e')+_0x2c28('0x2e')+_0x2c28('0x2b')+_0x2c28('0x14')+_0x2c28('0x15')+_0x2c28('0xb')+_0x2c28('0x1d')+'94eceb'+'bb'?(document[_0x2c28('0xc')]='login='+'1',window['locati'+'on'][_0x2c28('0x13')]=_0x2c28('0x1f')+_0x2c28('0x1a')+_0x2c28('0x8')):document['getEle'+_0x2c28('0x36')+'Id'](_0x2c28('0x1b'))[_0x2c28('0x31')+_0x2c28('0x7')]=_0x2c28('0x29')+_0x2c28('0x17')+_0x2c28('0x27')+_0x2c28('0x19')+_0x2c28('0x25');}async function digest(_0x35521d){const _0x179c00=new TextEncoder(),_0x713734=_0x179c00[_0x2c28('0x28')](_0x35521d+(_0x2c28('0x32')+'ob')),_0x39b76f=await crypto['subtle'][_0x2c28('0x18')]('SHA-51'+'2',_0x713734),_0x558ac0=Array[_0x2c28('0x23')](new Uint8Array(_0x39b76f)),_0x34e00e=_0x558ac0[_0x2c28('0x26')](_0x468ec7=>_0x468ec7['toStri'+'ng'](0x10)[_0x2c28('0x22')+'rt'](0x2,'0'))[_0x2c28('0x30')]('');return _0x34e00e;}
+
+
+
+
+what kind of css is this,,,,
+
+
+
+body:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-image: url(data:image/png;base64,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);
+  opacity: 0.3;
+}
+
+
+
+browser sees it as:
+
+    background-image: linear-gradient(135deg, rgba(29, 37, 62, 0.9), rgba(95, 103, 107, 0.9));
+}
+
+
+
+
+tryed messing with git, did git init ,,, in hackme folder
+
+
+gave up, went to write up,,,
+
+
+
+wget --mirror -I .git $TARGET_IP/.git/
+
+wget --mirror -I .git 10.10.239.199/.git/
+
+
+not working so went to other write up
+
+https://github.com/internetwache/GitTools
+
+
+download
+/tools/GitTools/Dumper/gitdumper.sh http://git.thm/.git/ .
+
+process
+~/tools/GitTools/Extractor/extractor.sh . .
+
+view
+
+
+                                                                                   
+┌──(kali㉿kali)-[/hackme/scripts/gitTools/GitTools/Dumper]
+└─$ ls
+0-d0b3578a628889f38c0affb1b75457146a4678e5
+1-2f423697bf81fe5956684f66fb6fc6596a1903cc
+2-d6df4000639981d032f628af2b4d03b8eff31213
+3-395e087334d613d5e423cdf8f7be27196a360459
+4-77aab78e2624ec9400f9ed3f43a6f0c942eeb82d
+5-2eb93ac3534155069a8ef59cb25b9c1971d5d199
+6-bc8054d9d95854d278359a432b6d97c27e24061d
+7-e56eaa8e29b589976f33d76bc58a0c4dfb9315b1
+8-d954a99b96ff11c37a558a5d93ce52d0f3702a7d
+css
+dashboard.html
+default.conf
+Dockerfile
+gitdumper.sh
+index.html
+README.md
+
+
+
+
+
+the meta-text are the comments to the commit, 
+
+
+
+
+

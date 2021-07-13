@@ -1,0 +1,124 @@
+Power shell is a .net language
+
+a command is called a cmdlet
+
+Get-help 
+
+Get-help Get-Command
+
+Get-help Get-Command -examples
+
+https://ratiros01.medium.com/tryhackme-hacking-with-powershell-bf6dbc5febc9
+
+
+To find a file by name
+
+Get-ChildItem -Filter interesting*.txt -Recurse 
+
+
+To view parameters
+
+(Get-Command Get-FileHash).Parameters
+
+
+
+
+Get the MD5 hash of interesting-file.txt
+
+Get-FileHash -Path 'C:\Program Files\interesting-file.txt.txt' -Algorithm MD5
+
+
+decode b64 file and show output:
+certutil -decode "C:\Users\Administrator\Desktop\b64.txt" out.txt
+
+Get-Content out.txt
+
+
+pwd = Get-Location
+
+request to a web server:
+
+Invoke-WebRequest
+
+
+
+Enumerate 
+
+Show users:
+Get-LocalUser
+
+How many users:
+Get-LocalUser | measure
+
+Find user with SID 
+Get-LocalUser -SID "S-1-5-21-1394777289-3961777894-1791813945-501"
+
+What users are not required to have a password:
+Get-LocalUser | Where-Object -Property PasswordRequired -Match false
+
+
+How many local groups are there?
+Get-LocalGroup | measure
+
+Get-NetIPAddress
+
+How many listners?
+Get-NetTCPConnection | Where-Object -Property State -Match Listen | mesure
+
+Patches:
+Get-Hotfix
+
+Look for back up files:
+Get-ChildItem -Path C:\ -Include *.bak* -File -Recurse -ErrorAction SilentlyContinue
+
+Show content of back up file:
+Get-Content "C:\Program Files (x86)\Internet Explorer\passwords.bak.txt"
+
+look for api keys:
+Get-ChildItem C:\* -Recurse | Select -String -pattern API_KEY
+
+Look for running process (ps)
+Get-Process
+
+task
+Get-ScheduledTask -TaskName new-scheduled-task
+
+who is the owner of the task:
+Get-Acl c:/
+
+search directory for string password:
+$path = "<path to email directory>"
+$string_pattern = "password"
+$command = Get-ChildItem -Path $path -Recurse | Select-String -Pattern 
+$String_pattern 
+echo $command
+
+What file contains an HTTPS link:
+$path = "<path>"
+$string_pattern = "https://"
+$command = Get-ChildItem -Path $path -Recurse | Select-String -Pattern 
+$String_pattern echo $command
+
+
+
+How many open ports 
+
+for($i=130; $i -le 140; $i++){ 
+    Test-NetConnection localhost -Port $i
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

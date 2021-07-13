@@ -1,0 +1,53 @@
+# Nmap 7.91 scan initiated Tue Feb 16 16:05:32 2021 as: nmap -sC -sV --script vuln -oN relevantVuln 10.10.133.210
+Nmap scan report for 10.10.133.210
+Host is up (0.13s latency).
+Not shown: 995 filtered ports
+PORT     STATE SERVICE       VERSION
+80/tcp   open  http          Microsoft IIS httpd 10.0
+|_http-aspnet-debug: ERROR: Script execution failed (use -d to debug)
+|_http-csrf: Couldn't find any CSRF vulnerabilities.
+|_http-dombased-xss: Couldn't find any DOM based XSS.
+|_http-server-header: Microsoft-IIS/10.0
+|_http-stored-xss: Couldn't find any stored XSS vulnerabilities.
+| vulners: 
+|   cpe:/a:microsoft:internet_information_server:10.0: 
+|     	SSV:12476	9.3	https://vulners.com/seebug/SSV:12476	*EXPLOIT*
+|     	SSV:12175	9.3	https://vulners.com/seebug/SSV:12175	*EXPLOIT*
+|     	SAINT:38542AFE78DE33F6BB0AF7E6A3C90956	9.3	https://vulners.com/saint/SAINT:38542AFE78DE33F6BB0AF7E6A3C90956	*EXPLOIT*
+|     	PACKETSTORM:94532	9.3	https://vulners.com/packetstorm/PACKETSTORM:94532	*EXPLOIT*
+|     	MSF:EXPLOIT/WINDOWS/FTP/MS09_053_FTPD_NLST	9.3	https://vulners.com/metasploit/MSF:EXPLOIT/WINDOWS/FTP/MS09_053_FTPD_NLST	*EXPLOIT*
+|     	EDB-ID:9559	9.3	https://vulners.com/exploitdb/EDB-ID:9559	*EXPLOIT*
+|     	EDB-ID:9541	9.3	https://vulners.com/exploitdb/EDB-ID:9541	*EXPLOIT*
+|     	EDB-ID:16740	9.3	https://vulners.com/exploitdb/EDB-ID:16740	*EXPLOIT*
+|     	SAINT:54344E071A068774A374DCE7F7795E80	9.0	https://vulners.com/saint/SAINT:54344E071A068774A374DCE7F7795E80	*EXPLOIT*
+|     	SAINT:4EB4CF34422D02BCBF715C4ACFAC8C99	9.0	https://vulners.com/saint/SAINT:4EB4CF34422D02BCBF715C4ACFAC8C99	*EXPLOIT*
+|     	IISFTP_NLST	9.0	https://vulners.com/canvas/IISFTP_NLST	*EXPLOIT*
+|     	CVE-2009-3023	9.0	https://vulners.com/cve/CVE-2009-3023
+|_    	CVE-2010-1256	8.5	https://vulners.com/cve/CVE-2010-1256
+135/tcp  open  msrpc         Microsoft Windows RPC
+139/tcp  open  netbios-ssn   Microsoft Windows netbios-ssn
+445/tcp  open  microsoft-ds  Microsoft Windows Server 2008 R2 - 2012 microsoft-ds
+3389/tcp open  ms-wbt-server Microsoft Terminal Services
+|_sslv2-drown: 
+Service Info: OSs: Windows, Windows Server 2008 R2 - 2012; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+|_smb-vuln-ms10-054: false
+|_smb-vuln-ms10-061: ERROR: Script execution failed (use -d to debug)
+| smb-vuln-ms17-010: 
+|   VULNERABLE:
+|   Remote Code Execution vulnerability in Microsoft SMBv1 servers (ms17-010)
+|     State: VULNERABLE
+|     IDs:  CVE:CVE-2017-0143
+|     Risk factor: HIGH
+|       A critical remote code execution vulnerability exists in Microsoft SMBv1
+|        servers (ms17-010).
+|           
+|     Disclosure date: 2017-03-14
+|     References:
+|       https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-0143
+|       https://blogs.technet.microsoft.com/msrc/2017/05/12/customer-guidance-for-wannacrypt-attacks/
+|_      https://technet.microsoft.com/en-us/library/security/ms17-010.aspx
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Tue Feb 16 16:15:10 2021 -- 1 IP address (1 host up) scanned in 578.78 seconds

@@ -1,0 +1,95 @@
+{
+  "main": {
+    "id": "f91fb31d8bb53004",
+    "type": "split",
+    "children": [
+      {
+        "id": "81a39fb6d3a854e7",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "NMAP.md",
+            "mode": "source"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "d923c4a400ac12fa",
+    "type": "split",
+    "children": [
+      {
+        "id": "a3cf1bac2ed431c2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b5abc923dd2ca990",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "9cf5a5334bd9d0bf",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 182
+  },
+  "right": {
+    "id": "3c40d1e673203b1b",
+    "type": "split",
+    "children": [
+      {
+        "id": "586c61e1bfb5a628",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0b2306ae797357dd",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "NMAP.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "81a39fb6d3a854e7",
+  "lastOpenFiles": [
+    "NMAP.md",
+    "80.md",
+    "Untitled.md"
+  ]
+}

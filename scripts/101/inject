@@ -1,0 +1,7 @@
+Content-Disposition: form-data; name=”filename”
+
+reverse.php
+—————————–
+Content-Disposition: form-data; name=”uploadedfile”; filename=”reverse.jpg”
+
+Content-Type: image/jpeg

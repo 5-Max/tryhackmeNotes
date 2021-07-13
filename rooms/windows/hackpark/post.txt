@@ -1,0 +1,14 @@
+POST /Account/login.aspx?ReturnURL=%2fadmin%2f HTTP/1.1
+Host: 10.10.203.102
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101 Firefox/78.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 763
+Origin: http://10.10.203.102
+Connection: close
+Referer: http://10.10.203.102/Account/login.aspx?ReturnURL=%2fadmin%2f
+Upgrade-Insecure-Requests: 1
+
+__VIEWSTATE=dZVppvO7thw8c%2Bc%2BvjQaeX3DET7QqB9bDVY82tOh6nnhUNllRCN4dP0IcWLAN9daG%2FZmIAepzGo%2BE8kYuht0BGhXjJGEqg2ULFnH7g7LQnRp8IDZmo94qkXgmEddtNcYPahTiFBS19X5K%2BJv%2BJskU2QqyPhUXlZTihj%2BZlydypGmc%2BZC0X56b9EdbNnOcek4b%2FKwEwLAxVaOB%2BVcUq7b1DyihFBj%2BKOwJRjc1poDmqgBIL13J7ECP3EYP7EbCnI5SBBg0eYtrLnAuPokasP5adpbtc3JChw%2FnjQEx7dq%2BVdOHyai2OGOa04n05AhHqlEC0nKkRLKF2CyZZQndS7jxDpu2dQ1Pw04yRFIgOsEji0JiY33&__EVENTVALIDATION=8WriVMR9u8w1rbYvWY7RulFn%2BtpEem0%2Fhl%2FbACmKbsO1CJEKrn402ng%2BbBUCD1WVk%2FL%2BMnARIPbEOwY78CjcgiIz33w2nPYWg3HleYenifMfGyvZdl2ihoqnlW30Ox1H9dKA2x8wKArLEPEGzbkUAo6bzKqq6rqahwc1TL9t81yooEkv&ctl00%24MainContent%24LoginUser%24UserName=admin&ctl00%24MainContent%24LoginUser%24Password=test&ctl00%24MainContent%24LoginUser%24LoginButton=Log+in

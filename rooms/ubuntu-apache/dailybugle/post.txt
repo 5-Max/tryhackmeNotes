@@ -1,0 +1,15 @@
+POST /index.php HTTP/1.1
+Host: 10.10.251.138
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101 Firefox/78.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 140
+Origin: http://10.10.251.138
+Connection: close
+Referer: http://10.10.251.138/
+Cookie: eaa83fe8b963ab08ce9ab7d4a798de05=1qjflno1fc3rush7hckiq1nv02
+Upgrade-Insecure-Requests: 1
+
+username=^admin^&password=^passwd^&Submit=&option=com_users&task=user.login&return=aHR0cDovLzEwLjEwLjI1MS4xMzgv&14a4c44acb07fecfa817c3638fd589a8=1
