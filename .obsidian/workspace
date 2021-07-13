@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "rooms/Notes/Wonderland Series/Wonderland/22.md",
+            "file": "README.md.md",
             "mode": "source"
           }
         }
@@ -68,7 +68,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "rooms/Notes/Wonderland Series/Wonderland/22.md",
+                "file": "README.md.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -88,6 +88,7 @@
   },
   "active": "1db0c9acbcbed620",
   "lastOpenFiles": [
+    "README.md",
     "rooms/Notes/Wonderland Series/Wonderland/22.md",
     "rooms/Notes/Wonderland Series/Wonderland/images.md",
     "rooms/Notes/Wonderland Series/Wonderland/80.md",
@@ -96,7 +97,6 @@
     "rooms/Notes/Wonderland/Looking Glass/22.md",
     "educational/privesc.md",
     "educational/shellz.md",
-    "rooms/Notes/Wonderland/Looking Glass/Untitled.md",
-    "rooms/Notes/Wonderland/Looking Glass/dropbear.md"
+    "rooms/Notes/Wonderland/Looking Glass/Untitled.md"
   ]
 }
