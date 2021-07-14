@@ -1,4 +1,4 @@
-```
+``` bash
 ┌──(kali㉿kali)-[~/Downloads]
 └─$ ls -la                 
 total 283252

@@ -1,17 +1,17 @@
 Just a short intro on what's coming ahead:
 
-    du
-    grep, egrep, fgrep
-    tr
-    awk
-    sed
-    xargs
-    curl
-    wget
-    xxd
+		du
+		grep, egrep, fgrep
+		tr
+		awk
+		sed
+		xargs
+		curl
+		wget
+		xxd
     
     
-du
+### du
 
 what files/directories are consuming how much space.
 
@@ -26,7 +26,7 @@ du -a /home/ | grep user 	will list any file/directory whose name is containing 
 
 
 
-grep
+### grep
 
 grep "PATTERN" file.txt
 
@@ -68,7 +68,7 @@ Flags	Description
 
 
 
-String Manipulations (STRing OPerationS)
+### String Manipulations (STRing OPerationS)
 
 
 For strops, we have the following tools that I always keep in my arsenal and you should too:
@@ -83,13 +83,12 @@ Other commands to be familiar with:
     sort
     uniq
     
-tr	translate command
+#### tr	translate command
     
-tr [flags] [source]/[find]/[select] [destination]/[replace]/[change]
+`tr [flags] [source]/[find]/[select] [destination]/[replace]/[change]`
 
 
-Flags
-	Description
+Flags Description
 -d	To delete a given set of characters
 -t	To concat source set with destination set(destination set comes first; t stands for truncate)
 -s	To replace the source set with the destination set(s stands for squeeze)
@@ -97,18 +96,18 @@ Flags
 
 https://www.geeksforgeeks.org/tr-command-in-unix-linux-with-examples/
 
- echo "Welcome    To    GeeksforGeeks" | tr -s [:space:] ' '
+` echo "Welcome    To    GeeksforGeeks" | tr -s [:space:] ' '`
  
  Welcome To GeeksforGeeks
  
  
 
-awk
+#### awk
 
 awk [flags] [select pattern/find(sort)/commands] [input file]
 
 
-Note: The $0 variable points to the whole line.  Also, make sure to use single quotes('') to specify patterns, awk treats double quotes("") as a raw string. To use double quotes make sure that you escape the ($) sign(s) with a backslash (\) each, to make it work properly.
+Note: The `$0` variable points to the whole line.  Also, make sure to use single quotes('') to specify patterns, awk treats double quotes("") as a raw string. To use double quotes make sure that you escape the ($) sign(s) with a backslash (\) each, to make it work properly.
 
 Flags	Description
 -F	With this flag you can specify FIELD SEPARATOR (FS), and thus don't need to use the BEGIN rule
@@ -118,7 +117,7 @@ Flags	Description
 You can debug your .awk scripts specifying this flag(awk -D script.awk) 
 -o	To specify the output file (if no name is given after the flag, the output is defaulted to awkprof.out)
 
-                                                      
+```bash                                                    
 ┌──(kali㉿kali)-[~/Downloads]
 └─$ cat awk.txt 
 ippsec youtube hackthebox 34024
@@ -141,7 +140,7 @@ stok:1234
 awk 'BEGIN{ORS=","} {print $1}' awk.txt 
 
 ippsec,john,thecybermentor,liveoverflow,nahamsec,stok,  
-
+```
 
 
 
