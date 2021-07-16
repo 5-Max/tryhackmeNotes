@@ -16,4 +16,6 @@ The newer formated ones will be in rooms/notes.
 
 Don't play king of the hill (KOTH), so not much there. 
 
+Ohh, I did have a un-mounting issue where I lost like a week of notes, if they are blank, well, 
+
 Thank you for stoping by.

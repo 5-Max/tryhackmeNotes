@@ -1,3 +1,5 @@
+
+```basic
 └─$ nmap 10.10.113.196
 Starting Nmap 7.91 ( https://nmap.org ) at 2021-05-26 19:51 EDT
 Nmap scan report for 10.10.113.196
@@ -10,7 +12,7 @@ PORT    STATE SERVICE
 111/tcp open  rpcbind
 
 Nmap done: 1 IP address (1 host up) scanned in 12.91 seconds
-
+```
 
 dirsearch gives us /island and /island/2100
 
@@ -35,7 +37,7 @@ didn't get the hint that the extension is .ticket  ,,, so wfuzz
 
 after many,many,many tries got 
 
-                                                                                                                                                                        
+```basic                                                                                                                                                                     
 ┌──(kali㉿kali)-[~]
 └─$ wfuzz -c -z file,/usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-medium.txt --sc 200,202,204,301,302,307,403 http://10.10.113.196/island/2100/FUZZ.ticket 
  /usr/lib/python3/dist-packages/wfuzz/__init__.py:34: UserWarning:Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz's documentation for more information.
@@ -83,11 +85,11 @@ This is just a token to get into Queen's Gambit(Ship)
 
 
 RTy8yhBQdscX
-
+```
 
 so it's base 58 , cyber chef did not recognize it hashid neither, didn't google (picked it right up), 
 
-                                                                                                                                                                         
+```basic                                                                                                                                                                        
 ┌──(kali㉿kali)-[~]
 └─$ ftp 10.10.113.196                                                                                                                                              130 ⨯
 Connected to 10.10.113.196.
@@ -140,10 +142,10 @@ drwxr-xr-x    2 1001     1001         4096 May 05  2020 vigilante
 226 Directory send OK.
 ftp> cd slade
 550 Failed to change directory.
-
+```
 the png file had the header corrupted, that gives us the password for the jpg file that has two compressed files 
 
-                                                                                                                                                                        
+```bash                                                                                                                                                                  
 ┌──(kali㉿kali)-[~/Downloads/Image-ExifTool-12.26]
 └─$ ./exiftool /home/kali/Leave_me_alone.png                                                                                                                         1 ⨯
 ExifTool Version Number         : 12.26
@@ -158,7 +160,7 @@ Error
 
 
 
-                                                                                                                                                                        
+                                                                                                     
 ┌──(kali㉿kali)-[~/Downloads/Image-ExifTool-12.26]
 └─$ ./exiftool /home/kali/Leave_me_alone.png     
 ExifTool Version Number         : 12.26
@@ -181,9 +183,9 @@ Filter                          : Adaptive
 Interlace                       : Noninterlaced
 Image Size                      : 845x475
 Megapixels                      : 0.401
+```
 
-
-                                                                                                                                                                        
+```basic                                                                                                                                                                   
 ┌──(kali㉿kali)-[~/Downloads/Image-ExifTool-12.26]
 └─$ steghide info /home/kali/aa.jpg                                                                                                                                  1 ⨯
 "aa.jpg":
@@ -192,7 +194,7 @@ Megapixels                      : 0.401
 Try to get information about embedded data ? (y/n) y
 Enter passphrase: 
 steghide: could not extract any data with that passphrase!
-                                                                                                                                                                         
+                                                                            
 ┌──(kali㉿kali)-[~/Downloads/Image-ExifTool-12.26]
 └─$ steghide info /home/kali/aa.jpg                                                                                                                                  1 ⨯
 "aa.jpg":
@@ -206,9 +208,9 @@ Enter passphrase:
     compressed: yes
 
 
+```
 
-
-                                                                                                                                                                        
+```basic                                                                                                                                                                     
 ┌──(kali㉿kali)-[~]
 └─$ steghide extract -sf /home/kali/aa.jpg
 Enter passphrase: 
@@ -247,8 +249,9 @@ wild pigs and wolves.
 └─$ cat shado     
 M3tahuman
 
-
-ssh
+```
+### ssh
+```bash
 
                                                                                                                                                                          
 ┌──(kali㉿kali)-[~]
@@ -314,6 +317,6 @@ THM{MY_W0RD_I5_MY_B0ND_IF_I_ACC3PT_YOUR_CONTRACT_THEN_IT_WILL_BE_COMPL3TED_OR_I'
 
 Let me know your comments about this machine :)
 I will be available @twitter @User6825
-
+```
 
 

@@ -1,4 +1,4 @@
-
+```basic
 ┌──(kali㉿kali)-[~]
 └─$ nmap 10.10.133.159
 Starting Nmap 7.91 ( https://nmap.org ) at 2021-07-08 08:51 EDT
@@ -9,7 +9,9 @@ PORT   STATE SERVICE
 80/tcp open  http
 
 Nmap done: 1 IP address (1 host up) scanned in 11.93 seconds
-                                                                                                                                                                         
+```                                                    
+
+```basic
 ┌──(kali㉿kali)-[~]
 └─$ nmap -p- --open 10.10.133.159
 Starting Nmap 7.91 ( https://nmap.org ) at 2021-07-08 08:52 EDT
@@ -23,7 +25,9 @@ PORT      STATE SERVICE
 65524/tcp open  unknown==
 
 Nmap done: 1 IP address (1 host up) scanned in 46.04 seconds
-                                                                                   
+```                                                                                  
+
+```basic
 ┌──(kali㉿kali)-[~]
 └─$ nmap -p80 -sV 10.10.133.159  
 Starting Nmap 7.91 ( https://nmap.org ) at 2021-07-08 08:53 EDT
@@ -35,8 +39,9 @@ PORT   STATE SERVICE VERSION
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 9.69 seconds
+```
 
-
+```basic
 ┌──(kali㉿kali)-[~]
 └─$ nmap -sCV -p- -Pn -T5 -v 10.10.133.159               
 Host discovery disabled (-Pn). All addresses will be marked 'up' and scan times will be slower.
@@ -82,24 +87,24 @@ Nmap scan report for 10.10.133.159
 Host is up (0.10s latency).
 Not shown: 64138 closed ports, 1394 filtered ports
 PORT      STATE SERVICE VERSION
-==80==/tcp    open  http    nginx 1.16.1
+80/tcp    open  http    nginx 1.16.1
 | http-methods: 
 |_  Supported Methods: GET HEAD
 | http-robots.txt: 1 disallowed entry 
 |_/
 |_http-server-header: nginx/1.16.1
 |_http-title: Welcome to nginx!
-==6498==/tcp  open  ==ssh==    OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+6498/tcp  open  ssh    OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
 | ssh-hostkey: 
 |   2048 30:4a:2b:22:ac:d9:56:09:f2:da:12:20:57:f4:6c:d4 (RSA)
 |   256 bf:86:c9:c7:b7:ef:8c:8b:b9:94:ae:01:88:c0:85:4d (ECDSA)
 |_  256 a1:72:ef:6c:81:29:13:ef:5a:6c:24:03:4c:fe:3d:0b (ED25519)
-==65524==/tcp open  http    Apache httpd 2.4.43 ((Ubuntu))
+65524/tcp open  http    Apache httpd 2.4.43 ((Ubuntu))
 | http-methods: 
 |_  Supported Methods: POST OPTIONS HEAD GET
 | http-robots.txt: 1 disallowed entry 
 |_/
-|_http-server-header: ==Apache/2.4.43== (Ubuntu)
+|_http-server-header: Apache/2.4.43 (Ubuntu)
 |_http-title: Apache2 Debian Default Page: It works
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
@@ -113,4 +118,8 @@ Completed NSE at 08:59, 0.00s elapsed
 Read data files from: /usr/bin/../share/nmap
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 400.53 seconds
+```
 
+80
+6498
+65524
