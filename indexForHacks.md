@@ -8,8 +8,8 @@ CCT2019	|	impossible will be there a while, |
 MAL: Malware Introductory |
 
 # rooms(ctf's)
-room | 		tools used / initial access	| privesc | CVE
-------|----------|---------------
+room | 		tools used / initial access		| privesc |CVE
+-----|--------------------------------------|---------|-----
 [[Lian_Yu]]	| fuzz => ftp => exiftool steghide => ssh  |gtfo pkexec
 bountyhacker |ftp => hydra => ssh |gtfo tar   where is this file?
 [[cyborg]]		|borg backup => ssh | gtfo bash
@@ -20,8 +20,8 @@ brute it	|hydra login => ssh2john | cat
 osint|
 
 # rooms(ctf's)/Notes
-room | 		tools used / initial access	| privesc | CVE
-------|----------|---------------
+room | 		tools used / initial access		| privesc |CVE
+-----|--------------------------------------|---------|-----
 Cage	| [nmap](rooms(ctf's)/Notes/Cage/nmap) - [ftp](rooms(ctf's)/Notes/Cage/21) => vignere => [22](rooms(ctf's)/Notes/Cage/22) Cookie Rev Shell => vigeniere  | su rootab
 Easy Peasy   | [nmap](rooms(ctf's)/Notes/Easy%20Peasy/nmap) - [80](rooms(ctf's)/Notes/Easy%20Peasy/80) - [6498](rooms(ctf's)/Notes/Easy%20Peasy/6498) - [65524](rooms(ctf's)/Notes/Easy%20Peasy/65524) |cronjob
 Kiba  		| [nmap](rooms(ctf's)/Notes/Kiba/NMAP) - [80](rooms(ctf's)/Notes/Kiba/80) - [5601](rooms(ctf's)/Notes/Kiba/)	Kibana 6.5     |components
@@ -45,8 +45,8 @@ Source|
 
 
 # Ubuntu-Apache
-room | 		tools used / initial access	| privesc | CVE
-------|----------|---------------
+room | 		tools used / initial access		| privesc |CVE
+-----|--------------------------------------|---------|-----
 Daily bugle |	joombla  //  reverse.php  |  SSH  
 Gamezone |	sqlmap injecting searchbar  // reverse ssh port | escalation with msf (never worked) // url manipulation we get flag 
 Internal	|Wordpress  | SSH 
@@ -63,8 +63,8 @@ rootme		|dirsearch // upload php | gtfo  (python and bash)
 
 
 # Windows
-room | 		tools used / initial access	| privesc | CVE
-------|----------|---------------
+room | 		tools used / initial access		| privesc |CVE
+-----|--------------------------------------|---------|-----
 
 Alfred		Jenkins (admin:admin) // Invoke-PowerShellTct (reverse shell) // incognito (add user/privilage escalation) //  			rmdesktop windows 7
 
@@ -94,8 +94,8 @@ retro		rpd with remmina //  CVE-2019-1388  (opening browser as admin and then op
 
 
 # Educational
-room | 		tools used / initial access	| privesc | CVE
-------|----------|---------------
+room | 		tools used / initial access		| privesc |CVE
+-----|--------------------------------------|---------|-----
 
 
 
@@ -127,8 +127,8 @@ overpass series 1,2,3|
 
 
 # educational/webapps
-room | 		tools used / initial access	| privesc | CVE
-------|----------|---------------
+room | 		tools used / initial access		| privesc |CVE
+-----|--------------------------------------|---------|-----
 authenticate|
 avengers|
 lfi|
@@ -142,7 +142,7 @@ toolsrus|	tomcat manager upload |
 
 # Buffer Overflow
 room | 		exploit language | CVE
-------|----------
+-----|-----------------------|-------
 buffer overeflow | mona
 Intro X86|r2
 Gate Keeper| rb
