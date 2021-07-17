@@ -9,8 +9,8 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "educational(walkthroughs)/PrintNightmare/One Page.md",
-            "mode": "source"
+            "file": "indexForHacks.md",
+            "mode": "preview"
           }
         }
       }
@@ -68,7 +68,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "educational(walkthroughs)/PrintNightmare/One Page.md",
+                "file": "indexForHacks.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -88,15 +88,15 @@
   },
   "active": "eac056e0e9ec5315",
   "lastOpenFiles": [
-    "educational(walkthroughs)/PrintNightmare/One Page.md",
+    "indexForHacks.md",
     "educational(walkthroughs)/PrintNightmare/microsoftDocs.md",
+    "rooms(ctf's)/windows/blue/report.md",
+    "educational(walkthroughs)/PrintNightmare/One Page.md",
     "educational(walkthroughs)/PrintNightmare/index.md",
-    "educational(walkthroughs)/PrintNightmare/Q's.md",
     "educational(walkthroughs)/PrintNightmare/Untitled.md",
     "educational(walkthroughs)/PrintNightmare/exploit.md",
+    "educational(walkthroughs)/PrintNightmare/Q's.md",
     "educational(walkthroughs)/webApps/Ignite/ignite.md",
-    "indexForHacks.md",
-    "educational(walkthroughs)/msf.md",
-    "educational(walkthroughs)/webApps/toolsrus.md"
+    "educational(walkthroughs)/msf.md"
   ]
 }

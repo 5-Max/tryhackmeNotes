@@ -61,49 +61,30 @@ rootme		|dirsearch // upload php | gtfo  (python and bash)
 # Windows
 room | 		tools used / initial access		| privesc |CVE
 -----|--------------------------------------|---------|-----
-
-Alfred		Jenkins (admin:admin) // Invoke-PowerShellTct (reverse shell) // incognito (add user/privilage escalation) //  			rmdesktop windows 7
-
-Blue		eternal blue  msf  ///  print spooler to escalate and hashdump (john) 
-
-Hackpark	hydra // BlogEngine.net edit post with reverse shell //  escalate with msf 
-
-Ice		MSF // Kiwi  
-
-Relevant	eternal blue  smb client
-
-Steel Mountain	HTTP File Server (HFS)  Rejetto Vuln  //  MSF
-
-		NO-MSF   //  python 
-
-		powerup.ps1  //  winPEAS 
-
-		AdvancedSystemCareService9
-
-
-retro		rpd with remmina //  CVE-2019-1388  (opening browser as admin and then opening prompt as admin)  
+Alfred	|Jenkins (admin:admin) // Invoke-PowerShellTct (reverse shell) | incognito (add user/privilage escalation) 
+[Blue](rooms(ctf's)/windows/blue/report)| eternal blue  msf - migrate to print spooler |hashdump - john | CVE-2017-0143
+Hackpark | hydra // BlogEngine.net edit post with reverse shell |  escalate with msf 
+Ice		|MSF | Kiwi  
+Relevant | eternal blue  smb client |
+Steel Mountain	|HTTP File Server (HFS)  Rejetto Vuln  |  MSF
+		|NO-MSF   //  python 
+		|powerup.ps1  //  winPEAS 
+		|AdvancedSystemCareService9
+retro	|	rpd with remmina  |(opening browser as admin and then opening prompt as admin)  |CVE-2019-1388
 
 # Educational
 room | 		tools used / initial access		| privesc |CVE
 -----|--------------------------------------|---------|-----
-
-Capture the Flag 		encryption 
-
-Hashing
-
-Networks
-
-Overpass Series
-
-[[msf]]
-
-[[Privesc]]
-
-[[Shellz]]
-
-[[sqli]]
-
-[[tmux.png]]  like terminator but more command base
+Capture the Flag 	|	encryption 
+Hashing|
+Networks|
+Overpass Series|
+[[msf]]|
+[[Privesc]]| linux privesc
+[[Shellz]]|
+[[sqli]]|
+[[tmux.png]]  |like terminator but more command base
+PrintNightmare	| [[exploit]] | |CVE-2021-34527 
 
 # educational/webapps
 room | 		tools used / initial access		| privesc |CVE
