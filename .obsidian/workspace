@@ -4,13 +4,13 @@
     "type": "split",
     "children": [
       {
-        "id": "3983235f4c20d8ee",
+        "id": "eac056e0e9ec5315",
         "type": "leaf",
         "state": {
           "type": "markdown",
           "state": {
-            "file": "indexForHacks.md",
-            "mode": "preview"
+            "file": "educational(walkthroughs)/PrintNightmare/One Page.md",
+            "mode": "source"
           }
         }
       }
@@ -68,7 +68,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "indexForHacks.md",
+                "file": "educational(walkthroughs)/PrintNightmare/One Page.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -86,17 +86,17 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "3983235f4c20d8ee",
+  "active": "eac056e0e9ec5315",
   "lastOpenFiles": [
+    "educational(walkthroughs)/PrintNightmare/One Page.md",
+    "educational(walkthroughs)/PrintNightmare/microsoftDocs.md",
+    "educational(walkthroughs)/PrintNightmare/index.md",
+    "educational(walkthroughs)/PrintNightmare/Q's.md",
+    "educational(walkthroughs)/PrintNightmare/Untitled.md",
+    "educational(walkthroughs)/PrintNightmare/exploit.md",
+    "educational(walkthroughs)/webApps/Ignite/ignite.md",
     "indexForHacks.md",
-    "rooms(ctf's)/Notes/Kiba/80.md",
-    "rooms(ctf's)/Notes/Kiba/5601.md",
-    "rooms(ctf's)/Notes/Kiba/NMAP.md",
-    "rooms(ctf's)/Notes/Easy Peasy/nmap.md",
-    "romms(ctf's)/Notes/EasyPeasy/nmap.md",
-    "rooms(ctf's)/Notes/Cage/nmap.md",
-    "rooms(ctf's)/Notes/Easy Peasy/65524.md",
-    "rooms(ctf's)/Notes/Easy Peasy/6498.md",
-    "rooms(ctf's)/Notes/Easy Peasy/80.md"
+    "educational(walkthroughs)/msf.md",
+    "educational(walkthroughs)/webApps/toolsrus.md"
   ]
 }

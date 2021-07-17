@@ -2,5 +2,6 @@
   "promptDelete": false,
   "showUnsupportedFiles": true,
   "alwaysUpdateLinks": true,
-  "attachmentFolderPath": "rooms(ctf's)/Notes/Easy Peasy"
+  "attachmentFolderPath": "rooms(ctf's)/Notes/Easy Peasy",
+  "spellcheck": true
 }

