@@ -4,13 +4,13 @@
     "type": "split",
     "children": [
       {
-        "id": "eac056e0e9ec5315",
+        "id": "6591d307d234e253",
         "type": "leaf",
         "state": {
           "type": "markdown",
           "state": {
-            "file": "indexForHacks.md",
-            "mode": "preview"
+            "file": "educational(walkthroughs)/captureTheFlag.md",
+            "mode": "source"
           }
         }
       }
@@ -68,7 +68,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "indexForHacks.md",
+                "file": "educational(walkthroughs)/captureTheFlag.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -86,17 +86,17 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "eac056e0e9ec5315",
+  "active": "6591d307d234e253",
   "lastOpenFiles": [
+    "educational(walkthroughs)/captureTheFlag.md",
+    "educational(walkthroughs)/msf.md",
     "indexForHacks.md",
-    "educational(walkthroughs)/PrintNightmare/microsoftDocs.md",
-    "rooms(ctf's)/windows/blue/report.md",
-    "educational(walkthroughs)/PrintNightmare/One Page.md",
-    "educational(walkthroughs)/PrintNightmare/index.md",
-    "educational(walkthroughs)/PrintNightmare/Untitled.md",
-    "educational(walkthroughs)/PrintNightmare/exploit.md",
-    "educational(walkthroughs)/PrintNightmare/Q's.md",
-    "educational(walkthroughs)/webApps/Ignite/ignite.md",
-    "educational(walkthroughs)/msf.md"
+    "rooms(ctf's)/Notes/Madeye's Castle/80.md",
+    "educational(walkthroughs)/sqli.md",
+    "educational(walkthroughs)/shellz.md",
+    "README.md",
+    "bufferOverflow/Reversing Elf/Reversing_Elf.md",
+    "bufferOverflow/Intro X86/Intro X86-64.md",
+    "rooms(ctf's)/windows/blue/report.md"
   ]
 }

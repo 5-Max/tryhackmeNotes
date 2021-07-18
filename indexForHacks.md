@@ -10,13 +10,13 @@ MAL: Malware Introductory |
 # rooms(ctf's)
 room | 		tools used / initial access		| privesc |CVE
 -----|--------------------------------------|---------|-----
-[[Lian_Yu]]	| fuzz => ftp => exiftool steghide => ssh  |gtfo pkexec
-bountyhacker |ftp => hydra => ssh |gtfo tar   where is this file?
-[[cyborg]]		|borg backup => ssh | gtfo bash
-[[startup]]		|ftp (writable directory) | ssh (writable cronjob)
-brute it	|hydra login => ssh2john | cat 
-[[wgel]]	|	ssh2john => sudo wget | sudoers file
-[[charlie's factory]]| rce => ssh | reading code
+[Lian Yu](rooms(ctf's)/Lian_Yu)	| fuzz => ftp => exiftool steghide => ssh  |gtfo pkexec
+bountyhacker |ftp => hydra => ssh |gtfo tar   Lost?
+[Cyborg](rooms(ctf's)/cyborg)	|borg backup => ssh | gtfo bash
+[Startup](rooms(ctf's)/startup)		|ftp (writable directory) | ssh (writable cronjob)
+brute it	|hydra login => ssh2john | cat Lost?
+[Wgel](rooms(ctf's)/wgel)	|	ssh2john => sudo wget | sudoers file
+[Charlie's Factory](rooms(ctf's)/charlie's%20factory)| rce => ssh | reading code
 osint|
 
 # rooms(ctf's)/Notes
@@ -79,12 +79,12 @@ Capture the Flag 	|	encryption
 Hashing|
 Networks|
 Overpass Series|
-[[msf]]|
-[[Privesc]]| linux privesc
-[[Shellz]]|
-[[sqli]]|
-[[tmux.png]]  |like terminator but more command base
-PrintNightmare	| [[exploit]] | |CVE-2021-34527 
+[Metasploit](educational(walkthroughs)/msf) |
+[Privilege Escalation](educational(walkthroughs)/privesc) | linux privesc
+[Shells](educational(walkthroughs)/shellz)| nc rlwrap socat msf
+[SQL i ](educational(walkthroughs)/sqli) | sqlite
+[tmux](educational(walkthroughs)/tmux.png)  |like terminator but more command base
+PrintNightmare	|  | |CVE-2021-34527 
 
 # educational/webapps
 room | 		tools used / initial access		| privesc |CVE
@@ -103,7 +103,7 @@ toolsrus|	tomcat manager upload |
 # Buffer Overflow
 room | 		exploit language | CVE
 -----|-----------------------|-------
-buffer overeflow | mona
+buffer overflow | mona
 Intro X86|r2
 Gate Keeper| rb
 Brainstorm| mona

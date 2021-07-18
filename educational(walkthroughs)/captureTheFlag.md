@@ -6,7 +6,7 @@ https://cryptii.com/
 
 
 
-#1 Translation & Shifting
+# 1 Translation & Shifting
 
 c4n y0u c4p7u23 7h3 f149?
 can you capture the flag?
@@ -20,7 +20,7 @@ lets try some binary out!
 
 
 
-MJQXGZJTGIQGS4ZAON2XAZLSEBRW63LNN5XCA2LOEBBVIRRHOM======
+MJQXGZJTGIQGS4ZAON2XAZLSEBRW63LNN5XCA2LOEBBVIRRHOM==
 base32 is super common in CTF's
 
 
@@ -64,17 +64,14 @@ LS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0KLS0tLS0gLi0tLS0g
 Base64 => Morse Code => Binary => ROT47 => Decimal 
 
 
-
-
-#2 Spectrograms
+# 2 Spectrograms
 
 audacity 
 
 change the view of track 
 
 
-
-#3 Steganography
+# 3 Steganography
 
 steghide 
 

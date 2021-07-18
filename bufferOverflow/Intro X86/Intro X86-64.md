@@ -33,14 +33,14 @@ https://en.wikibooks.org/wiki/X86_Assembly/X86_Architecture
 
 The 8 GPRs are:
 
-    Accumulator register (AX). Used in arithmetic operations
-    Counter register (CX). Used in shift/rotate instructions and loops.
-    Data register (DX). Used in arithmetic operations and I/O operations.
-    Base register (BX). Used as a pointer to data (located in segment register DS, when in segmented mode).
-    Stack Pointer register (SP). Pointer to the top of the stack.
-    Stack Base Pointer register (BP). Used to point to the base of the stack.
-    Source Index register (SI). Used as a pointer to a source in stream operations.
-    Destination Index register (DI). Used as a pointer to a destination in stream operations.
+1- Accumulator register (AX). Used in arithmetic operations
+2- Counter register (CX). Used in shift/rotate instructions and loops.
+3- Data register (DX). Used in arithmetic operations and I/O operations.
+4- Base register (BX). Used as a pointer to data (located in segment register DS, when in segmented mode).
+5- Stack Pointer register (SP). Pointer to the top of the stack.
+6- Stack Base Pointer register (BP). Used to point to the base of the stack.
+7- Source Index register (SI). Used as a pointer to a source in stream operations.
+8- Destination Index register (DI). Used as a pointer to a destination in stream operations.
 
 Similarly, in the 64-bit version, the 'E' is replaced with an 'R' (register), so the 64-bit version of 'EAX' is called 'RAX'.
 
@@ -48,31 +48,23 @@ Similarly, in the 64-bit version, the 'E' is replaced with an 'R' (register), so
 screenshot of conversion 
 
 
+leaq source, destination: this instruction sets destination to the address denoted by the expression in source
 
-    leaq source, destination: this instruction sets destination to the address denoted by the expression in source
+addq source, destination: destination = destination + source
 
-    addq source, destination: destination = destination + source
+subq source, destination: destination = destination - source
 
-    subq source, destination: destination = destination - source
+imulq source, destination: destination = destination * source
 
-    imulq source, destination: destination = destination * source
+salq source, destination: destination = destination << source where << is the left bit shifting operator
 
-    salq source, destination: destination = destination << source where << is the left bit shifting operator
+sarq source, destination: destination = destination >> source where >> is the right bit shifting operator
 
-    sarq source, destination: destination = destination >> source where >> is the right bit shifting operator
+xorq source, destination: destination = destination XOR source
 
-    xorq source, destination: destination = destination XOR source
+andq source, destination: destination = destination & source
 
-    andq source, destination: destination = destination & source
-
-    orq source, destination: destination = destination | source
-
-
-
-
-
-
-if statement,
+orq source, destination: destination = destination | source
 
 
 ### if1
@@ -93,17 +85,13 @@ int main(void){
 }
 ```
 
-set breakpoint ,,, remember 60   becomes 0x60 which is hexadecimal,,, 
+- set breakpoint ,,, remember 60   becomes 0x60 which is hexadecimal,,, 
 
 
 https://www.rapidtables.com/convert/number/hex-to-decimal.html
 
 
-
-
-
-
-Loops
+### Loops
 ```
 #include <stdio.h>
 
@@ -119,27 +107,6 @@ return 0;
 ```
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ```
 #include <stdio.h>
 
@@ -153,11 +120,6 @@ int main(void){
 return 0;
 }
 ```
-
-
-
-
-
 
 ### crackme1
 ```
@@ -273,35 +235,3 @@ is this code doing ROT?
 ```
 
 0=0
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

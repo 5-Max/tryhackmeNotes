@@ -1,10 +1,13 @@
+### 1
+```
 ┌──(kali㉿kali)-[~/Downloads]
 └─$ ./crackme1           
 flag{not_that_kind_of_elf}
 
+```
 
-
-                                                                                   
+  ### 2                                                                      
+  ```          
 ┌──(kali㉿kali)-[~/Downloads]
 └─$ ./crackme2                      
 Usage: ./crackme2 password
@@ -19,21 +22,24 @@ super_secret_passwordAccess denied.Access granted.%+
 └─$ ./crackme2 super_secret_password
 Access granted.
 flag{if_i_submit_this_flag_then_i_will_get_points}
+```   
    
    
-   
-crackme3
+### 3
 
-when we cat it we se base64
+when we cat it we see base64
 
-ZjByX3kwdXJfNWVjMG5kX2xlNTVvbl91bmJhc2U2NF80bGxfN2gzXzdoMW5nNQ==
+ZjByX3kwdXJfNWVjMG5kX2xlNTVvbl91bmJhc2U2NF80bGxfN2gzXzdoMW5nNQ\=\=
 
+```
 ┌──(kali㉿kali)-[~/Downloads]
 └─$ echo "ZjByX3kwdXJfNWVjMG5kX2xlNTVvbl91bmJhc2U2NF80bGxfN2gzXzdoMW5nNQ==" | base64 -d
-f0r_y0ur_5ec0nd_le55on_unbase64_4ll_7h3_7h1ng5                                      
+f0r_y0ur_5ec0nd_le55on_unbase64_4ll_7h3_7h1ng5   
 
+```                        
 
-							#4
+### 4
+```							
 ┌──(kali㉿kali)-[~/Downloads]
 └─$ r2 -d crackme4     
 Process with PID 2682 started...
@@ -378,11 +384,11 @@ p: Cannot find function at 0x7ffd864ca290
 0x7ffd864ca370  0000 0000 0000 0000 e005 4000 0000 0000  ..........@.....
 0x7ffd864ca380  b0a3 4c86 fd7f 0000 0000 0000 0000 0000  ..L.............
 [0x0040074a]> 
-
+```
 
 
 crackme6
-
+```
 [0x7f611a7e00a1]> pdf @sym.my_secure_test
             ; CALL XREF from sym.compare_pwd @ 0x4006e4
 ┌ 340: sym.my_secure_test (int64_t arg1);
@@ -510,13 +516,13 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> bytes.fromhex('313333375f707764').decode('utf8')
 '1337_pwd'
 >>> 
+```
 
 
 
+### crackme7
 
-crackme7
-
-
+```
 ┌──(kali㉿kali)-[~/Downloads]
 └─$ ./crackme7                                                               127 ⨯
 Menu:
@@ -546,11 +552,11 @@ Menu:
 
 [>] 3
 Goodbye!
- 
+```
  
 main function
 
-
+```
 [0x080483c0]> pdf @main
             ; DATA XREF from entry0 @ 0x80483d7
 ┌ 491: int main (char **argv);
@@ -749,12 +755,12 @@ Menu:
 [>] 31337
 Wow such h4x0r!
 flag{much_reversing_very_ida_wow}
+```  
   
   
-  
-crackme8
+### crackme8
 
-
+```
 command: strings Crackme8 (giveFlag function)
 command: chmod 777 Crackme8
 command: r2 -d ./Crackme8
@@ -765,6 +771,6 @@ command: afl
 	 (0xcafef00d into integer)
 	 (convert 0xcafef00d(hexadecimal) to decimal(2'complement) = -889262067)
 command: ./Crackme8 -889262067
-
+```
 
 
