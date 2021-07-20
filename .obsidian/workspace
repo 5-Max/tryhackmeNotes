@@ -4,14 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "6591d307d234e253",
+        "id": "ebc081986c74f0ae",
         "type": "leaf",
         "state": {
-          "type": "markdown",
-          "state": {
-            "file": "educational(walkthroughs)/captureTheFlag.md",
-            "mode": "source"
-          }
+          "type": "graph",
+          "state": {}
         }
       }
     ],
@@ -68,7 +65,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "educational(walkthroughs)/captureTheFlag.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -86,17 +82,17 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "6591d307d234e253",
+  "active": "ebc081986c74f0ae",
   "lastOpenFiles": [
-    "educational(walkthroughs)/captureTheFlag.md",
-    "educational(walkthroughs)/msf.md",
     "indexForHacks.md",
-    "rooms(ctf's)/Notes/Madeye's Castle/80.md",
-    "educational(walkthroughs)/sqli.md",
-    "educational(walkthroughs)/shellz.md",
-    "README.md",
-    "bufferOverflow/Reversing Elf/Reversing_Elf.md",
-    "bufferOverflow/Intro X86/Intro X86-64.md",
-    "rooms(ctf's)/windows/blue/report.md"
+    "rooms(ctf's)/Notes/Overpass/overpass3.md",
+    "rooms(ctf's)/Notes/Overpass/overpass1.md",
+    "educational(walkthroughs)/PrintNightmare/exploit.md",
+    "educational(walkthroughs)/webApps/toolsrus.md",
+    "educational(walkthroughs)/webApps/toolsrus.md.md",
+    "educational(walkthroughs)/webApps/ssrf.md",
+    "educational(walkthroughs)/webApps/dogcat.md",
+    "rooms(ctf's)/Notes/Tony the tiger/80.md",
+    "rooms(ctf's)/Notes/Tony the tiger/nmap.md"
   ]
 }

