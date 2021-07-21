@@ -4,11 +4,25 @@
     "type": "split",
     "children": [
       {
-        "id": "ebc081986c74f0ae",
+        "id": "310397e5c490e6f1",
         "type": "leaf",
         "state": {
-          "type": "graph",
-          "state": {}
+          "type": "markdown",
+          "state": {
+            "file": "educational(walkthroughs)/OWASP 10/Remidiation.md",
+            "mode": "source"
+          }
+        }
+      },
+      {
+        "id": "cbb0e5824fa814f2",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "educational(walkthroughs)/OWASP 10/owaspJuiceShop.md",
+            "mode": "source"
+          }
         }
       }
     ],
@@ -65,6 +79,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "educational(walkthroughs)/OWASP 10/Remidiation.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -82,17 +97,17 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "ebc081986c74f0ae",
+  "active": "310397e5c490e6f1",
   "lastOpenFiles": [
+    "educational(walkthroughs)/OWASP 10/Remidiation.md",
+    "educational(walkthroughs)/OWASP 10/owaspJuiceShop.md",
     "indexForHacks.md",
-    "rooms(ctf's)/Notes/Overpass/overpass3.md",
-    "rooms(ctf's)/Notes/Overpass/overpass1.md",
-    "educational(walkthroughs)/PrintNightmare/exploit.md",
-    "educational(walkthroughs)/webApps/toolsrus.md",
-    "educational(walkthroughs)/webApps/toolsrus.md.md",
-    "educational(walkthroughs)/webApps/ssrf.md",
-    "educational(walkthroughs)/webApps/dogcat.md",
-    "rooms(ctf's)/Notes/Tony the tiger/80.md",
-    "rooms(ctf's)/Notes/Tony the tiger/nmap.md"
+    "educational(walkthroughs)/OWASP 10/Untitled.md",
+    "rooms(ctf's)/owaspJuiceShop.md",
+    "educational(walkthroughs)/privesc.md",
+    "rooms(ctf's)/forBusinessReasons.md",
+    "rooms(ctf's)/couchdb.md",
+    "rooms(ctf's)/brooklyn99.md",
+    "rooms(ctf's)/Notes/Year of the Rabbit/22.md"
   ]
 }

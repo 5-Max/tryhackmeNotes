@@ -19,6 +19,10 @@ bountyhacker |ftp => hydra => ssh |gtfo tar   Lost?
 brute it	|hydra login => ssh2john | cat Lost?
 [Wgel](rooms(ctf's)/wgel)	|	ssh2john => sudo wget | sudoers file
 [Charlie's Factory](rooms(ctf's)/charlie's%20factory)| rce => ssh | reading code
+[Brooklin99](rooms(ctf's)/brooklyn99)	| easy box quick hydra | gtfo sudo less |
+[couchdb](rooms(ctf's)/couchdb)| nosql | running docker |CVE-2017-12636
+[for buisness reasons](rooms(ctf's)/forBusinessReasons)| wp rev shell plugin - pivot with msf | mount alpine |
+
 osint|
 
 # rooms(ctf's)/Notes
@@ -28,20 +32,16 @@ Cage| [nmap](rooms(ctf's)/Notes/Cage/nmap) - [ftp](rooms(ctf's)/Notes/Cage/21) =
 Easy Peasy  | [nmap](rooms(ctf's)/Notes/Easy%20Peasy/nmap) - [80](rooms(ctf's)/Notes/Easy%20Peasy/80) - [6498](rooms(ctf's)/Notes/Easy%20Peasy/6498) - [65524](rooms(ctf's)/Notes/Easy%20Peasy/65524) |cronjob
 Kiba  		| [nmap](rooms(ctf's)/Notes/Kiba/NMAP) - [80](rooms(ctf's)/Notes/Kiba/80) - [5601](rooms(ctf's)/Notes/Kiba/5601)	Kibana 6.5     |components
 Madeye's Castle| [nmap](rooms(ctf's)/Notes/Madeye's%20Castle/nmap) - [juicy sqlite(i)](rooms(ctf's)/Notes/Madeye's%20Castle/80) - [22](rooms(ctf's)/Notes/Madeye's%20Castle/22) | gtfo pico(horz) path variable 
-Marketplace  | cookie stealing - sqli |docker mnt
-Node	|very messed up room  // room vuln-net series
-Year of the Rabbit|	encryption | sudo -l
-Brooklin99	|
-couchdb|
-for buisness reasons|
-lazy admin|
+Marketplace  | [nmap](rooms(ctf's)/Notes/Marketplace/Nmap) - [80](rooms(ctf's)/Notes/Marketplace/80) - [22](rooms(ctf's)/Notes/Marketplace/22) - cookie stealing(JWT) - sqli mysql |docker mnt
+Node	| [nmap](rooms(ctf's)/Notes/Node/nmap)-[deserialization rce](rooms(ctf's)/Notes/Node/8080) | gtfo sudo systemctl|
+Year of the Rabbit|	[nmap](rooms(ctf's)/Notes/Year%20of%20the%20Rabbit/nmap) - [80](rooms(ctf's)/Notes/Year%20of%20the%20Rabbit/80) - [21](rooms(ctf's)/Notes/Year%20of%20the%20Rabbit/21) - [22](rooms(ctf's)/Notes/Year%20of%20the%20Rabbit/22)| gtfo sudo vi |CVE-2019-14287-l
+lazy admin| 
 gaming server|
 Nax	|	nagios | msf
 res|
 gitCrumpets|
 gitHappens|
 wonderland	|	html digging  | pivoting 
-Year of the Rabbit|
 Source|
 
 # Ubuntu-Apache
@@ -88,6 +88,9 @@ Overpass Series| [1](overpass1.md) [2](rooms(ctf's)/Notes/Overpass/overpass2) [3
 [tmux](educational(walkthroughs)/tmux.png)  |like terminator but more command base
 [PrintNightmare](educational(walkthroughs)/PrintNightmare/One%20Page)	|  | |CVE-2021-34527, CVE-2021-1675
 [ffuf](educational(walkthroughs)/ffuf) | fuzzer ||
+OWASP 10 |||
+| |[Owasp and Juice Shop](educational(walkthroughs)/OWASP%2010/owaspJuiceShop) |
+|| [Remediation](educational(walkthroughs)/OWASP%2010/Remidiation) |
 
 # educational/webapps
 room | 		tools used / initial access		| privesc |CVE
