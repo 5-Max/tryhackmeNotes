@@ -1,5 +1,18 @@
 to mitigate or remediate is the question lol
 
+https://owasp.org/www-project-top-ten/
+1- Injection
+2- Broken Authentication
+3- Sensitive Data Exposure
+4- XXE
+5- Broken Access Control
+6- Security Misconfiguration
+7- XSS
+8- Insecure Deserialization
+9- Using Components with Known Vulnerabilites
+10- Insufficient Logging & Monitoring
+
+
 this site looks promising 
 https://www.upguard.com/blog/top-20-owasp-vulnerabilities-and-how-to-fix-them
 
@@ -68,4 +81,41 @@ database dump
 - Generally, it is sufficient to disable resolution of external entities and disable support for `XInclude`. This can usually be done via configuration options or by programmatically overriding default behavior. Consult the documentation for your XML parsing library or API for details about how to disable unnecessary capabilities.
 
 ## 5 Broken Access Control
+
+
+
+## 6 Security Misconfiguration
+https://owasp.org/www-project-secure-headers/
+
+Access control is only effective if enforced in trusted server-side code or server-less API, where the attacker cannot modify the access control check or metadata.  
+* With the exception of public resources, **deny by default**.  
+* Implement access control mechanisms once and re-use them throughout the application, including **minimizing CORS usage**.  
+* Model access controls should enforce **record ownership**, rather than accepting that the user can create, read, update, or delete any record.  
+* Unique application business limit requirements should be enforced by domain models.  
+* **Disable web server directory listing** and ensure file metadata (e.g. .git) and backup files are not present within web roots.  
+* **Log access control failures**, alert admins when appropriate (e.g. repeated failures).  
+* **Rate limit API** and controller access to minimize the harm from automated attack tooling.  
+* JWT tokens should be invalidated on the server after logout.  
+Developers and QA staff should include functional access control unit and integration tests.
+
+## XSS
+run burpsuite web vuln scanner should catch them
+
+manual test of entry points and exit points
+https://portswigger.net/web-security/cross-site-scripting/stored
+
+
+## 8 Insecure Deserialization
+- deserialization of user input should be avoided unless absolutely necessary.
+- digital signature to check the integrity of the data
+- focus on the deserialization of user input not the gadgets
+
+## 9
+
+- run updates, 
+- migrate to more secure version ASAP
+
+## 10 
+
+blue team need to work maybe?
 

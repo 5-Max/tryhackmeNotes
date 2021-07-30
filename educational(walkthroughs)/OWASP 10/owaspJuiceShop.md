@@ -1,4 +1,16 @@
 # OWASP 10
+https://owasp.org/www-project-top-ten/
+1- Injection
+2- Broken Authentication
+3- Sensitive Data Exposure
+4- XXE
+5- Broken Access Control
+6- Security Misconfiguration
+7- XSS
+8- Insecure Deserialization
+9- Using Components with Known Vulnerabilites
+10- Insufficient Logging & Monitoring
+
 
 ## 1	Injection
 
@@ -119,7 +131,7 @@ GET /rest/basket/2 HTTP/1.1
 
 ## 6 Security Misconfiguration
 
-S3 buckets , unnecessary features , weak passwords, Error messages, not using HTTP security headers
+S3 buckets , unnecessary features , weak passwords, Error messages, not using [HTTP security](https://owasp.org/www-project-secure-headers/) headers
 
 
 can lead to other vulnerability = sensitive data, XXE , command injection
@@ -131,7 +143,7 @@ can lead to other vulnerability = sensitive data, XXE , command injection
 2-  Reflected (Client not sanitizing search data)
 
 
-types:
+types of xss payloads:
 
 popup's
 
@@ -152,27 +164,37 @@ XFS (cross-frame scripting)
 
 True-Client-IP: `<iframe src="javascript:alert(`xss`)">`
 
-## 8 Insecure Deserialization
 
+## 8 Insecure Deserialization
 
 Serialization is the process of converting objects used in programming into simpler, compatible formatting for transmitting between systems or networks for further processing or storage.
 
 Alternatively, deserialization is the reverse of this; converting serialized information into their complex form - an object that the application will understand.
 
+Tourist map example
 
+> A Tourist approaches you in the street asking for directions. They're looking for a local landmark and got lost. Unfortunately, English isn't their strong point and nor do you speak their dialect either. What do you do? You draw a map of the route to the landmark because pictures cross language barriers, they were able to find the landmark. Nice! You've just serialised some information, where the tourist then deserialised it to find the landmark.
+
+#### objects
+made up of two things, lamp example
+	- State - type of bulb
+	- Behavior - On/Off 
+	
+#### cookies
 
 cookies in plaintext 
 
+#### code execution
+python pickle vuln 
+to create cookie payload for reverse shell use [rce.py](scripts/rce.py)
 
-to create cookie payload for reverse shell use rce.py
 
 
+---
 ## 9	Components with know vulnerabilites
 
-
-missed updates
-
-
+- updating
+- migrating
 
 ## 10	Insufficient logging and monitoring
 

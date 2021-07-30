@@ -2,12 +2,12 @@
 room | 		tools used / initial access		| privesc |CVE
 -----|--------------------------------------|---------|-----
 CCT2019	|	impossible will be there a while, |
-[[Fusion Corp]]	| got in, need to escalate	|
+[[Fusion Corp]]	| kerbrute - impacket - evil-winrm| got in, need to escalate	|
 [[linuxModules]] |   educational
 [[attacktiveDirect]] | go over again and make better notes
 MAL: Malware Introductory |
-Tony the tiger | 
 ffuz | 
+Intro to Python |
 
 # rooms(ctf's)
 room | 		tools used / initial access		| privesc |CVE
@@ -35,6 +35,8 @@ Madeye's Castle| [nmap](rooms(ctf's)/Notes/Madeye's%20Castle/nmap) - [juicy sqli
 Marketplace  | [nmap](rooms(ctf's)/Notes/Marketplace/Nmap) - [80](rooms(ctf's)/Notes/Marketplace/80) - [22](rooms(ctf's)/Notes/Marketplace/22) - cookie stealing(JWT) - sqli mysql |docker mnt
 Node	| [nmap](rooms(ctf's)/Notes/Node/nmap)-[deserialization rce](rooms(ctf's)/Notes/Node/8080) | gtfo sudo systemctl|
 Year of the Rabbit|	[nmap](rooms(ctf's)/Notes/Year%20of%20the%20Rabbit/nmap) - [80](rooms(ctf's)/Notes/Year%20of%20the%20Rabbit/80) - [21](rooms(ctf's)/Notes/Year%20of%20the%20Rabbit/21) - [22](rooms(ctf's)/Notes/Year%20of%20the%20Rabbit/22)| gtfo sudo vi |CVE-2019-14287-l
+Overpass Series| [1](overpass1.md) [2](rooms(ctf's)/Notes/Overpass/overpass2) [3](overpass3.md) 
+Tony the tiger | [nmap](rooms(ctf's)/Notes/Tony%20the%20tiger/nmap)-[80](rooms(ctf's)/Notes/Tony%20the%20tiger/80) [8080](rooms(ctf's)/Notes/Tony%20the%20tiger/8080) [22](rooms(ctf's)/Notes/Tony%20the%20tiger/22) |gtfo sudo find|CVE-2015-7501
 lazy admin| 
 gaming server|
 Nax	|	nagios | msf
@@ -43,12 +45,13 @@ gitCrumpets|
 gitHappens|
 wonderland	|	html digging  | pivoting 
 Source|
+fowsniff |  [nmap](rooms(ctf's)/Notes/Fowsniff/nmap) - [80](rooms(ctf's)/Notes/Fowsniff/80) - [110](rooms(ctf's)/Notes/Fowsniff/110) - [22](rooms(ctf's)/Notes/Fowsniff/22)| **/etc/update-motd.d/**
 
 # Ubuntu-Apache
 room | 		tools used / initial access		| privesc |CVE
 -----|--------------------------------------|---------|-----
-Daily bugle |	joombla  //  reverse.php    |  SSH  
-Gamezone    |	sqlmap injecting searchbar  // reverse ssh port | escalation with msf (never worked) // url manipulation we get flag 
+[Daily bugle](rooms(ctf's)/ubuntu-apache/dailybugle/report) |	[[joombla.py]] - john - wp(404) |  gtfo sudo yum
+Gamezone    |	sqlmap injecting searchbar | escalation with msf (never worked) // url manipulation we get flag 
 Internal	|  Wordpress  | SSH 
 Kenobi	|	Samba  // smbclient  //  SSH  (access) |  gtfo SUID
 Skynet	|	smbclient // squirrelmail  //  hidden directory that leads to Cuppa CMS  //  upload shell to cuppa | escalate with cronjobs running
@@ -80,14 +83,13 @@ room | 		tools used / initial access		| privesc |CVE
 Capture the Flag 	|	encryption 
 Hashing|
 Networks|
-Overpass Series| [1](overpass1.md) [2](rooms(ctf's)/Notes/Overpass/overpass2) [3](overpass3.md) 
 [Metasploit](educational(walkthroughs)/msf) |
 [Privilege Escalation](educational(walkthroughs)/privesc) | linux privesc
 [Shells](educational(walkthroughs)/shellz)| nc rlwrap socat msf
 [SQL i ](educational(walkthroughs)/sqli) | sqlite
 [tmux](educational(walkthroughs)/tmux.png)  |like terminator but more command base
 [PrintNightmare](educational(walkthroughs)/PrintNightmare/One%20Page)	|  | |CVE-2021-34527, CVE-2021-1675
-[ffuf](educational(walkthroughs)/ffuf) | fuzzer ||
+[ffuf](ffuf.md) | fuzzer ||
 OWASP 10 |||
 | |[Owasp and Juice Shop](educational(walkthroughs)/OWASP%2010/owaspJuiceShop) |
 || [Remediation](educational(walkthroughs)/OWASP%2010/Remidiation) |

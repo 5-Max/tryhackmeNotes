@@ -145,3 +145,40 @@ Target: http://10.10.78.249/
 
 Task Completed
 ```
+
+```bash
+┌──(kali㉿kali)-[~]
+└─$ dirsearch -x 400 -r -u 10.10.226.166/images       
+
+  _|. _ _  _  _  _ _|_    v0.4.1
+ (_||| _) (/_(_|| (_| )
+
+Extensions: php, aspx, jsp, html, js | HTTP method: GET | Threads: 30
+Wordlist size: 10877
+
+Output File: /home/kali/.dirsearch/reports/10.10.226.166/images_21-07-25_11-44-25.txt
+
+Error Log: /home/kali/.dirsearch/logs/errors-21-07-25_11-44-25.log
+
+Target: http://10.10.226.166/images/
+
+[11:44:26] Starting: 
+[11:44:30] 403 -  298B  - /images/.ht_wsr.txt
+[11:44:30] 403 -  301B  - /images/.htaccess.orig
+[11:44:30] 403 -  301B  - /images/.htaccess.bak1
+[11:44:30] 403 -  303B  - /images/.htaccess.sample
+[11:44:30] 403 -  300B  - /images/.htaccessOLD2
+[11:44:30] 403 -  301B  - /images/.htaccess_orig
+[11:44:30] 403 -  292B  - /images/.html
+[11:44:30] 403 -  302B  - /images/.htaccess_extra
+[11:44:30] 403 -  301B  - /images/.htaccess.save
+[11:44:30] 403 -  298B  - /images/.httr-oauth
+[11:44:30] 403 -  299B  - /images/.htaccessBAK
+[11:44:30] 403 -  299B  - /images/.htaccess_sc
+[11:44:30] 403 -  291B  - /images/.htm
+[11:44:30] 403 -  299B  - /images/.htaccessOLD
+[11:44:30] 403 -  301B  - /images/.htpasswd_test
+[11:44:30] 403 -  297B  - /images/.htpasswds
+
+Task Completed
+```

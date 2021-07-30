@@ -4,24 +4,13 @@
     "type": "split",
     "children": [
       {
-        "id": "310397e5c490e6f1",
+        "id": "525252735cc031c8",
         "type": "leaf",
         "state": {
           "type": "markdown",
           "state": {
-            "file": "educational(walkthroughs)/OWASP 10/Remidiation.md",
-            "mode": "source"
-          }
-        }
-      },
-      {
-        "id": "cbb0e5824fa814f2",
-        "type": "leaf",
-        "state": {
-          "type": "markdown",
-          "state": {
-            "file": "educational(walkthroughs)/OWASP 10/owaspJuiceShop.md",
-            "mode": "source"
+            "file": "indexForHacks.md",
+            "mode": "preview"
           }
         }
       }
@@ -79,7 +68,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "educational(walkthroughs)/OWASP 10/Remidiation.md",
+                "file": "indexForHacks.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,17 +86,17 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "310397e5c490e6f1",
+  "active": "525252735cc031c8",
   "lastOpenFiles": [
-    "educational(walkthroughs)/OWASP 10/Remidiation.md",
-    "educational(walkthroughs)/OWASP 10/owaspJuiceShop.md",
     "indexForHacks.md",
-    "educational(walkthroughs)/OWASP 10/Untitled.md",
-    "rooms(ctf's)/owaspJuiceShop.md",
+    "rooms(ctf's)/Notes/Fowsniff/80.md",
+    "rooms(ctf's)/Notes/Fowsniff/22.md",
+    "rooms(ctf's)/Notes/Fowsniff/110.md",
+    "rooms(ctf's)/Unfinished/attacktiveDirect.md",
     "educational(walkthroughs)/privesc.md",
-    "rooms(ctf's)/forBusinessReasons.md",
-    "rooms(ctf's)/couchdb.md",
-    "rooms(ctf's)/brooklyn99.md",
-    "rooms(ctf's)/Notes/Year of the Rabbit/22.md"
+    "rooms(ctf's)/Notes/Fowsniff/Untitled.md",
+    "rooms(ctf's)/Notes/Fowsniff/nmap.md",
+    "joombla.py.md",
+    "rooms(ctf's)/ubuntu-apache/dailybugle/report.md"
   ]
 }
