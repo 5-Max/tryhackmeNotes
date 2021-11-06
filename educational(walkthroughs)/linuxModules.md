@@ -1,14 +1,14 @@
 Just a short intro on what's coming ahead:
 
-		du
-		grep, egrep, fgrep
-		tr
-		awk
-		sed
-		xargs
-		curl
-		wget
-		xxd
+-  du
+-  grep, egrep, fgrep
+-  tr
+-  awk
+-  sed
+-  xargs
+-  curl
+-  wget
+-  xxd
     
     
 ### du
@@ -17,18 +17,18 @@ what files/directories are consuming how much space.
 
 Examples
 
-du -a /home/ 			will list every file in the /home/ directory with their sizes in KB.
+`du -a /home/ `			will list every file in the /home/ directory with their sizes in KB.
 
 If there's a lot of output you can surely use grep...
 
-du -a /home/ | grep user 	will list any file/directory whose name is containing the string "user" in it.
+`du -a /home/ | grep user `	will list any file/directory whose name is containing the string "user" in it.
 
 
 
 
 ### grep
 
-grep "PATTERN" file.txt
+`grep "PATTERN" file.txt`
 
 egrep and fgrep are no different from grep(other than 2 flags that can be used with grep to function as both). 
 In simple words, egrep matches the regular expressions in a string, and fgrep searches for a fixed string inside text. 
@@ -56,17 +56,6 @@ Flags	Description
 -E	This flag we already read above... will consider the PATTERN as a regular expression to find the matching strings. 
 
 -e	The official documentation says, it can be used to specify multiple patterns and if any string matches with the pattern(s) it will list it.
-
-
-
-
-
-
-
-
-
-
-
 
 ### String Manipulations (STRing OPerationS)
 

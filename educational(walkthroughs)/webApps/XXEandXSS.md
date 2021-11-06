@@ -133,6 +133,9 @@ In a similar manner, we can use this kind of payload to read other files but a l
 
 extremely easy to do with burpsuite repeater ...
 
+
+
+
 ### Stored XSS
 
 as always overthinkink,,, after creating  an account:

@@ -91,8 +91,8 @@ Networks|
 [PrintNightmare](educational(walkthroughs)/PrintNightmare/One%20Page)	|  | |CVE-2021-34527, CVE-2021-1675
 [ffuf](ffuf.md) | fuzzer ||
 OWASP 10 |||
-| |[Owasp and Juice Shop](educational(walkthroughs)/OWASP%2010/owaspJuiceShop) |
-|| [Remediation](educational(walkthroughs)/OWASP%2010/Remidiation) |
+| |[Owasp and Juice Shop](owaspJuiceShop.md) |
+|| [Remediation](Remidiation.md) |
 
 # educational/webapps
 room | 		tools used / initial access		| privesc |CVE
