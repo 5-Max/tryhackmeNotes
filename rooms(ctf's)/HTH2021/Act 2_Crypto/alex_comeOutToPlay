@@ -1,0 +1,67 @@
+#!/usr/bin/env python2
+from socket import *
+import json
+import base64
+import time
+import string
+import requests as r
+import codecs
+
+s = socket(AF_INET, SOCK_STREAM)
+ip = "18.222.113.93"
+port = 7807
+
+s.connect((ip, port))
+rq = '"'
+rec = s.recv(1024)
+a = rec.replace("encoded", "")
+b = a.replace(":", "")
+c = b.replace("Level", "")
+d = c[3:]
+e = d.replace("type", "")
+f = e.replace("{", "")
+g = f.replace("}", "")
+z = g.replace(",", "")
+if 'base64' in z:
+    level = b[:8]
+    p = z[16:]
+    k = p.replace('"', '')
+    l = base64.decodestring(k)
+    print(level + "" + l)
+    print("[BASE64]")
+    s.send(l)
+elif 'rot13' in z:
+    rot13Table = string.maketrans( 
+    "ABCDEFGHIJKLMabcdefghijklmNOPQRSTUVWXYZnopqrstuvwxyz", 
+    "NOPQRSTUVWXYZnopqrstuvwxyzABCDEFGHIJKLMabcdefghijklm")
+    omg = z.replace('"', '')
+    ff = omg.replace(" ", "")
+    fff = ff.replace("rot13", "")
+    level_rot = b[:8]
+    rot13 = lambda s : string.translate(s, rot13Table)
+    print(level_rot + rot13(fff))
+    print("[ROT-13]")
+    s.send(rot13(fff))
+elif 'hex' in z:
+    ohhhhh = z.replace('"', '')
+    okee = ohhhhh.replace("hex", "")
+    animm = okee[3:]
+    thats = animm
+    levelll = b[:8]
+    hecx = thats.decode("hex")
+    print(levelll + "" + str(hecx))
+    print("[HEX]")
+    s.send(str(hecx))
+elif 'utf-8' in z:
+    decodee = rec[9:]
+    halooo = z.replace('"', '')
+    fuck = halooo.replace("[", "")
+    fucktoo = fuck.replace("]", "")
+    fuckutf = fucktoo.replace("utf-8", "")
+    fucklevel = b[:8]
+    fuckog = fuckutf[3:]
+    fuckogspace = fuckog.replace(" ", "")
+    decode = ''.join(map(chr,json.loads(decodee)['encoded']))
+    print(fucklevel + "" + decode)
+    print("[UTF-8]")
+    s.send(decode)

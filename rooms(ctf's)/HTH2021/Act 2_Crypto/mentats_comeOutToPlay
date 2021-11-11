@@ -1,0 +1,31 @@
+#!/usr/bin/env python3
+
+import json
+import codecs
+import socket
+
+edsIP = "18.222.113.93"
+edsPORT = 7807
+
+srvsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+srvsock.settimeout(3) # 3 second timeout on commands
+srvsock.connect((edsIP, edsPORT))
+# srvsock.sendall(MESSAGE)
+
+data = srvsock.recv(4096)
+decData = data.decode('utf-8').replace('Level 1: ','')
+print(decData)
+
+encData=json.loads(decData)['encoded']
+encMethod=json.loads(decData)['type']
+
+if encMethod == 'utf-8':
+        print(''.join(map(chr,encData)))
+elif encMethod == 'base64':
+        print(codecs.decode(' '.join(str(encData)).encode("utf-8"),encMethod).decode('utf-8'))
+elif encMethod == 'rot13':
+        print(codecs.decode(encData,encMethod))
+else:
+        print(codecs.decode(encData,encMethod).decode('utf-8'))
+
+srvsock.close()

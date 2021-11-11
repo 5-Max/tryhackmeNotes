@@ -4,24 +4,13 @@
     "type": "split",
     "children": [
       {
-        "id": "08b9f0149a458b62",
+        "id": "55cf4bb84be987fe",
         "type": "leaf",
         "state": {
           "type": "markdown",
           "state": {
-            "file": "bufferOverflow/Reversing Elf/Reversing_Elf.md",
+            "file": "educational(walkthroughs)/Networks/wifi_hack.md",
             "mode": "preview"
-          }
-        }
-      },
-      {
-        "id": "ffc02d9aa2e170c7",
-        "type": "leaf",
-        "state": {
-          "type": "markdown",
-          "state": {
-            "file": "bufferOverflow/Intro X86/Intro X86-64.md",
-            "mode": "source"
           }
         }
       }
@@ -79,7 +68,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "bufferOverflow/Intro X86/Intro X86-64.md",
+                "file": "educational(walkthroughs)/Networks/wifi_hack.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,17 +86,17 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "ffc02d9aa2e170c7",
+  "active": "55cf4bb84be987fe",
   "lastOpenFiles": [
+    "educational(walkthroughs)/Networks/wifi_hack.md",
+    "rooms(ctf's)/HTH2021/Act 2_Crypto/2 Come out to play.md",
+    "rooms(ctf's)/HTH2021/Act 2_Crypto/1 The Arrival.md",
+    "indexForHacks.md",
+    "rooms(ctf's)/HTH2021/report.md",
     "bufferOverflow/Intro X86/Intro X86-64.md",
     "bufferOverflow/Reversing Elf/Reversing_Elf.md",
     "bufferOverflow/Gate Keeper/gateKeeper.md",
-    "educational(walkthroughs)/Networks/wifi_hack.md",
     "educational(walkthroughs)/Networks/practice.md",
-    "educational(walkthroughs)/Networks/Untitled.md",
-    "educational(walkthroughs)/linuxModules.md",
-    "educational(walkthroughs)/users.md",
-    "educational(walkthroughs)/Wireshark.md",
-    "educational(walkthroughs)/Fuzzing/ffuf.md"
+    "educational(walkthroughs)/Networks/Untitled.md"
   ]
 }
