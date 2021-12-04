@@ -2,9 +2,9 @@
 room | 		tools used / initial access		| privesc |CVE
 -----|--------------------------------------|---------|-----
 CCT2019	|	impossible will be there a while, |
-[[Fusion Corp]]	| kerbrute - impacket - evil-winrm| got in, need to escalate	|
-[[linuxModules]] |   educational
-[[attacktiveDirect]] | go over again and make better notes
+ [Fusion Corp](rooms(ctf's)/Unfinished/Fusion%20Corp) | kerbrute - impacket - evil-winrm| got in, need to escalate	|
+[linuxModules](educational(walkthroughs)/linuxModules) |   educational
+[attacktiveDirect](rooms(ctf's)/Unfinished/attacktiveDirect) | go over again and make better notes
 MAL: Malware Introductory |
 ffuz | 
 Intro to Python |
