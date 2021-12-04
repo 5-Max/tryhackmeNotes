@@ -1,4 +1,4 @@
-Intro to x86-64 a
+Intro to x86-64 
 
  tryhackme and the password is reismyfavl33t. To access the machine, SSH into it on port 22. 
  
@@ -28,19 +28,61 @@ basic workflow
 
   ood 'random'   // to turn register ????
 
+from writeup
+https://www.goggleheadedhacker.com/blog/post/1
+
+rabin2 -I `<filename>`    // look for arch and language 
+
+rabin2 -z `<filename>`   // list all strings from data section
+
+rabin2 -zz `<filename>`  // shows all strings
+
+r2 `<filename>` 
+
+aa  // analyze binary
+
+s main  // seek main function
+
+v  // visual mode
+
+p  // change to disassembly view
+
+
+part II
+
+rabin2 -zqq `<filename>` 
+
+r2 `<filename>` 
+
+aaa
+
+s main
+
+VV  //  graph mode  navigate like Vim "HJKL"
+
+==atoi function converts string into integer==
+
+==strcmp function compares==
+**if not equal is true (green)**
+
+rax2 `<hexadecimal>`      // converts hexadecimal to integer 
+
+good cheat sheet of commands
+https://hydrasky.com/malware-analysis/reversing-with-radare2/
+
+
 
 https://en.wikibooks.org/wiki/X86_Assembly/X86_Architecture
 
 The 8 GPRs are:
-
-1- Accumulator register (AX). Used in arithmetic operations
-2- Counter register (CX). Used in shift/rotate instructions and loops.
-3- Data register (DX). Used in arithmetic operations and I/O operations.
-4- Base register (BX). Used as a pointer to data (located in segment register DS, when in segmented mode).
-5- Stack Pointer register (SP). Pointer to the top of the stack.
-6- Stack Base Pointer register (BP). Used to point to the base of the stack.
-7- Source Index register (SI). Used as a pointer to a source in stream operations.
-8- Destination Index register (DI). Used as a pointer to a destination in stream operations.
+1. Accumulator register **(AX)**. Used in arithmetic operations
+2. Counter register **(CX)**. Used in shift/rotate instructions and loops.
+3. Data register **(DX)**. Used in arithmetic operations and I/O operations.
+4. Base register **(BX)**. Used as a pointer to data (located in segment register DS, when in segmented mode).
+5. Stack Pointer register **(SP)**. Pointer to the top of the stack.
+6. Stack Base Pointer register **(BP)**. Used to point to the base of the stack.
+7. Source Index register **(SI)**. Used as a pointer to a source in stream operations.
+8. Destination Index register **(DI)**. Used as a pointer to a destination in stream operations.
 
 Similarly, in the 64-bit version, the 'E' is replaced with an 'R' (register), so the 64-bit version of 'EAX' is called 'RAX'.
 

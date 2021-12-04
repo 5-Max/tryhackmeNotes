@@ -11,6 +11,7 @@ We need you on that terminal decoding messages as fast as possible. There are so
 Don't mess this up.
 
 `nc 18.222.113.93 7806`
+```bash 
 [Hax4Headz RF SNIFFER v3.5.6] Intercepting messages...
 ZzZ~zzZ~ZZz~ tell St0ke we're closing in on them quickly ~ZzZ~zzZ~ZZz
 
@@ -19,7 +20,7 @@ KEY1 = 01bc5208fa52c816e880df39a825070a8e7e9105228409cd73e7d07ada88fd430dbd7a
 KEY2 ^ KEY1 = b4ff12a92f113607373d6b74093f7219aa3db9b1049115305568e988bf3b29b8b6bb85
 KEY2 ^ KEY3 = 0c6a977a51c55b6284288ff1c63589d811bc4326283a61b119dada26cee58fe5c1cbe3
 FLAG ^ KEY1 ^ KEY3 ^ KEY2 = 45828d09d3f8e12b04c92397077efab7eda7a15763d00f231a4f652c711f06cfa905e4
-
+```
 
 Hint: Use the prodided file to help you "undo" the XOR'd bytes you're given by the challenge server.
 

