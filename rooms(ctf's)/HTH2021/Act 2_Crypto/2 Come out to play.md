@@ -86,6 +86,46 @@ bytes.fromhex('41').decode('utf-8')
 
 ```py
 from socket import * 
-import base64 import time import string s = socket(AF_INET, SOCK_STREAM) ip = "18.222.113.93" port = 7807 s.connect((ip, port)) rq = '"' rec = s.recv(1024) a = rec.replace("encoded", "") b = a.replace(":", "") c = b.replace("Level", "") d = c[3:] e = d.replace("type", "") f = e.replace("{", "") g = f.replace("}", "") z = g.replace(",", "") if 'base64' in z: level = b[:8] p = z[16:] k = p.replace('"', '') l = base64.decodestring(k) print(level + "" + l) print("[BASE64]") elif 'rot13' in z: rot13Table = string.maketrans( "ABCDEFGHIJKLMabcdefghijklmNOPQRSTUVWXYZnopqrstuvwxyz", "NOPQRSTUVWXYZnopqrstuvwxyzABCDEFGHIJKLMabcdefghijklm") omg = z.replace('"', '') ff = omg.replace(" ", "") fff = ff.replace("rot13", "") level_rot = b[:8] rot13 = lambda s : string.translate(s, rot13Table) print(level_rot + rot13(fff)) print("[ROT-13]") elif 'hex' in z: ohhhhh = z.replace('"', '') okee = ohhhhh.replace("hex", "") animm = okee[3:] levelll = b[:8] hex = bytes.fromhex(animm) hex = hex.decode("ASCII") print(levelll + "" + hex) elif 'utf-8' in z: print(z)
+import base64 
+import time 
+import string 
+
+s = socket(AF_INET, SOCK_STREAM) ip = "18.222.113.93" port = 7807 s.connect((ip, port)) 
+rq = '"' 
+rec = s.recv(1024) 
+a = rec.replace("encoded", "") 
+b = a.replace(":", "") 
+c = b.replace("Level", "") 
+d = c[3:] e = d.replace("type", "") 
+f = e.replace("{", "") 
+g = f.replace("}", "") 
+z = g.replace(",", "") 
+
+if 'base64' in z: 
+    level = b[:8] 
+    p = z[16:] 
+    k = p.replace('"', '') 
+    l = base64.decodestring(k) 
+    print(level + "" + l) 
+    print("[BASE64]") 
+    
+    elif 'rot13' in z: 
+        rot13Table = string.maketrans( "ABCDEFGHIJKLMabcdefghijklmNOPQRSTUVWXYZnopqrstuvwxyz", "NOPQRSTUVWXYZnopqrstuvwxyzABCDEFGHIJKLMabcdefghijklm") 
+        omg = z.replace('"', '') 
+        ff = omg.replace(" ", "") 
+        fff = ff.replace("rot13", "") 
+        level_rot = b[:8] 
+        rot13 = lambda s : 
+        string.translate(s, rot13Table) 
+        print(level_rot + rot13(fff))
+        print("[ROT-13]") 
+    elif 'hex' in z: 
+        ohhhhh = z.replace('"', '') 
+        okee = ohhhhh.replace("hex", "") 
+        animm = okee[3:] levelll = b[:8] 
+        hex = bytes.fromhex(animm) 
+        hex = hex.decode("ASCII") 
+        print(levelll + "" + hex) 
+    elif 'utf-8' in z: print(z)
 python2
 ```
