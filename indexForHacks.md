@@ -8,6 +8,7 @@ CCT2019	|	impossible will be there a while, |
 MAL: Malware Introductory |
 ffuz | 
 Intro to Python |
+Mustaccio 
 
 # rooms(ctf's)
 room | 		tools used / initial access		| privesc |CVE
