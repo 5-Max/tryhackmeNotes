@@ -70,7 +70,7 @@ Finding and Exploiting SUID Files
 find / -perm -u=s -type f 2>/dev/null
 
 
-find / -type f -u cage 2>/dev/null
+find / -type f -u plotted_root 2>/dev/null
 
 
 
