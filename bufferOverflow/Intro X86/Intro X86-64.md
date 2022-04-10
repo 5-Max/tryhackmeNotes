@@ -1,4 +1,4 @@
-Intro to x86-64 
+# Intro to x86-64 
 
  tryhackme and the password is reismyfavl33t. To access the machine, SSH into it on port 22. 
  
@@ -12,7 +12,7 @@ Intro to x86-64
   remember to enter e asm.syntax=att to ensure that you are using the AT&T syntax.
   
   
-basic workflow
+## basic workflow:
   
 ```  r2 -d <filename>```
   
@@ -27,6 +27,8 @@ basic workflow
   rd
 
   ood 'random'   // to turn register ????
+
+----------------
 
 from writeup
 https://www.goggleheadedhacker.com/blog/post/1
@@ -67,11 +69,19 @@ VV  //  graph mode  navigate like Vim "HJKL"
 
 rax2 `<hexadecimal>`      // converts hexadecimal to integer 
 
+-------------
 good cheat sheet of commands
 https://hydrasky.com/malware-analysis/reversing-with-radare2/
 
+---------------
+### To check for protection against buffer overflow
+https://musyokaian.medium.com/dear-qa-tryhackme-walkthrough-1c0a76326f8e
 
+gdb <./name_of_file>
 
+then, `checksec`
+
+--------------
 https://en.wikibooks.org/wiki/X86_Assembly/X86_Architecture
 
 The 8 GPRs are:
