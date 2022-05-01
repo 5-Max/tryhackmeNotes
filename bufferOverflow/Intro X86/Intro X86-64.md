@@ -11,22 +11,70 @@
   
   remember to enter e asm.syntax=att to ensure that you are using the AT&T syntax.
   
-  
+  --------------
+  [good walkthrough](https://www.megabeets.net/a-journey-into-radare-2-part-1/)
+
+  ----------------
+
 ## basic workflow:
+``` r2 <filename>  ```
+
+ie = info entrypoints
+
   
 ```  r2 -d <filename>```
   
-  aa  or aaa?
-  
-  e asm.syntax=att
-  
-  afl
-  
-  pdf @main
-  
-  rd
+a?
 
-  ood 'random'   // to turn register ????
+e asm.syntax=att
+
+afl = list all functions
+
+
+## flags
+
+fs <flagname>; f 
+choose flag spage and prints flags it contains
+
+fs * = go back to normal
+
+
+## Strings
+
+iz =  List strings in data sections
+
+izz = Search for Strings in the whole binary 
+
+where they’re used in the program
+
+`axt @@ str.*`  
+
+The axt command is used to “find data/code references to this address” (see ax?). 
+
+The special operator @@ is like a foreach iterator sign, used to repeat a command over a list of offsets (see @@?), 
+
+and str.* is a wildcard for all the flags that start with str.
+
+
+## Visual
+
+controls margins
+e scr.utf8=true; e scr.utf8.curvy=true
+
+R = changes color
+
+: = to input command in visual mode
+
+
+pdf @main
+
+db `<breakpoint>`
+
+dc to move forward 
+
+ood 'random'   // to turn register ????
+
+endbra64 = NOP 
 
 ----------------
 
