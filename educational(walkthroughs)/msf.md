@@ -68,9 +68,14 @@ run -j     //  (-j run as job)
 
 
 
+Interact with a session
 
 `sessions -i <SESSION_NUMBER>`
 
+
+List jobs
+
+`jobs -l`
 
 after connecting, run ps to view processes
 

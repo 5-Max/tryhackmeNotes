@@ -14,19 +14,24 @@
   --------------
   [good walkthrough](https://www.megabeets.net/a-journey-into-radare-2-part-1/)
 
+  [The Book](https://book.rada.re/)
   ----------------
 
 ## basic workflow:
 ``` r2 <filename>  ```
 
-ie = info entrypoints
+i = info
+
+ie = info **entrypoints**
 
   
 ```  r2 -d <filename>```
   
 a?
 
-e asm.syntax=att
+e asm.syntax=att; e asm.describe = true
+
+explains for dummies like me `e asm.describe = true`
 
 afl = list all functions
 
@@ -49,17 +54,22 @@ where they’re used in the program
 
 `axt @@ str.*`  
 
+a analysis
+x cross reference 
+t to
+
 The axt command is used to “find data/code references to this address” (see ax?). 
 
 The special operator @@ is like a foreach iterator sign, used to repeat a command over a list of offsets (see @@?), 
 
 and str.* is a wildcard for all the flags that start with str.
 
+dcu main = continue until main function
 
 ## Visual
 
 controls margins
-e scr.utf8=true; e scr.utf8.curvy=true
+`e scr.utf8=true; e scr.utf8.curvy=true`
 
 R = changes color
 
