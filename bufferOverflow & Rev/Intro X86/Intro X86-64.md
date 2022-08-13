@@ -29,7 +29,7 @@ ie = info **entrypoints**
   
 a?
 
-e asm.syntax=att; e asm.describe = true
+e asm.syntax=att;e asm.describe=true
 
 explains for dummies like me `e asm.describe = true`
 
@@ -73,7 +73,20 @@ controls margins
 
 R = changes color
 
+To enter visual debugger mode use `Vpp`
+
+p and P cycle through views
+
+s to step over 
+
+c to toggle cursor mode to mark byte range selection 
+
+F2 to set breakpoint 
+
+dr is used to read or write values of the target's general purpose registers. 
+
 : = to input command in visual mode
+
 
 
 pdf @main

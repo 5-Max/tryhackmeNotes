@@ -340,10 +340,9 @@ https://en.wikipedia.org/wiki/Grace_Hopper
 
 Errors
 -   **Compile-time errors:** Errors found by the compiler.
-	-   **Syntax errors**: Errors that occur when we violate the rules of C++ syntax.
-	-   **Type errors**: Errors that occur when there are mismatch between the types we declared.
+-   **Syntax errors**: Errors that occur when we violate the rules of C++ syntax.
+-   **Type errors**: Errors that occur when there are mismatch between the types we declared.
 -   **Link-time errors:** Errors found by the linker when it is trying to combine object files into an executable program.
-	-   
 -   **Run-time errors:** Errors found by checks in a running program.
 -   **Logic errors:** Errors found by the programmer looking for the causes of erroneous results.
 ```c++

@@ -6,7 +6,7 @@ flag{not_that_kind_of_elf}
 
 ```
 
-  ### 2                                                                      
+### 2                                                                      
   ```          
 ┌──(kali㉿kali)-[~/Downloads]
 └─$ ./crackme2                      
@@ -39,6 +39,7 @@ f0r_y0ur_5ec0nd_le55on_unbase64_4ll_7h3_7h1ng5
 ```                        
 
 ### 4
+
 ```							
 ┌──(kali㉿kali)-[~/Downloads]
 └─$ r2 -d crackme4     
@@ -257,7 +258,11 @@ hit breakpoint at: 0x4006d2
 0x7ffcd0f0a810  0000 0000 0000 0000 4005 4000 0000 0000  ........@.@.....
 [0x004006d2]> 
 
+```
 
+### 5
+
+```
 
 crackme5
 
@@ -386,9 +391,12 @@ p: Cannot find function at 0x7ffd864ca290
 [0x0040074a]> 
 ```
 
+### 6
 
 crackme6
+
 ```
+
 [0x7f611a7e00a1]> pdf @sym.my_secure_test
             ; CALL XREF from sym.compare_pwd @ 0x4006e4
 ┌ 340: sym.my_secure_test (int64_t arg1);

