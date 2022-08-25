@@ -1,9 +1,9 @@
 Just a short intro on what's coming ahead:
 
--  du
--  grep, egrep, fgrep
--  tr
--  awk
+-  [du](#du)
+-  [grep, egrep, fgrep](#grep)
+-  [tr](#tr-translate-command)
+-  [awk](#awk)
 -  sed
 -  xargs
 -  curl
@@ -31,6 +31,7 @@ If there's a lot of output you can surely use grep...
 `grep "PATTERN" file.txt`
 
 egrep and fgrep are no different from grep(other than 2 flags that can be used with grep to function as both). 
+
 In simple words, egrep matches the regular expressions in a string, and fgrep searches for a fixed string inside text. 
 Now grep can do both their jobs by using -E and -F flag, respectively.
 
@@ -38,24 +39,25 @@ Now grep can do both their jobs by using -E and -F flag, respectively.
 In other terms, grep -E functions same as egrep and grep -F functions same as fgrep.
 
 
-Flags	Description
--R	Does a recursive grep search for the files inside the folders(if found in the specified path for pattern search; else grep won't traverse diretory for searching 		the pattern you specify)
+### Flags Description
 
--h	If you're grepping recursively in a directory, this flag disables the prefixing of filenames in the results.
+`-R`	Does a recursive grep search for the files inside the folders(if found in the specified path for pattern search; else grep won't traverse diretory for searching 		the pattern you specify)
 
--c	This flag won't list you the pattern only list an integer value, that how many times the pattern was found in the file/folder.
+`-h` If you're grepping recursively in a directory, this flag disables the prefixing of filenames in the results.
 
--i	I prefer to use this flag most of the time, this is what specifies grep to search for the PATTERN while IGNORING the case 
+`-c` This flag won't list you the pattern only list an integer value, that how many times the pattern was found in the file/folder.
 
--l 	will only list the filename instead of pattern found in it.
+`-i` I prefer to use this flag most of the time, this is what specifies grep to search for the PATTERN while IGNORING the case 
 
--n	It will list the lines with their line number in the file containing the pattern.
+`-l` 	will only list the filename instead of pattern found in it.
 
--v	This flag prints all the lines that are NOT containing the pattern
+`-n` It will list the lines with their line number in the file containing the pattern.
 
--E	This flag we already read above... will consider the PATTERN as a regular expression to find the matching strings. 
+`-v` This flag prints all the lines that are NOT containing the pattern
 
--e	The official documentation says, it can be used to specify multiple patterns and if any string matches with the pattern(s) it will list it.
+`-E` This flag we already read above... will consider the PATTERN as a regular expression to find the matching strings. 
+
+`-e` The official documentation says, it can be used to specify multiple patterns and if any string matches with the pattern(s) it will list it.
 
 ### String Manipulations (STRing OPerationS)
 
@@ -74,7 +76,9 @@ Other commands to be familiar with:
     
 #### tr	translate command
     
-`tr [flags] [source]/[find]/[select] [destination]/[replace]/[change]`
+```bash
+tr [flags] [source]/[find]/[select] [destination]/[replace]/[change]
+```
 
 
 Flags Description
@@ -106,7 +110,7 @@ Flags	Description
 You can debug your .awk scripts specifying this flag(awk -D script.awk) 
 -o	To specify the output file (if no name is given after the flag, the output is defaulted to awkprof.out)
 
-```bash                                                    
+```bash                                            
 ┌──(kali㉿kali)-[~/Downloads]
 └─$ cat awk.txt 
 ippsec youtube hackthebox 34024
