@@ -1,0 +1,9 @@
+curl -s http://10.129.161.124/index | 
+while read line; do 
+  decode=$(echo $line | base64 -d); 
+  email=$(echo $decode | grep -Po '\w+@\w+\.\w+'); 
+  hash=$(echo $decode | grep -Po '\w{64}'); 
+  if [ -n "$hash" ]; then 
+    echo "$email:$hash"; 
+  fi; 
+done

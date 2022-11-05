@@ -1,4 +1,9 @@
+# Reversing Elf on THM
+
+[good write up](https://berkanttelli.com/tryhackme-reversing-elf-walkthrough/)
+
 ### 1
+
 ```
 ┌──(kali㉿kali)-[~/Downloads]
 └─$ ./crackme1           
@@ -11,13 +16,14 @@ flag{not_that_kind_of_elf}
 ┌──(kali㉿kali)-[~/Downloads]
 └─$ ./crackme2                      
 Usage: ./crackme2 password
+```
 
 we cat content and see:
   
 %s password
 super_secret_passwordAccess denied.Access granted.%+ 
 
-
+```
 ┌──(kali㉿kali)-[~/Downloads]
 └─$ ./crackme2 super_secret_password
 Access granted.
@@ -35,7 +41,6 @@ ZjByX3kwdXJfNWVjMG5kX2xlNTVvbl91bmJhc2U2NF80bGxfN2gzXzdoMW5nNQ\=\=
 ┌──(kali㉿kali)-[~/Downloads]
 └─$ echo "ZjByX3kwdXJfNWVjMG5kX2xlNTVvbl91bmJhc2U2NF80bGxfN2gzXzdoMW5nNQ==" | base64 -d
 f0r_y0ur_5ec0nd_le55on_unbase64_4ll_7h3_7h1ng5   
-
 ```                        
 
 ### 4
@@ -157,7 +162,12 @@ asm.bits 64
 [0x7f10f64a5090]> db 0x004006d2
 [0x7f10f64a5090]> dc 
 Usage : ./crackme4 password
+```
+
+
 This time the string is hidden and we used strcmp
+
+```
 (2682) Process exited with status=0x0
 [0x7f10f6390699]> ood 'argument'
 PTRACE_CONT: No such process
@@ -257,13 +267,11 @@ hit breakpoint at: 0x4006d2
 0x7ffcd0f0a800  8001 ef1c 397f 0000 0000 0000 0000 0000  ....9...........
 0x7ffcd0f0a810  0000 0000 0000 0000 4005 4000 0000 0000  ........@.@.....
 [0x004006d2]> 
-
 ```
 
 ### 5
 
 ```
-
 crackme5
 
 [0x0040074a]> pdf @main
